@@ -1,0 +1,96 @@
+{% extends "./layouts/_RESULTS.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Search results" %}
+{% set pageDescription = "Your search:" %}
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-two-thirds">  
+
+<h2 class="govuk-heading-m"><a href="horse-care">Work based horse care and management</a></h2>
+
+<strong class="govuk-tag govuk-tag--purple">
+  Level 3 diploma
+</strong>
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break">
+<p class="govuk-body">Distance: 20 miles (Wigan)</p>
+<p class="govuk-body">Start date: 1 September 2025</p>
+<p class="govuk-body">Duration: 18 months</p>
+<p class="govuk-body">Requirements: No academic entry requirements but previous experience with horses required</p>
+
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+<h2 class="govuk-heading-m"><a href="">Animal care and welfare manager</a></h2>
+
+<strong class="govuk-tag govuk-tag--blue">
+  Level 3 apprenticeship
+</strong>
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break">
+<p class="govuk-body">Distance: 0.21 miles (Manchester)</p>
+<p class="govuk-body">Salary: £9,050</p>
+<p class="govuk-body">Start date: flexible</p>
+<p class="govuk-body">Duration: 12 to 18 months</p>
+<p class="govuk-body">Requirements: Maths and English GCSE grade 4-9</p>
+<p class="govuk-body">Application deadline: flexible</p>
+
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+<h2 class="govuk-heading-m"><a href="">Biology</a></h2>
+
+<strong class="govuk-tag govuk-tag--orange">
+  A Level
+</strong>
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break">
+<p class="govuk-body">Distance: 1.21 miles (Manchester)</p>
+<p class="govuk-body">Start date: 1 September 2025</p>
+<p class="govuk-body">Duration: 2 years</p>
+<p class="govuk-body">Requirements: 6 GCSEs at grades 4-9 including 2 at grade 6 or above (from English, Maths and Science)</p>
+
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+<h2 class="govuk-heading-m"><a href="">Animal management and science</a></h2>
+
+<strong class="govuk-tag govuk-tag--yellow">
+  T Level
+</strong>
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break">
+<p class="govuk-body">Distance: 8.2 miles (Wythenshawe)</p>
+<p class="govuk-body">Institution: The Manchester College</p>
+<p class="govuk-body">Start date: 1 September 2025</p>
+<p class="govuk-body">Duration: 2 years</p>
+<p class="govuk-body">Requirements: 5 GCSEs at grades 4-9, including English, Maths and Science</p>
+
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+{{ govukPagination({
+  next: {
+    href: "#"
+  },
+  items: [
+    {
+      number: 1,
+      current: true,
+      href: "#"
+    },
+    {
+      number: 2,
+      href: "#"
+    },
+    {
+      number: 3,
+      href: "#"
+    }
+  ]
+}) }}
+
+
+  </div>
+</div>
+
+{% endblock %}

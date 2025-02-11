@@ -1,0 +1,34 @@
+.page-header {
+    padding-bottom: 15px;
+    background-color: #e6ebf0;
+    color: #0b0c0c;
+    display: flex;
+}
+
+.page-header > .govuk-width-container {
+    flex: 1;
+}
+
+.page-header__title {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 3rem;
+    line-height: 1.0416666667;
+    font-family: "GDS Transport", arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.page-header__description {
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    font-family: "GDS Transport", arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    color: #ffffff;
+
+}

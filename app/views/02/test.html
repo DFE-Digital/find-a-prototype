@@ -1,0 +1,83 @@
+{% extends "./layouts/_TEST.html" %}
+
+{% set pageHeading = "Search results" %}
+{% set pageDescription = "Your search:" %}
+{% set searchResultType = "Your search:" %}
+{% set searchResultLocation = "Your search:" %}
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-two-thirds">  
+
+<p class="govuk-body">It doesn't matter if you:</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>already have a good idea what you need to do</li>
+  <li>aren't sure yet</li>
+  <li>are looking to change direction</li>
+  <li>want to get back into education after a break</li>
+</ul>
+
+<div class="dfe-grid-container">
+  <div class="dfe-card">
+      <div class="dfe-card-container">
+        <h3 class="govuk-heading-m">
+            <a href="what-options-are-you-looking-for" class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Search courses</a>
+        </h3>
+        <p>If you have some ideas about your next steps, you can search for courses and apprenticeships near you.</p>
+      </div>
+  </div>
+  <div class="dfe-card">
+      <div class="dfe-card-container">
+        <h3 class="govuk-heading-m">
+            <a href="#" class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Browse courses</a>
+        </h3>
+        <p>If you're not sure yet what to do, you can browse all courses and apprenticeships near you.</p>
+      </div>
+  </div>
+</div>
+
+<p class="govuk-body">Find out how to <a href="">support a young person</a> if you're a parent, carer, teacher or careers advisor.</p>
+
+<h2 class="govuk-heading-m">Before you get started</h2>
+
+<p class="govuk-body">It can be good to talk to someone. This could be a parent, carer, teacher or careers adviser.</p>
+<p class="govuk-body">You can also talk to the National Careers Service (NCS) for free on <a href="">0800 100 900</a> or by <a href="">webchat</a>.</p>
+<p class="govuk-body">It's really common to feel a bit anxious about your next steps. Find out about <a href="">mental health support for young people</a>.</p>
+<p class="govuk-body">We have lots of <a href="">short videos of young people talking about their experiences</a>. Here are a few you might find useful.</p>
+
+
+<h3 class="govuk-heading-s">What can I do after GCSEs?</h3>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/D1ZkDA_swNc?si=vMrrEgDujJANTV1e" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p class="govuk-body">2 minutes 1 second</p>
+{{ govukDetails({
+  summaryText: "View transcript",
+  text: "transcript goes here."
+}) }}
+
+<h3 class="govuk-heading-s">What's an apprenticeship'?</h3>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MifweBgu8KU?si=DQh6NJsFxMWFfCln" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p class="govuk-body">1 minute 50 seconds</p>
+{{ govukDetails({
+  summaryText: "View transcript",
+  text: "transcript goes here."
+}) }}
+
+<h3 class="govuk-heading-s">What are vocational courses like T Levels?</h3>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-4dm9KskMbY?si=yR0jz1Dj-Yreaclj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p class="govuk-body">2 minutes 7 seconds</p>
+{{ govukDetails({
+  summaryText: "View transcript",
+  text: "transcript goes here."
+}) }}
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "./layouts/_BASE.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Search for courses" %}
+{% set pageDescription = "Use our AI-powered search to find courses based on the subject and location you're interested in." %}
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-two-thirds">  
+
+    <form action="search-results" method="post">
+
+    <div class="govuk-form-group">
+      <h1 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--m" for="more-detail">
+          Describe what you'd like to do
+        </label>
+      </h1>
+      <div id="more-detail-hint" class="govuk-hint">
+        <p class="govuk-body">For example:</p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>engineering</li>
+          <li>bike repair</li>
+          <li>working with animals</li>
+          <li>something creative with photography or writing</li>
+        </ul>
+      </div>
+      <textarea class="govuk-textarea" id="description" name="description" rows="5" aria-describedby="description-hint"></textarea>
+    </div>
+
+
+    <div class="govuk-form-group">
+      <h1 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--m" for="event-name">
+          Enter a town, postcode, school or college name
+        </label>
+      </h1>
+      <div id="event-name-hint" class="govuk-hint">
+        <p class="govuk-body">For example:</p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>Manchester</li>
+          <li>M11 2WH</li>
+          <li>Trafford College</li>
+        </ul>
+      </div>
+      <input class="govuk-input" id="location" name="location" type="text" aria-describedby="location-hint">
+    </div>
+
+    {{ govukButton({
+      text: "Search"
+    }) }}
+
+  </form>
+
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break">
+
+
+
+<h2 class="govuk-heading-s">How I managed the jump from GCSEs to A Levels</h2>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/scqcjFk-6dI?si=lPaxvVBdOn0gZPHn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p class="govuk-body">1 minutes 50 seconds</p>
+{{ govukDetails({
+  summaryText: "View transcript",
+  text: "transcript goes here."
+}) }}
+
+<h3 class="govuk-heading-s">Why I went to the sixth form attached to my school</h3>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zDlD_se44g4?si=cDgy1tRBWZ8PF47Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p class="govuk-body">3 minute 42 seconds</p>
+{{ govukDetails({
+  summaryText: "View transcript",
+  text: "transcript goes here."
+}) }}
+
+<h3 class="govuk-heading-s">How I got myself ready for A Levels</h3>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Z-lLMyOSKRY?si=cSJ7BIov0KYX4rQt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p class="govuk-body">2 minutes 20 seconds</p>
+{{ govukDetails({
+  summaryText: "View transcript",
+  text: "transcript goes here."
+}) }}
+</div>
+</div>
+
+{% endblock %}

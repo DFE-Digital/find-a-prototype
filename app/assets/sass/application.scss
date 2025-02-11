@@ -1,0 +1,24 @@
+//
+// For guidance on how to add CSS and SCSS see:
+// https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
+// 
+
+// Add extra styles here
+
+.dfe-page-hero {
+    padding-top: 40px;
+    padding-bottom: 30px;
+    background-color: #003a69;
+    width: 100%;
+}
+
+@import 'node_modules/dfe-frontend/packages/dfefrontend';
+
+// Patterns not in Frontend
+
+@import "components/hero";
+@import "components/masthead";
+@import "components/page-header";
+
+
+.govuk-width-container { @include govuk-width-container; }

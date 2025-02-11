@@ -1,0 +1,72 @@
+{% extends "./layouts/_BASE.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "What options are you looking for?" %}
+
+
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-full">  
+
+    <div class="dfe-grid-container">
+      <div class="dfe-card">
+          <div class="dfe-card-container">
+            <h3 class="govuk-heading-m">
+                <a href="search-for-courses" class="govuk-link govuk-link--no-visited-state dfe-card-link--header">I'm looking for options after GCSEs</a>
+            </h3>
+            <p>These are for young people from 16 and include A Levels, T Levels and apprenticeships.</p>
+          </div>
+      </div>
+      <div class="dfe-card">
+          <div class="dfe-card-container">
+            <h3 class="govuk-heading-m">
+                <a href="search-for-courses" class="govuk-link govuk-link--no-visited-state dfe-card-link--header">I'm looking for options after sixth form or college</a>
+            </h3>
+            <p>These are for young people from 18 and include university courses, higher technical qualifications and apprenticeships.</p>
+          </div>
+      </div>
+      <div class="dfe-card">
+        <div class="dfe-card-container">
+          <h3 class="govuk-heading-m">
+              <a href="search-for-courses" class="govuk-link govuk-link--no-visited-state dfe-card-link--header">I'm looking to get back into education after a break</a>
+          </h3>
+          <p>Find options if you’ve been away from education or training for a while. </p>
+        </div>
+    </div>
+    </div>
+
+<h2 class="govuk-heading-s">How I managed the jump from GCSEs to A Levels</h2>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/scqcjFk-6dI?si=lPaxvVBdOn0gZPHn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p class="govuk-body">1 minutes 50 seconds</p>
+{{ govukDetails({
+  summaryText: "View transcript",
+  text: "transcript goes here."
+}) }}
+
+<h3 class="govuk-heading-s">Why I went to the sixth form attached to my school</h3>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zDlD_se44g4?si=cDgy1tRBWZ8PF47Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p class="govuk-body">3 minute 42 seconds</p>
+{{ govukDetails({
+  summaryText: "View transcript",
+  text: "transcript goes here."
+}) }}
+
+<h3 class="govuk-heading-s">How I got myself ready for A Levels</h3>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Z-lLMyOSKRY?si=cSJ7BIov0KYX4rQt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p class="govuk-body">2 minutes 20 seconds</p>
+{{ govukDetails({
+  summaryText: "View transcript",
+  text: "transcript goes here."
+}) }}
+</div>
+</div>
+
+{% endblock %}
