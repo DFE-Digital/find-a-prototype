@@ -1,0 +1,95 @@
+{% extends "./layouts/_BASE.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Browse courses and apprenticeships by subject" %}
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-two-thirds">  
+
+    <form action="subject-answer" method="post">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="subject-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            <h1 class="govuk-fieldset__heading">
+              Choose some topics that interest you
+            </h1>
+          </legend>
+          <div id="subject-hint" class="govuk-hint">
+            Select all that apply
+          </div>
+          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="health" name="subject" type="checkbox" value="Health, Public Services and Care">
+              <label class="govuk-label govuk-checkboxes__label" for="health">
+                Health, Public Services and Care
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="science" name="subject" type="checkbox" value="Science and Mathematics">
+              <label class="govuk-label govuk-checkboxes__label" for="science">
+                Science and Mathematics
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="agriculture" name="subject" type="checkbox" value="Agriculture, Horticulture and Animal Care">
+              <label class="govuk-label govuk-checkboxes__label" for="agriculture">
+                Agriculture, Horticulture and Animal Care
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="engineering" name="subject" type="checkbox" value="Engineering and Manufacturing Technologies">
+              <label class="govuk-label govuk-checkboxes__label" for="engineering">
+                Engineering and Manufacturing Technologies
+              </label>
+            </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="construction" name="subject" type="checkbox" value="Construction, Planning and the Built Environment">
+            <label class="govuk-label govuk-checkboxes__label" for="construction">
+              Construction, Planning and the Built Environment
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="retail" name="subject" type="checkbox" value="Retail and Commercial Enterprise">
+            <label class="govuk-label govuk-checkboxes__label" for="retail">
+              Retail and Commercial Enterprise
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="leisure" name="subject" type="checkbox" value="Leisure, Travel and Tourism">
+            <label class="govuk-label govuk-checkboxes__label" for="leisure">
+              Leisure, Travel and Tourism
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="arts" name="subject" type="checkbox" value="Arts, Media and Publishing">
+            <label class="govuk-label govuk-checkboxes__label" for="arts">
+              Arts, Media and Publishing
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="history" name="subject" type="checkbox" value="History, Philosophy and Theology">
+            <label class="govuk-label govuk-checkboxes__label" for="history">
+              History, Philosophy and Theology
+            </label>
+          </div>
+          </div>
+        </fieldset>
+      </div>
+
+    <div class="govuk-button-group">
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+    
+      {{ govukButton({
+        text: "Skip this step",
+        classes: "govuk-button--secondary"
+      }) }}
+    </div>
+
+  </form>
+
+{% endblock %}

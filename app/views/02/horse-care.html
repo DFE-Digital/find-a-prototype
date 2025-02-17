@@ -9,6 +9,8 @@
 <div class="govuk-grid-row"> 
   <div class="govuk-grid-column-two-thirds">  
 
+    <h2 class="govuk-heading-m">Course details</h2>
+
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
@@ -68,7 +70,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <p class="govuk-body">No academic entry requirements but previous experience with horses required.</p>
-          <p class="govuk-body"><a href="">What can I do if I don't meet these?</a></p>
+          <p class="govuk-body"><a href="dont-meet-entry-requirements">What can I do if I don't meet these?</a></p>
         </dd>
       </div>
       <div class="govuk-summary-list__row">
@@ -106,7 +108,8 @@
     </dl>
 
     {{ govukButton({
-      text: "I'm interested in this course"
+      text: "I'm interested in this course",
+      href: "interested-in-course"
     }) }}
 
     <h2 class="govuk-heading-m">Other courses</h2>

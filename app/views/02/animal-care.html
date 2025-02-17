@@ -1,0 +1,147 @@
+{% extends "./layouts/_BASE.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Animal care and welfare manager" %}
+{% set pageDescription = "More information about this apprenticeship." %}
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-two-thirds">  
+
+    <h2 class="govuk-heading-m">Apprenticeship details</h2>
+
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Start date
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Flexible
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Duration
+        </dt>
+        <dd class="govuk-summary-list__value">
+          12 to 18 months
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location and distance
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">0.57 miles (Manchester)</p>
+          <p class="govuk-body">Ashleigh Veterinary Centre</p>
+          <p class="govuk-body"><a href="">How do I get there?</a></p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course type
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">Level 3 apprenticeship</p>
+          <p class="govuk-body"><a href="">What does this mean?</a></p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Hours
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">Full time</p>
+          <p class="govuk-body"><a href="">What does this mean?</a></p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Entry requirements
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">Maths and English GCSE at grade 4-9</p>
+          <p class="govuk-body"><a href="dont-meet-entry-requirements">What can I do if I don't meet these?</a></p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Work overview
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">Working as a veterinary nurse, no two days would be the same. You would be responsible for assisting with the care of a wide range of animals, and each day you are likely to face a variety of different tasks. You might be assisting a veterinary surgeon in theatre, or advising an owner on the most appropriate method of flea control for their pet. You may also be involved with:</p>
+            <ul class="govuk-list govuk-list--bullet">
+            <li>Preparing animals for surgery and performing minor surgical procedures</li>
+            <li>Monitoring anaesthetised animals</li>
+            <li>Nursing sick animals and administering medication</li>
+            <li>Taking x-rays and carrying out diagnostic tests</li>
+            <li>Advising owners on the health and welfare of their pets</li>
+            <li>Taking bookings, payments and completing necessary paperwork</li>
+            <li>Running nurse clinics, such as diet, worming and grooming consultations</li>
+          </ul>
+          <p class="govuk-body">Whilst much of the work that veterinary nurses carry out is challenging and rewarding, most workplaces have tedious tasks that we would all rather avoid; but these jobs are just as important in helping an organisation to thrive. In veterinary nursing, these jobs come in the form of cages that need to be cleaned and floors that need to be mopped; therefore you should also be prepared to take on hard and dirty work when necessary.</p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Training overview
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">You would spend 2 days each week in college learning the theory of animal welfare.</p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Company overview
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">Ashleigh Veterinary Centre has been a veterinary practice since 1963. We are very proud to have been serving our local community for the past 50 plus years, and hope to continue doing so for many more to come.</p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          After this job
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">Depending on how it goes there may be the opportunity to continue working with this company.</p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Support for additional needs
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body"><a href="">Find out the support available if you have additional needs</a></p>
+        </dd>
+      </div>
+    </dl>
+
+    <div class="govuk-button-group">
+      {{ govukButton({
+        text: "I'm interested in this apprenticeship"
+      }) }}
+    
+      {{ govukButton({
+        text: "Ask a question about this apprenticeship",
+        classes: "govuk-button--secondary"
+      }) }}
+    </div>
+
+    <h2 class="govuk-heading-m">Other apprenticeships</h2>
+    <p class="govuk-body">Before deciding whether to apply for this apprenticeship, here are a few other apprenticeships in related subjects you might also want to consider.</p>
+    <ul class="govuk-list">
+      <li>
+        <a class="govuk-link" href="#">Conservation</a>
+      </li>
+      <li>
+        <a class="govuk-link" href="#">Agriculture, environment and animal care</a>
+      </li>
+      <li>
+        <a class="govuk-link" href="#">Dog groomer</a>
+      </li>
+      <li>
+        <a class="govuk-link" href="#">Veterinary nurse</a>
+      </li>
+    </ul>
+{% endblock %}
