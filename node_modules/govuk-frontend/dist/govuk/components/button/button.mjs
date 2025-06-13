@@ -52,7 +52,7 @@ class Button extends ConfigurableComponent {
  */
 
 /**
- * @typedef {import('../../common/configuration.mjs').Schema} Schema
+ * @import { Schema } from '../../common/configuration.mjs'
  */
 Button.moduleName = 'govuk-button';
 Button.defaults = Object.freeze({

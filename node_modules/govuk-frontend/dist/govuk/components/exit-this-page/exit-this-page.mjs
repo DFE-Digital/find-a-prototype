@@ -200,7 +200,7 @@ class ExitThisPage extends ConfigurableComponent {
  */
 
 /**
- * @typedef {import('../../common/configuration.mjs').Schema} Schema
+ * @import { Schema } from '../../common/configuration.mjs'
  */
 ExitThisPage.moduleName = 'govuk-exit-this-page';
 ExitThisPage.defaults = Object.freeze({

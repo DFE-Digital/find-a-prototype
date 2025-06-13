@@ -31,7 +31,7 @@ class NotificationBanner extends ConfigurableComponent {
  */
 
 /**
- * @typedef {import('../../common/configuration.mjs').Schema} Schema
+ * @import { Schema } from '../../common/configuration.mjs'
  */
 NotificationBanner.moduleName = 'govuk-notification-banner';
 NotificationBanner.defaults = Object.freeze({
