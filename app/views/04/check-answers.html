@@ -1,0 +1,121 @@
+{% extends "./layouts/_QUESTION.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Where would you like to study?" %}
+{% set withoutDescription = "true" %}
+
+
+{% block service %}
+<form action="results-type" method="post" novalidate>
+<h1 class="govuk-heading-l">What you've told us</h1>
+<p>Check your answers, and change them if you'd like to, before viewing your search results.</p>
+
+<dl class="govuk-summary-list">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Jobs or careers
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data['job-1'] }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="interests">Change<span class="govuk-visually-hidden"> name</span></a>
+    </dd>
+  </div>
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      School subjects
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data['subject-1'] }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="interests">Change<span class="govuk-visually-hidden"> name</span></a>
+    </dd>
+  </div>
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Location
+    </dt>
+    <dd class="govuk-summary-list__value">
+     {{ data['location-guided'] }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="location">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+    </dd>
+  </div>
+
+  {% if (data['travel-location'] == "Only in") %}
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Travel distance
+    </dt>
+    <dd class="govuk-summary-list__value">
+      Only in {{ data['study-location'] }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="how-far">Change<span class="govuk-visually-hidden"> address</span></a>
+    </dd>
+  </div>
+
+  {% else %}
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Travel distance
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data['travel-location'] }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="how-far">Change<span class="govuk-visually-hidden"> address</span></a>
+    </dd>
+  </div>
+
+  {% endif %}
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Course preference
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data['learning-style'] or "No learning style added" }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="learning-method">Change<span class="govuk-visually-hidden"> address</span></a>
+    </dd>
+  </div>
+  <!--<div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Apprenticeships and courses
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data['apprenticeship-or-course'] or "No apprenticeships or courses added"}}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="apprenticeships-or-courses">Change<span class="govuk-visually-hidden"> address</span></a>
+    </dd>
+  </div>-->
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Education
+    </dt>
+    <dd class="govuk-summary-list__value">
+      <p>{{ data['level-of-education'] or "No education added"}}</p> 
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="level-of-education">Change<span class="govuk-visually-hidden"> address</span></a>
+    </dd>
+  </div>
+</dl>
+
+<p>Find out <a href="">how we use AI</a> to bring you relevant results.</p>
+
+<button type="submit" class="govuk-button" data-module="govuk-button">
+  Search
+</button>
+</form>
+{% endblock %}

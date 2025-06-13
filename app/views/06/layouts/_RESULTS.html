@@ -1,0 +1,97 @@
+{% set serviceName = "Explore your options after school or college" %}
+{% set govukRebrand = true %}
+{% extends "/layouts/main.html" %}
+
+
+{% block header %}  
+
+<header class="govuk-header" data-module="govuk-header">
+  <div class="govuk-header__container govuk-width-container">
+      <div class="govuk-header__logo">
+        <a href="#" class="govuk-header__link govuk-header__link--homepage">
+            <img src="/public/images/department-for-education_white.png" alt="Department for Education" class="govuk-header__logotype">
+        </a>
+      </div>
+  </div>
+</header>
+
+{{ govukServiceNavigation({
+  serviceName: "Find education and training",
+  serviceUrl: "index"
+}) }}
+
+{% endblock %}    
+
+{% block beforeContent %}
+
+{% if back %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+{% endif %}
+{% endblock %}  
+
+{% block content %}
+<div class="govuk-grid-row"> 
+<div class="govuk-grid-column-two-thirds">  
+<!-- start of service specific block -->
+{% block service %}
+Text goes here, override this by overriding the block
+{% endblock %}
+<!-- end service specific block-->
+</div>
+{% endblock %}    
+
+{% block footer %}
+
+{% from "govuk/components/footer/macro.njk" import govukFooter %}
+
+{{ govukFooter({
+  navigation: [
+    {
+      title: "Website information",
+      width: "two-thirds",
+      columns: 2,
+      items: [
+        {
+          href: "#",
+          text: "About us"
+        },
+        {
+          href: "#",
+          text: "Help"
+        },
+        {
+          href: "#",
+          text: "Privacy and cookies"
+        },
+        {
+          href: "#",
+          text: "Accessibility statement"
+        },
+        {
+          href: "#",
+          text: "Terms and conditions"
+        }
+      ]
+    },
+    {
+      title: "Sites for other UK countries",
+      width: "one-third",
+      items: [
+        {
+          href: "#",
+          text: "Scotland"
+        },
+        {
+          href: "#",
+          text: "Wales"
+        },
+        {
+          href: "#",
+          text: "Northern Ireland"
+        }
+      ]
+    }
+  ]
+}) }}
+
+{% endblock %}

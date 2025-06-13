@@ -1,0 +1,115 @@
+{% extends "../layouts/_BASE.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Football scholarship programme" %}
+{% set pageDescription = "More information about this course." %}
+{% set withDescription = "true" %}
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-two-thirds">  
+
+    <h2 class="govuk-heading-m">Course details</h2>
+
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Start date
+        </dt>
+        <dd class="govuk-summary-list__value">
+          8 September 2025
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Duration
+        </dt>
+        <dd class="govuk-summary-list__value">
+          18 months
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location and distance
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">3 miles</p>
+          <p class="govuk-body">Openshaw Campus</p>
+          <p class="govuk-body"><a href="#">How do I get there?</a></p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course type
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">Level 3 diploma</p>
+          <p class="govuk-body"><a href="">What does this mean?</a></p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Hours
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">Full time</p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Entry requirements
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">No academic entry requirements.</p>
+          <p class="govuk-body"><a href="dont-meet-entry-requirements">What can I do if I don't meet these?</a></p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course overview
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">This qualification will help students develop their skills and knowledge of the sport and physical activity sector. Areas covered by the course include principles of anatomy and physiology, biomechanics, fitness testing for sport and exercise, psychology for sports performance, and preparing for a career in the sport industry.</p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Support for additional needs
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body"><a href="">Find out the support available if you have additional needs</a></p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Next open day
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body"><a href="">Find out about open days</a></p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          What jobs can I do after this course?
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body"><a href="">Explore possible careers on the National Careers Service website</a></p>
+        </dd>
+      </div>
+    </dl>
+
+    <div class="govuk-button-group">
+      {{ govukButton({
+        text: "I'm interested in this course",
+        href: "interested-in-course"
+      }) }}
+    
+      {{ govukButton({
+        text: "Don't show me courses like this",
+        classes: "govuk-button--secondary"
+      }) }}
+    </div>
+
+  
+{% endblock %}

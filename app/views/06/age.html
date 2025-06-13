@@ -1,0 +1,77 @@
+{% extends "./layouts/_QUESTION.html" %}
+{% set back = true %}
+
+{% block content %}
+
+
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row">
+
+      <form action="age-results" method="post" novalidate>
+      <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-l">
+          Tell us how old you are
+        </h1>
+    
+        <p>Some education and training courses are not available to everyone.</p> 
+        <p>This can be because of age or other eligibility requirements or having to live in a particular area.</p> 
+        <p>To display options which are relevant we need to know your current situation.</p>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" role="group" aria-describedby="age-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+              <h1 class="govuk-fieldset__heading">
+                What is your age group?
+              </h1>
+            </legend>
+            <div class="govuk-radios" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="age-under-18" name="age" type="radio" value="under-18">
+                <label class="govuk-label govuk-radios__label" for="age-under-18">
+                  Under 18 years old
+                </label>
+              </div>
+        
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="age-18-21" name="age" type="radio" value="18-21">
+                <label class="govuk-label govuk-radios__label" for="age-18-21">
+                  Between 18–21 years old
+                </label>
+              </div>
+        
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="age-under-24" name="age" type="radio" value="under-24">
+                <label class="govuk-label govuk-radios__label" for="age-under-24">
+                  Under 24 years old
+                </label>
+              </div>
+        
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="age-over-24" name="age" type="radio" value="over-24">
+                <label class="govuk-label govuk-radios__label" for="age-over-24">
+                  Over 24 years old
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        
+        <div class="govuk-button-group">
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+        <a class="govuk-link" href="location">Skip this step</a>
+        </div>
+      </div>
+    </form>
+
+      
+    </div>
+  </div>
+
+
+
+{% endblock %}

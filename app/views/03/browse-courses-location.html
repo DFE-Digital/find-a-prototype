@@ -1,0 +1,35 @@
+{% extends "./layouts/_BASE.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Browse courses and apprenticeships by location" %}
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-two-thirds">  
+
+    <form action="browse-courses-subject" method="post">
+
+    <div class="govuk-form-group">
+      <h2 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--m" for="more-detail">
+          Enter a school, college or provider name
+        </label>
+      </h2>
+      <input class="govuk-input" id="provider-name" name="provider-name" type="text" aria-describedby="provider-name-hint">
+    </div>
+
+    <div class="govuk-button-group">
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+    
+      {{ govukButton({
+        text: "Skip this step",
+        classes: "govuk-button--secondary"
+      }) }}
+    </div>
+
+  </form>
+
+{% endblock %}

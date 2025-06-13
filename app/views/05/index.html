@@ -1,0 +1,120 @@
+{% extends "./layouts/_HOME.html" %}
+
+{% block header %}
+
+<header class="dfe-header" role="banner">
+  <div class="govuk-width-container dfe-header__container">
+     <div class="dfe-header__logo">
+        <a class="dfe-header__link" href="/" aria-label="DfE homepage">
+        <img src="/public/images/dfe-logo.png" class="dfe-logo" alt="Department for Education">
+        <img src="/public/images/dfe-logo-alt.png" class="dfe-logo-hover" alt="Department for Education">
+        </a>
+     </div>
+  </div>
+  
+
+  <div class="masthead" role="banner">
+   <div class="govuk-width-container dfe-header__container">
+   <div class="hero">
+     <div class="hero__content">
+     <div class="hero__body" id="index-hero-body">
+       <h1 class="hero__title" style="margin-bottom: 24px;">Explore your options after school or college</h1> 
+       <p class="hero__description">
+         Find out about education and training opportunities in England if you're 15 to 18.
+       </p>
+      </div>
+     </div>
+   </div>
+ </div>
+
+</header>
+
+<section class="dfe-page-grey">
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+
+        <div class="govuk-phase-banner" style="margin-top: -30px; margin-bottom: 20px;">
+          <p class="govuk-phase-banner__content">
+            <strong class="govuk-tag govuk-phase-banner__content__tag">
+              Alpha
+            </strong>
+            <span class="govuk-phase-banner__text">
+              This is a new service. Help us improve it and <a class="govuk-link" href="#">give your feedback (opens in new tab)</a>.
+    </span>
+            </span>
+          </p>
+        </div>
+      </div>
+      <div class="govuk-grid-column-two-thirds">
+
+
+        <h2 class="govuk-heading-l">
+          Find a course or apprenticeship
+        </h2>
+    
+        <p>Whether you're already in education or training, or coming back after a break, we can help you work out what to do next.</p>
+        <p>Our <a href="ai">AI-powered</a> service makes it easy to find courses that are relevant to you.</p>
+    
+        {{ govukButton({
+          text: "Start now",
+          href: "all-or-nothing"
+        }) }}
+    
+      </div>
+      <div class="govuk-grid-column-one-third">
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-full">  
+
+
+<h2 class="govuk-heading-m">Help and support</h2>
+
+
+<div class="dfe-grid-container">
+  <div class="dfe-card">
+    <img src="/public/images/icon-health.png" alt="Sample Image">
+      <div class="dfe-card-container">
+        <h3 class="govuk-heading-m">
+            <a href="./support" class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Get support</a>
+        </h3>
+        <p>Sources of help and advice, including mental health and financial support.</p>
+      </div>
+  </div>
+  <div class="dfe-card">
+    <img src="/public/images/icon-education.png" alt="Sample Image">
+      <div class="dfe-card-container">
+        <h3 class="govuk-heading-m">
+            <a href="./dont-meet-entry-requirements" class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Help around grades</a>
+        </h3>
+        <p>What can I do if I don't meet the entry requirements for a course?</p>
+      </div>
+  </div>
+  <div class="dfe-card">
+    <img src="/public/images/icon-work.png" alt="Sample Image">
+    <div class="dfe-card-container">
+      <h3 class="govuk-heading-m">
+          <a href="./break" class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Help to come back to education after a break</a>
+      </h3>
+      <p>Advice about getting back into education or training after a gap.</p>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

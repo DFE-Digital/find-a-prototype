@@ -1,0 +1,49 @@
+{% extends "./layouts/_QUESTION.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Where would you like to study?" %}
+{% set withoutDescription = "true" %}
+
+
+{% block service %}
+<form action="search-results-all" method="post" novalidate>
+
+  {{ govukCheckboxes({
+    name: "waste",
+    fieldset: {
+      legend: {
+        text: "Select the colleges you want to see near [postcode]",
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--l"
+      }
+    },
+    items: [
+      {
+        value: "Example insitution 1",
+        text: "Example insitution 1"
+      },
+      {
+        value: "Example insitution 2",
+        text: "Example insitution 2"
+      },
+      {
+        value: "Example insitution 3",
+        text: "Example insitution 3"
+      },
+      {
+        value: "Example insitution 4",
+        text: "Example insitution 4"
+      }
+    ]
+  }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+  </form>
+
+  </div>
+</div>
+
+{% endblock %}

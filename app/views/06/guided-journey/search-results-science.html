@@ -1,0 +1,950 @@
+{% extends "../layouts/_BASE.html" %}
+
+{% set withDescriptionAndLink = "true" %}
+{% set pageHeading = "Find a course results" %}
+{% set pageDescription = "Find courses based on the subject and location you showed interested in." %}
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-two-thirds">  
+
+    <p class="govuk-body govuk-!-margin-bottom-6">
+      <span class="govuk-!-font-weight-bold">Sort courses by:</span> 
+    <span class="govuk-!-margin-left-1 govuk-!-margin-right-1">
+      
+    <span class="">Relevance</span>
+    </span>    
+     | 
+    <span class="govuk-!-margin-left-2 govuk-!-margin-right-1">
+        <a href="/records?sortOrder=lastName" class="govuk-link govuk-link--no-visited-state">Distance</a>
+    </span>
+    | 
+    <span class="govuk-!-margin-left-2 govuk-!-margin-right-1">
+        <a href="/records?sortOrder=lastName" class="govuk-link govuk-link--no-visited-state">Start date</a>
+    </span>
+    </p>
+
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          <a href="course-example" style="margin-right: 10px;">Work based horse care and management</a>
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Requirements
+            </dt>
+            <dd class="govuk-summary-list__value">
+              No academic entry requirements but previous experience with horses required
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Distance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              20 miles (Wigan)
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--purple" style="margin-bottom: 10px;">
+                Level 3 Diploma
+              </strong>
+
+                <details class="govuk-details">
+                  <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                      What is a Level 3 Diploma?
+                    </span>
+                  </summary>
+                  <div class="govuk-details__text">
+                    Content about a diploma
+                  </div>
+                </details>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+              1 September 2025
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Duration
+            </dt>
+            <dd class="govuk-summary-list__value">
+              18 months
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Relevance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              90%
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          <a href="horse-care.html">Animal care and welfare manager</a>
+          </strong>
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Requirements
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Maths and English GCSE grade 4-9
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Distance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              0.21 miles (Manchester)
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--blue" style="margin-bottom: 10px;">
+                Level 3 Apprenticeship
+              </strong>
+                <details class="govuk-details">
+                  <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                      What is a Level 3 Apprenticeship?
+                    </span>
+                  </summary>
+                  <div class="govuk-details__text">
+                    Content about Apprenticeships
+                  </div>
+                </details>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+              No start date added
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Duration
+            </dt>
+            <dd class="govuk-summary-list__value">
+              12 to 18 months
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Application deadline
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Flexible
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Relevance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              90%
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          <a href="horse-care.html">Biology</a>
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Requirements
+            </dt>
+            <dd class="govuk-summary-list__value">
+              6 GCSEs at grades 4-9 including 2 at grade 6 or above (from English, Maths and Science)
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Distance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              1.21 miles (Manchester)
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--orange" style="margin-bottom: 10px;">
+                A Level
+              </strong>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    What is an A Level?
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  Content about an A Level
+                </div>
+              </details>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+              1 September 2025
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Duration
+            </dt>
+            <dd class="govuk-summary-list__value">
+              2 years
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Relevance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              85%
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          <a href="horse-care.html">Animal management and science</a>
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Requirements
+            </dt>
+            <dd class="govuk-summary-list__value">
+              5 GCSEs at grades 4-9, including English, Maths and Science
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Distance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              8.2 miles (Wythenshawe)
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--yellow" style="margin-bottom: 10px;">
+                T Level
+              </strong>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    What is a T Level ?
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  Content about a T Level
+                </div>
+              </details>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+              1 September 2025
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Duration
+            </dt>
+            <dd class="govuk-summary-list__value">
+              2 years
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Relevance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              82%
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          <a href="course-example">Work based horse care and management</a>
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Requirements
+            </dt>
+            <dd class="govuk-summary-list__value">
+              No academic entry requirements but previous experience with horses required
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Distance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              20 miles (Wigan)
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--purple" style="margin-bottom: 10px;">
+                Level 3 Diploma
+              </strong>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    What is a Level 3 Diploma?
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  Content about a diploma
+                </div>
+              </details>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+              1 September 2025
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Duration
+            </dt>
+            <dd class="govuk-summary-list__value">
+              18 months
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Relevance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              80%
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          <a href="horse-care.html">Animal care and welfare manager</a>
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Requirements
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Maths and English GCSE grade 4-9
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Distance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              0.21 miles (Manchester)
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--blue" style="margin-bottom: 10px;">
+                Level 3 Apprenticeship
+              </strong>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    What is a Level 3 Apprenticeship?
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  Content about a diploma
+                </div>
+              </details>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Salary
+            </dt>
+            <dd class="govuk-summary-list__value">
+              £9,050
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+              No start date added
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Duration
+            </dt>
+            <dd class="govuk-summary-list__value">
+              12 to 18 months
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Application deadline
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Flexible
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Relevance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              78%
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          <a href="horse-care.html">Biology</a>
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Requirements
+            </dt>
+            <dd class="govuk-summary-list__value">
+              6 GCSEs at grades 4-9 including 2 at grade 6 or above (from English, Maths and Science)
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Distance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              1.21 miles (Manchester)
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--orange" style="margin-bottom: 10px;">
+                A Level
+              </strong>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    What is an A Level?
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  Content about an A Level
+                </div>
+              </details>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+              1 September 2025
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Duration
+            </dt>
+            <dd class="govuk-summary-list__value">
+              2 years
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Relevance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              76%
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          <a href="horse-care.html">Animal management and science</a>
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Requirements
+            </dt>
+            <dd class="govuk-summary-list__value">
+              5 GCSEs at grades 4-9, including English, Maths and Science
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Distance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              8.2 miles (Wythenshawe)
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--yellow" style="margin-bottom: 10px;">
+                T Level
+              </strong>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    What is a T Level?
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  Content about a T Level
+                </div>
+              </details>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+              1 September 2025
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Duration
+            </dt>
+            <dd class="govuk-summary-list__value">
+              2 years
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Relevance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              72%
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          <a href="course-example">Work based horse care and management</a>
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Requirements
+            </dt>
+            <dd class="govuk-summary-list__value">
+              No academic entry requirements but previous experience with horses required
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Distance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              20 miles (Wigan)
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--purple" style="margin-bottom: 10px;">
+                Level 3 Diploma
+              </strong>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    What is a Level 3 Diploma?
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  Content about a diploma
+                </div>
+              </details>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+              1 September 2025
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Duration
+            </dt>
+            <dd class="govuk-summary-list__value">
+              18 months
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Relevance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              70%
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          <a href="horse-care.html">Animal care and welfare manager</a>
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Requirements
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Maths and English GCSE grade 4-9
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Distance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              0.21 miles (Manchester)
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--blue" style="margin-bottom: 10px;">
+                Level 3 Apprenticeship
+              </strong>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    What is a Level 3 Apprenticeship?
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  Content about apprenticeships
+                </div>
+              </details>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Salary
+            </dt>
+            <dd class="govuk-summary-list__value">
+              £9,050
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+              No start date added
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Duration
+            </dt>
+            <dd class="govuk-summary-list__value">
+              12 to 18 months
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Application deadline
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Flexible
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Relevance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              69%
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          <a href="horse-care.html">Biology</a>
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Requirements
+            </dt>
+            <dd class="govuk-summary-list__value">
+              6 GCSEs at grades 4-9 including 2 at grade 6 or above (from English, Maths and Science)
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Distance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              1.21 miles (Manchester)
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--orange" style="margin-bottom: 10px;">
+                A Level
+              </strong>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    What is an A Level?
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  Content about A Levels
+                </div>
+              </details>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+              1 September 2025
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Duration
+            </dt>
+            <dd class="govuk-summary-list__value">
+              2 years
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Relevance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              66%
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          <a href="horse-care.html">Animal management and science</a>
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Requirements
+            </dt>
+            <dd class="govuk-summary-list__value">
+              5 GCSEs at grades 4-9, including English, Maths and Science
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Distance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              8.2 miles (Wythenshawe)
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--yellow" style="margin-bottom: 10px;">
+                T Level
+              </strong>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    What is a T Level?
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  Content about T Levels
+                </div>
+              </details>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+              1 September 2025
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Duration
+            </dt>
+            <dd class="govuk-summary-list__value">
+              2 years
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Relevance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              61%
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    
+    
+
+{{ govukPagination({
+  next: {
+    href: "search-results-page-2"
+  },
+  items: [
+    {
+      number: 1,
+      current: true,
+      href: "#"
+    },
+    {
+      number: 2,
+      href: "search-results-page-2"
+    },
+    {
+      number: 3,
+      href: "search-results-page-3"
+    }
+  ]
+}) }}
+
+
+  </div>
+</div>
+
+{% endblock %}

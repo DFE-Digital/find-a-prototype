@@ -1,0 +1,94 @@
+{% extends "./layouts/_QUESTION.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Where would you like to study?" %}
+{% set withoutDescription = "true" %}
+
+
+{% block service %}
+<form action="how-far" method="post" novalidate>
+
+  <div class="govuk-form-group">
+    <h1 class="govuk-label-wrapper">
+      <label class="govuk-label govuk-label--l" for="location-guided-name" >
+        Enter a town, city or postcode
+      </label>
+    </h1>
+    <input class="govuk-input govuk-input--width-20" id="location-guided" name="location-guided" type="text">
+  </div>
+    <p><a href="">Use my current location</a></p>
+    
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+
+{% from "govuk/components/footer/macro.njk" import govukFooter %}
+
+{{ govukFooter({
+  navigation: [
+    {
+      title: "Website information",
+      width: "two-thirds",
+      columns: 2,
+      items: [
+        {
+          href: "#",
+          text: "About us"
+        },
+        {
+          href: "#",
+          text: "Help"
+        },
+        {
+          href: "#",
+          text: "Privacy and cookies"
+        },
+        {
+          href: "#",
+          text: "Accessibility statement"
+        },
+        {
+          href: "#",
+          text: "Terms and conditions"
+        }
+      ]
+    },
+    {
+      title: "Sites for other UK countries",
+      width: "one-third",
+      items: [
+        {
+          href: "#",
+          text: "Scotland"
+        },
+        {
+          href: "#",
+          text: "Wales"
+        },
+        {
+          href: "#",
+          text: "Northern Ireland"
+        }
+      ]
+    }
+  ],
+  meta: {
+    items: [
+      {
+        href: "location-validation",
+        text: "Example validation for this page"
+      }
+    ]
+    }
+}) }}
+
+{% endblock %}

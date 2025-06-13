@@ -1,0 +1,168 @@
+// Filter compoenent styles:
+
+.filter-container {
+    border: 1px solid #B1B4B6;
+    width: 100%; /* Full width */
+    margin-bottom: 20px;
+  }
+  
+  .filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F4F2F1;
+    padding: 7px;
+  }
+  
+.filter-header-clear-all-link {
+    display: flex;
+    align-items: center;
+}
+
+
+.clear-all-link {
+    padding-left: 0px;
+    color: #1D70B8;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.filter-toggle {
+    color: #1D70B8;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
+    text-decoration: underline;
+    text-wrap: nowrap;
+}
+
+.filter-toggle:hover {
+    cursor: pointer;
+}
+
+.toggle-filter-icon-wrapper {
+    gap: 5px;
+    display: flex;
+    padding-right: 5px;
+}
+
+.filter-text {
+    color: #0B0C0C;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 32px; /* 168.421% */
+    padding-left: 2px;
+}
+
+.selected-filters {
+    display: flex;
+    gap: 10px; 
+    padding: 1px 6px;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+    
+}
+
+.filter-results-container {
+    display: flex;
+    padding: 10px;
+    align-items: baseline;
+    min-width: fit-content;
+}
+
+.selected-filters:empty {
+    border: none;
+    padding: 0;
+}
+
+#filtered-count {
+    display: none;
+}
+
+.filtered-count {
+
+    flex-wrap: nowrap;
+    min-width: fit-content;
+}
+
+.filter-label {
+    display: flex;
+    align-items: center;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 4px;
+    padding-right: 4px;
+    border: 1px solid #888888; /* Adjust the border color to match the screenshot */
+    border-radius: 4px;
+    background-color: #ffffff; /* Adjust the background color if necessary */
+    font-size: 16px; /* Adjust font size */
+    color: #000000; /* Adjust text color */
+}
+
+.remove-filter-button {
+    width: 24px;
+    height: 24px;
+    font-size: 24px; 
+    color: #000000; 
+    cursor: pointer;
+    line-height: 16px;
+    margin-left: -6px;
+    margin-bottom: 3px;
+    background: none; 
+    border: none;
+    text-align: center; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+  .filter-content {
+    display: none;
+    padding: 20px; 
+  }
+
+  .filter-content.show {
+    display: flex;
+  }
+  
+  .filter-section {
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px; 
+  }
+  
+  .filter-section h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+  }
+  
+  .filter-section p {
+    margin: 0 0 10px 0;
+    font-size: 12px;
+    color: #666;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .apply-button-top-margin {
+    margin-top: 85px;
+    @include govuk-media-query(mobile) {
+        margin-top: 130px;
+    }
+  }
+  
+  .apply-button:hover {
+    background-color: #003366;
+  }
+  
+//arrow rotation
+.arrow-icon.rotated {
+    transform: rotate(180deg);
+}
+

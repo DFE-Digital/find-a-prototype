@@ -5,45 +5,79 @@
 {% block header %}  
 
 <header class="dfe-header" role="banner">
-  <div class="govuk-width-container dfe-header__container">
-     <div class="dfe-header__logo">
-        <a class="dfe-header__link" href="/" aria-label="DfE homepage">
+  <div class="dfe-width-container dfe-header__container">
+    <div class="dfe-header__logo">
+      <a class="dfe-header__link" href="/" aria-label="DfE homepage">
+
         <img src="/public/images/dfe-logo.png" class="dfe-logo" alt="Department for Education">
         <img src="/public/images/dfe-logo-alt.png" class="dfe-logo-hover" alt="Department for Education">
-        </a>
-     </div>
-  </div>
-  <div class="govuk-width-container dfe-header__service-name" style="margin-bottom: 20px;">
-     <a href="/" class="dfe-header__link--service">Explore your options after school or college</a>
-  </div>
 
-  <div class="page-header" role="banner">
-   <div class="govuk-width-container dfe-header__container">
-   <div class="hero">
-     <div class="hero__content">
-     <div class="hero__body" id="index-hero-body">
+      </a>
+    </div>
+    <div class="dfe-header__content" id="content-header">
 
-      <div class="govuk-phase-banner" style="margin-bottom: 20px;">
-        <p class="govuk-phase-banner__content">
-          <strong class="govuk-tag govuk-phase-banner__content__tag">
-            Alpha
-          </strong>
-          <span class="govuk-phase-banner__text">
-            This is a new service. Help us improve it and <a class="govuk-link" href="#">give your feedback by email</a>.
-          </span>
-        </p>
+
+
+      <div class="dfe-header__menu">
+        <button class="dfe-header__menu-toggle" id="toggle-menu" aria-controls="header-navigation"
+          aria-expanded="false">Menu</button>
       </div>
-      
-       <h1 class="govuk-heading-l" style="margin-bottom: 24px; color: #0b0c0c">{{ pageHeading }}</h1>
- 
-       <p class="hero__description">
-         {{ pageDescription }}
-       </p>
+
+
+
+
+    </div>
+  </div>
+  <div class="dfe-width-container dfe-header__service-name">
+    <a href="/" class="dfe-header__link--service">Explore your options after school or college</a>
+  </div>
+
+</header>
+
+<section class="dfe-page-grey">
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+
+        <div class="govuk-phase-banner" style="margin-top: -30px; margin-bottom: 20px;">
+          <p class="govuk-phase-banner__content">
+            <strong class="govuk-tag govuk-phase-banner__content__tag">
+              Alpha
+            </strong>
+            <span class="govuk-phase-banner__text">
+              This is a new service. Help us improve it and <a class="govuk-link" href="#">give your feedback by
+                email</a>.
+            </span>
+          </p>
+        </div>
+      </div>
+      <div class="govuk-grid-column-two-thirds">
+
+
+        {% if withoutDescription %}
+        <h2 class="govuk-heading-l" style="margin-bottom: 10px;">
+          {{ pageHeading }}
+        </h2>
+        {% endif %}
+
+        {% if withDescription %}
+        <h2 class="govuk-heading-l">
+          {{ pageHeading }}
+        </h2>
+
+        <p class="govuk-body-m">{{ pageDescription }}</p>
+        {% endif %}
 
       </div>
-     </div>
-   </div>
+      <div class="govuk-grid-column-one-third">
+      </div>
+    </div>
+  </div>
+</section>
+
 </div>
+
+</header>
 
 </header>
 

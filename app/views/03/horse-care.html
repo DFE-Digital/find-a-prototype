@@ -1,0 +1,137 @@
+{% extends "./layouts/_BASE.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Work based horse care and management" %}
+{% set pageDescription = "More information about this course." %}
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-two-thirds">  
+
+    <h2 class="govuk-heading-m">Course details</h2>
+
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Start date
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Flexible
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Duration
+        </dt>
+        <dd class="govuk-summary-list__value">
+          18 months
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location and distance
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">20 miles (Wigan)</p>
+          <p class="govuk-body">The College of Animal Welfare</p>
+          <p class="govuk-body"><a href="">How do I get there?</a></p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course type
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">Level 3 diploma</p>
+          <p class="govuk-body"><a href="">What does this mean?</a></p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Cost
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">£6,195</p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Hours
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">Full time</p>
+          <p class="govuk-body"><a href="">What does this mean?</a></p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Entry requirements
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">No academic entry requirements but previous experience with horses required.</p>
+          <p class="govuk-body"><a href="dont-meet-entry-requirements">What can I do if I don't meet these?</a></p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course overview
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body">Mandatory units: Receive a Horse and Carry out an Initial Assessment Plan Diets and Implement Feeding Regimes for Horses Monitor and Maintain Stocks of Feed and Bedding Promote the Health and Well-being of Horses Deliver Basic Health Care Treatment to Horses Promote, Monitor and Maintain Health, Safety and Security of the Workplace Manage Your Own Resources Optional: Introduce Young Horses to Equipment Exercise and Improve the Performance of Horses using Lunging or Long Reigning Care for Horses After Strenuous Exercise Prepare and Maintain Grazing Land for Horses Jump Schooled Horses to Maintain Training</p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Support for additional needs
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body"><a href="">Find out the support available if you have additional needs</a></p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Next open day
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body"><a href="">Find out about open days</a></p>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          What jobs can I do after this course?
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p class="govuk-body"><a href="">Explore possible careers on the National Careers Service website</a></p>
+        </dd>
+      </div>
+    </dl>
+
+    <div class="govuk-button-group">
+
+    {{ govukButton({
+      text: "I'm interested in this course",
+      href: "interested-in-course"
+    }) }}
+
+    <p><a href="">Show me less like this</a></p>
+
+    </div>
+
+    <h2 class="govuk-heading-m">Other courses</h2>
+    <p class="govuk-body">Before deciding whether to apply for this course, here are a few other courses in related subjects you might also want to consider.</p>
+    <ul class="govuk-list">
+      <li>
+        <a class="govuk-link" href="#">Sociology Level 2</a>
+      </li>
+      <li>
+        <a class="govuk-link" href="#">Biology A Level</a>
+      </li>
+      <li>
+        <a class="govuk-link" href="#">Health and Social Care T Level</a>
+      </li>
+      <li>
+        <a class="govuk-link" href="#">Horse Care and Animal Care</a>
+      </li>
+    </ul>
+{% endblock %}

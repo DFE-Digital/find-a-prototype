@@ -1,0 +1,80 @@
+{% extends "../layouts/_HOME.html" %}
+
+
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-two-thirds">  
+
+   
+
+
+<div class="moj-interruption-card" style="background-color: #EAF5FF;">
+  <div class="moj-interruption-card__content">
+    <h1 class="govuk-heading-l">
+      What are you interested in?
+    </h1>
+
+    <p>Let us help you find a course or apprenticeship that suits you.</p>
+    <p>We use AI to give you the best results for things near you.</p>
+
+    {{ govukButton({
+      text: "Tell us what you're interested in",
+      href: "interests"
+    }) }}
+
+    <h3 class="govuk-heading-m">
+      I don't know where to start
+    </h3>
+
+    <p>If you're not sure yet about what to do, you can browse all courses and apprenticeships near you.</p>
+
+    <p><a href="">Browse</a></p>
+
+  </div>
+</div>
+
+
+
+<h2 class="govuk-heading-m">Before you get started</h2>
+
+<p class="govuk-body">It can be good to talk to someone. This could be a parent, carer, teacher or careers adviser.</p>
+<p class="govuk-body">You can also talk to the National Careers Service (NCS) for free on <a href="">0800 100 900</a> or by <a href="">webchat</a>.</p>
+<p class="govuk-body">It's really common to feel a bit anxious about your next steps. Find out about <a href="">mental health support for young people</a>.</p>
+<p class="govuk-body">We have lots of <a href="">short videos of young people talking about their experiences</a>. Here are a few you might find useful.</p>
+
+
+<h3 class="govuk-heading-s">What can I do after GCSEs?</h3>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/D1ZkDA_swNc?si=vMrrEgDujJANTV1e" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p class="govuk-body">2 minutes 1 second</p>
+{{ govukDetails({
+  summaryText: "View transcript",
+  text: "transcript goes here."
+}) }}
+
+<h3 class="govuk-heading-s">What's an apprenticeship'?</h3>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MifweBgu8KU?si=DQh6NJsFxMWFfCln" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p class="govuk-body">1 minute 50 seconds</p>
+{{ govukDetails({
+  summaryText: "View transcript",
+  text: "transcript goes here."
+}) }}
+
+<h3 class="govuk-heading-s">What are vocational courses like T Levels?</h3>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-4dm9KskMbY?si=yR0jz1Dj-Yreaclj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p class="govuk-body">2 minutes 7 seconds</p>
+{{ govukDetails({
+  summaryText: "View transcript",
+  text: "transcript goes here."
+}) }}
+</div>
+</div>
+
+{% endblock %}

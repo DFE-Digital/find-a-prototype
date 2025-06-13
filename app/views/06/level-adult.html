@@ -1,0 +1,75 @@
+{% extends "./layouts/_QUESTION.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Where would you like to study?" %}
+{% set withoutDescription = "true" %}
+
+
+{% block service %}
+<form action="check-answers" method="post" novalidate>
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset" role="group" aria-describedby="qualification-level-hint">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          What qualification level are you looking for?
+        </h1>
+      </legend>
+
+  
+      <div class="govuk-radios" data-module="govuk-radios">
+        
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="level-none" name="qualification-level" type="radio" value="none">
+          <label class="govuk-label govuk-radios__label" for="level-none">
+            Learn skills and experience without a qualification
+          </label>
+        </div>
+        
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="level-1-2" name="qualification-level" type="radio" value="level-1-2">
+          <label class="govuk-label govuk-radios__label" for="level-1-2">
+            Level 1 or 2 (like GCSEs)
+          </label>
+        </div>
+        
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="level-3" name="qualification-level" type="radio" value="level-3">
+          <label class="govuk-label govuk-radios__label" for="level-3">
+            Level 3 (like BTECs and A levels)
+          </label>
+        </div>
+        
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="level-4-7" name="qualification-level" type="radio" value="level-4-7">
+          <label class="govuk-label govuk-radios__label" for="level-4-7">
+            Level 4 to 7 (like diplomas and degrees)
+          </label>
+        </div>
+        
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="level-all" name="qualification-level" type="radio" value="all">
+          <label class="govuk-label govuk-radios__label" for="level-all">
+            Show me everything
+          </label>
+        </div>
+  
+      </div>
+    </fieldset>
+  </div>
+  
+
+    
+    <div class="govuk-button-group">
+
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+
+      <a class="govuk-link" href="check-answers">Skip this step</a>
+      </div>
+
+  </div>
+</div>
+</form>
+
+{% endblock %}

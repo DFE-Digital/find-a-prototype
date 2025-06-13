@@ -1,0 +1,266 @@
+{% extends "../layouts/_QUESTION.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Where would you like to study?" %}
+{% set withoutDescription = "true" %}
+
+
+{% block service %}
+<form action="example-2" method="post" novalidate>
+    
+  <h1 class="govuk-heading-l">Help us improve your search results</h1>
+
+  <p>Telling us what you think of these example courses will help make your search results even more relevant to you.
+  </p>
+  
+  {% if (data['person-1'] == "Football") %}
+
+  <div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        <a href="#">Football Scholarship Programme</a>
+      </h2>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Course type
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <strong class="govuk-tag govuk-tag--purple">
+              Level 3 diploma
+            </strong>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Distance
+          </dt>
+          <dd class="govuk-summary-list__value">
+            3 miles (Openshaw)
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Start date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            8 September 2025
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Duration
+          </dt>
+          <dd class="govuk-summary-list__value">
+            12 months
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Requirements
+          </dt>
+          <dd class="govuk-summary-list__value">
+            No academic entry requirements
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  {% endif %}
+
+  {% if (data['person-1'] == "Psychology") %}
+
+  <div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        <a href="#">Applied Psychology BTEC Extended Certificate 3</a>
+      </h2>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Course type
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <strong class="govuk-tag govuk-tag--turquoise">
+              BTEC
+            </strong>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Distance
+          </dt>
+          <dd class="govuk-summary-list__value">
+            3 miles (Openshaw)
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Start date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            8 September 2025
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Duration
+          </dt>
+          <dd class="govuk-summary-list__value">
+            12 months
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Requirements
+          </dt>
+          <dd class="govuk-summary-list__value">
+            GCSEs at grade C/4 or above in both Maths and English
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  {% endif %}
+
+  {% if (data['person-1'] == "Social care" or "social care") %}
+
+  <div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        <a href="#">Diploma in Adult Care</a>
+      </h2>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Course type
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <strong class="govuk-tag govuk-tag--purple">
+              Level 3 Diploma
+            </strong>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Distance
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <p>7 miles (Ashton)</p>
+            <p>Tameside College</p>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Start date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            3 September 2025
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Duration
+          </dt>
+          <dd class="govuk-summary-list__value">
+            12 months
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Requirements
+          </dt>
+          <dd class="govuk-summary-list__value">
+            No entry requirements           
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  {% endif %}
+
+  {% if (data['person'] == "Science") %}
+
+  <div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        <a href="#">Healthcare Science</a>
+      </h2>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Course type
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <strong class="govuk-tag govuk-tag--yellow">
+              T Level
+            </strong>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Distance
+          </dt>
+          <dd class="govuk-summary-list__value">
+            0.1 miles (Manchester)
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Start date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            8 September 2025
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Duration
+          </dt>
+          <dd class="govuk-summary-list__value">
+            2 years
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Requirements
+          </dt>
+          <dd class="govuk-summary-list__value">
+            5 GCSEs at Grade 4 or higher including English, maths and science
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  {% endif %}
+
+
+    
+    <div class="govuk-button-group">
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Show me more like this
+      </button>
+
+      <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+        Show me less like this
+      </button>
+      
+    </div>
+
+  </div>
+</div>
+</form>
+
+{% endblock %}

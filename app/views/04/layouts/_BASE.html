@@ -1,0 +1,190 @@
+{% set serviceName = "Explore your options after school or college" %}
+
+{% extends "/layouts/main.html" %}
+
+{% block header %}  
+
+<header class="dfe-header" role="banner">
+  <div class="dfe-width-container dfe-header__container">
+    <div class="dfe-header__logo">
+      <a class="dfe-header__link" href="/" aria-label="DfE homepage">
+
+        <img src="/public/images/dfe-logo.png" class="dfe-logo" alt="Department for Education">
+        <img src="/public/images/dfe-logo-alt.png" class="dfe-logo-hover" alt="Department for Education">
+
+      </a>
+    </div>
+    <div class="dfe-header__content" id="content-header">
+
+
+
+      <div class="dfe-header__menu">
+        <button class="dfe-header__menu-toggle" id="toggle-menu" aria-controls="header-navigation"
+          aria-expanded="false">Menu</button>
+      </div>
+
+    </div>
+  </div>
+  <div class="dfe-width-container dfe-header__service-name">
+    <a href="/" class="dfe-header__link--service">Explore your options after school or college</a>
+  </div>
+
+</header>
+
+<section class="dfe-page-grey">
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+
+        <div class="govuk-phase-banner" style="margin-top: -30px; margin-bottom: 20px;">
+          <p class="govuk-phase-banner__content">
+            <strong class="govuk-tag govuk-phase-banner__content__tag">
+              Alpha
+            </strong>
+            <span class="govuk-phase-banner__text">
+              This is a new service. Help us improve it and <a class="govuk-link" href="#">give your feedback by
+                email</a>.
+            </span>
+          </p>
+        </div>
+        {% if back %}
+        <a href="javascript:history.back()" class="govuk-back-link" style="margin-bottom: 30px;">Back</a>
+        {% endif %}
+      </div>
+      
+      <div class="govuk-grid-column-two-thirds">
+
+
+        {% if withoutDescription %}
+        <h2 class="govuk-heading-l" style="margin-bottom: 10px;">
+          {{ pageHeading }}
+        </h2>
+        {% endif %}
+
+        {% if withDescription %}
+        <h2 class="govuk-heading-l">
+          {{ pageHeading }}
+        </h2>
+
+        <p class="govuk-body-m">{{ pageDescription }}</p>
+
+        {% endif %}
+
+        {% if withDescriptionAndLink %}
+        <h2 class="govuk-heading-l">
+          {{ pageHeading }}
+        </h2>
+
+        <p class="govuk-body-m">{{ pageDescription }}</p>
+
+        <p class="govuk-body-m"><a href="jobs-and-careers">Change your search</a></p>
+        {% endif %}
+
+        {% if resultsPage %}
+
+        <h2 class="govuk-heading-l">
+          {{ pageHeading }}
+        </h2>
+
+       <p class="hero__description">
+        <p>You searched for:</p>
+         <ul class="govuk-list govuk-list--bullet">
+          <li class="govuk-body govuk-!-font-weight-bold">{{ data['job-1'] }}</li>
+            <li class="govuk-body govuk-!-font-weight-bold">{{ data['subject-1'] }}</li>
+         </ul>
+       </p>
+
+       <p class="govuk-body-m"><a href="jobs-and-careers">Change your search</a></p>
+
+        {% endif %}
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+</header>
+
+</header>
+
+{% endblock %}    
+
+
+{% block content %}
+<div class="govuk-grid-row"> 
+<div class="govuk-grid-column-two-thirds">  
+<!-- start of service specific block -->
+{% block service %}
+Text goes here, override this by overriding the block
+{% endblock %}
+<!-- end service specific block-->
+</div>
+{% endblock %}    
+
+{% block scripts %}
+  {{ super() }}
+  <script src="/public/javascripts/dfefrontend.js"></script>
+{% endblock %}
+
+{% block footer %}
+
+{% from "govuk/components/footer/macro.njk" import govukFooter %}
+
+{{ govukFooter({
+  navigation: [
+    {
+      title: "Website information",
+      width: "two-thirds",
+      columns: 2,
+      items: [
+        {
+          href: "#",
+          text: "About us"
+        },
+        {
+          href: "#",
+          text: "Help"
+        },
+        {
+          href: "#",
+          text: "Privacy and cookies"
+        },
+        {
+          href: "#",
+          text: "Accessibility statement"
+        },
+        {
+          href: "#",
+          text: "Terms and conditions"
+        },
+        {
+          href: "#",
+          text: "information sources"
+        }
+      ]
+    },
+    {
+      title: "Sites for other UK countries",
+      width: "one-third",
+      items: [
+        {
+          href: "#",
+          text: "Scotland"
+        },
+        {
+          href: "#",
+          text: "Wales"
+        },
+        {
+          href: "#",
+          text: "Northern Ireland"
+        }
+      ]
+    }
+  ]
+}) }}
+
+{% endblock %}

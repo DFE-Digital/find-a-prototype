@@ -1,0 +1,72 @@
+{% extends "./layouts/_BASE.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "I'm interested in Work based horse care and management course" %}
+{% set pageDescription = "What to do if you're interested in applying for this course." %}
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-two-thirds">  
+    
+    <h2 class="govuk-heading-m">Talk it through</h2>
+    
+    <p class="govuk-body">It can be helpful to talk to someone, like a parent or teacher, about your choice. You can also talk to the National Careers Service (NCS) for free on <a href="">0800 100 900</a> or by <a href="">webchat</a>.</p>
+    
+    <h2 class="govuk-heading-m">Check it out</h2>
+    
+    <p class="govuk-body">You could <a href="">attend an open day</a> with the course provider if one is available. This can help you check how you'd get there and whether you like the facilities.</p>
+      
+    <p class="govuk-body">If you have a disability or any additional needs you could also find out about what extra support you could get.</p>
+      
+    <p class="govuk-body">You might even be able to talk to some students to get their views.</p>
+        
+    <h2 class="govuk-heading-m">Apply</h2>
+    
+    <p class="govuk-body">Apply for the course if you think it's right for you (you could ask someone to help with this if the application process looks tricky).</p>
+    
+    <h2 class="govuk-heading-m">Decide what to do before the course starts</h2>
+    
+    <p class="govuk-body"> If you're going to have a gap before the course or apprenticeship starts, there are <a href="">loads of ways you could use your time</a> to top up your skills and have some great experiences.</p>
+    
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break">
+
+    {{ govukButton({
+      text: "Apply now"
+    }) }}
+
+    <hr class="govuk-section-break govuk-section-break--s govuk-section-break">
+    
+    <h3 class="govuk-heading-s">Tips for applying to college</h3>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/yh84u42Kfrw?si=c0q1UgPsip6m5G8n" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <p class="govuk-body">2 minutes 17 seconds</p>
+      {{ govukDetails({
+        summaryText: "View transcript",
+        text: "transcript goes here."
+      }) }}
+
+      <h3 class="govuk-heading-s">How I spent 9 months before my course started</h3>
+
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/GV8weH-JrBY?si=t0RLpoA0XnNGpLmT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <p class="govuk-body">1 minute 59 seconds</p>
+      {{ govukDetails({
+        summaryText: "View transcript",
+        text: "transcript goes here."
+      }) }}
+
+      <h3 class="govuk-heading-s">Tips for getting advice from a trusted adult</h3>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OWtPnjSoppc?si=lh5GuuPQmCnP0azC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <p class="govuk-body">3 minutes 4 seconds</p>
+      {{ govukDetails({
+        summaryText: "View transcript",
+        text: "transcript goes here."
+      }) }}
+
+  </div>
+ </div>   
+{% endblock %}

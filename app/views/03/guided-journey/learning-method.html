@@ -1,0 +1,56 @@
+{% extends "../layouts/_QUESTION.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "How do you like to learn?" %}
+{% set withoutDescription = "true" %}
+
+
+{% block service %}
+<form action="level-of-education" method="post" novalidate>
+
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Do you prefer more academic or vocational courses?
+          </h1>
+        </legend>
+        <div id="signIn-hint" class="govuk-hint">
+          <p>Academic courses are more about learning things in a classroom. Vocational courses are more hands-on and focus on learning practical skills.</p><p>If you're not sure, don't rule anything out at this stage.</p>
+        </div>
+        <div class="govuk-radios" data-module="govuk-radios">
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="learning-style" name="learning-style" type="radio" value="I prefer academic courses">
+            <label class="govuk-label govuk-radios__label" for="learning-style">
+              I prefer academic courses
+            </label>
+          </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="learning-style-2" name="learning-style" type="radio" value="I prefer vocational courses">
+            <label class="govuk-label govuk-radios__label" for="learning-style-2">
+              I prefer vocational courses
+            </label>
+          </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="learning-style-3" name="learning-style" type="radio" value="I'd like to see both academic and vocational courses">
+            <label class="govuk-label govuk-radios__label" for="learning-style-3">
+              I'd like to see both
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    
+    <div class="govuk-button-group">
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+      <a class="govuk-link" href="apprenticeships-or-courses">Skip this step</a>
+    </div>
+
+  </div>
+</div>
+</form>
+
+{% endblock %}

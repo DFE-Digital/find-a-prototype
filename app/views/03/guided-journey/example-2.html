@@ -1,0 +1,263 @@
+{% extends "../layouts/_QUESTION.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Where would you like to study?" %}
+{% set withoutDescription = "true" %}
+
+
+{% block service %}
+<form action="example-3" method="post" novalidate>
+    
+  <h1 class="govuk-heading-l">Help us improve your search results</h1>
+
+  <p>Telling us what you think of these example courses will help make your search results even more relevant to you.
+  </p>
+
+  {% if (data['person-1'] == "Football") %}
+
+  <div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        <a href="#">Diploma in Sport</a>
+      </h2>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Course type
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <strong class="govuk-tag govuk-tag--purple">
+              Level 3 diploma
+            </strong>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Distance
+          </dt>
+          <dd class="govuk-summary-list__value">
+            3 miles (Salford)
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Start date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            9 September 2025
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Duration
+          </dt>
+          <dd class="govuk-summary-list__value">
+            18 months
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Requirements
+          </dt>
+          <dd class="govuk-summary-list__value">
+            No academic entry requirements
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  {% endif %}
+
+  {% if (data['person-1'] == "Social care" or "social care") %}
+
+  <div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        <a href="#">Health & Social Care</a>
+      </h2>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Course type
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <strong class="govuk-tag govuk-tag--turquoise">
+              BTEC
+            </strong>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Distance
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <p>1 miles (Manchester)</p>
+            <p>The Manchester College</p>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Start date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            8 September 2025
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Duration
+          </dt>
+          <dd class="govuk-summary-list__value">
+            18 months
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Requirements
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Five GCSEs between 9-4 (or A*-C), one or two at B/6 with two of English, Maths or Science OR Five GCSEs between 9-4 (or A*-C) together with Distinctions in BTEC Level 2 qualifications OR Seven or eight GCSEs at grade 4 (or C)           </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  {% endif %}
+
+  {% if (data['person-1'] == "Psychology") %}
+
+  <div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        <a href="#">A Level in Psychology</a>
+      </h2>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Course type
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <strong class="govuk-tag govuk-tag--orange">
+              A Level
+            </strong>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Distance
+          </dt>
+          <dd class="govuk-summary-list__value">
+            5 miles (Sale)
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Start date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            8 September 2025
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Duration
+          </dt>
+          <dd class="govuk-summary-list__value">
+            12 months
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Requirements
+          </dt>
+          <dd class="govuk-summary-list__value">
+            A minimum Attainment 8 score of 60. A grade 6 in GCSE English Language and Maths. A grade 6 in the subject you wish to study (or two grade 6s if you wish to study a science and took Combined Science at GCSE).
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  {% endif %}
+
+  {% if (data['person-1'] == "Science") %}
+
+  <div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        <a href="#">Computer science</a>
+      </h2>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Course type
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <strong class="govuk-tag govuk-tag--orange">
+              A Level
+            </strong>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Distance
+          </dt>
+          <dd class="govuk-summary-list__value">
+            1.2 miles (Manchester)
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Start date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            1 September 2025
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Duration
+          </dt>
+          <dd class="govuk-summary-list__value">
+            12 months
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Requirements
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Six GCSEs 9-4 (or A*-C) Two at least grade 6 (or B) Two from English, Maths OR Science GCSE Maths (higher tier) grade 9-6
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  {% endif %}
+    
+    <div class="govuk-button-group">
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Show me more like this
+      </button>
+
+      <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+        Show me less like this
+      </button>
+      
+    </div>
+
+  </div>
+</div>
+</form>
+
+{% endblock %}

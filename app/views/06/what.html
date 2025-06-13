@@ -1,0 +1,50 @@
+{% extends "./layouts/_QUESTION.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Where would you like to study?" %}
+{% set withoutDescription = "true" %}
+
+
+{% block service %}
+<form action="job-subject-all" method="post" novalidate>
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset" aria-describedby="study-location-hint">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          How would you like to search?
+        </h1>
+      </legend>
+
+      <div class="govuk-radios" data-module="govuk-radios">
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="all-or-nothing" name="all-or-nothing" type="radio" value="Search for all courses near an institution">
+          <label class="govuk-label govuk-radios__label" for="all-or-nothing">
+            Find all courses nearby
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="all-or-nothing-2" name="all-or-nothing" type="radio" value="Answer some questions to get personalised results">
+          <label class="govuk-label govuk-radios__label" for="all-or-nothing-2">
+            Answer a few questions for more specific results
+          </label>
+        </div>
+      </div>
+    </fieldset>
+  </div>    
+
+  <div class="govuk-button-group">
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+    <a class="govuk-link" href="search-results">Skip this step</a>
+    </div>
+   
+  </form>
+
+  </div>
+</div>
+
+{% endblock %}
