@@ -8,33 +8,31 @@
 {% block service %}
 
   <div data-module="moj-add-another">
-    <form action="jobs" method="post" novalidate>
- 
-      
-      <h1 class="govuk-heading-l">What subjects or courses are you interested in? </h1>
+    <form action="learning-method" method="post" novalidate>
 
-      <p>This is optional but the more you tell us the better your search results will be.</p>
+      <h1 class="govuk-heading-l">What courses, subjects, jobs or careers are you interested in?</h1>
 
-      <p>Add anything you think could help us find you relevant courses. For example:</p>
+      <p>You can be as specific as you like. For example:</p>
         <ul class="govuk-list govuk-list--bullet">
           <li>maths</li>
-          <li>social sciences</li>
-          <li>anything creative</li>
+          <li>bricklaying</li>
+          <li>working with animals</li>
+          <li>something in the public sector</li>
         </ul>
 
-<br>
-      <fieldset class="govuk-fieldset moj-add-another__item">
+        <br>
   
+      <fieldset class="govuk-fieldset moj-add-another__item">
         <div class="govuk-form-group">
-          <label class="govuk-label govuk-label--m govuk-!-font-weight-bold" for="subject[0][first_name]">
-            Enter a subject (optional)
+          <label class="govuk-label govuk-label--m govuk-!-font-weight-bold" for="job[0][first_name]">
+            Enter an interest
           </label>
-
+          
           <div id="event-name-hint" class="govuk-hint">
             You can enter one thing at a time, then press 'Add another' if you want to include more. Enter anything from a single word to a full sentence.
           </div>
 
-          <input class="govuk-input" id="subject-1" name="subject-1" type="text" data-name="subject[%index%][first_name]" data-id="subject[%index%][first_name]">
+          <input class="govuk-input" id="job-1" name="job-1" type="text" data-name="person[%index%][first_name]" data-id="job[%index%][first_name]">
   
         </div>
   
@@ -55,13 +53,12 @@
   <hr class="govuk-section-break govuk-section-break--m govuk-section-break">
 
     
-    <div class="govuk-button-group">
-      {{ govukButton({
-        text: "Continue"
-      }) }}
+  <div class="govuk-button-group">
+    {{ govukButton({
+      text: "Continue"
+    }) }}
 
-      <a class="govuk-link" href="#">Skip this step</a>
-    </div>
+  </div>
 
   </div>
 </div>

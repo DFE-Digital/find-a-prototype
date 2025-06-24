@@ -8,18 +8,19 @@
 {% block service %}
 
   <div data-module="moj-add-another">
-    <form action="jobs" method="post" novalidate>
+    <form action="location-18-plus" method="post" novalidate>
+
+      <h1 class="govuk-heading-l">Tell us what you want to search for </h1>
  
       
-      <h1 class="govuk-heading-l">What subjects or courses are you interested in? </h1>
+      <h2 class="govuk-heading-m">Are there any subjects or careers you are interested in?</h2>
 
-      <p>This is optional but the more you tell us the better your search results will be.</p>
 
-      <p>Add anything you think could help us find you relevant courses. For example:</p>
+      <p>You can be as specific or broad as you like. For example:</p>
         <ul class="govuk-list govuk-list--bullet">
-          <li>maths</li>
+          <li>applied physics</li>
           <li>social sciences</li>
-          <li>anything creative</li>
+          <li>working in a creative industry</li>
         </ul>
 
 <br>
@@ -27,7 +28,7 @@
   
         <div class="govuk-form-group">
           <label class="govuk-label govuk-label--m govuk-!-font-weight-bold" for="subject[0][first_name]">
-            Enter a subject (optional)
+            Enter a subject or career 
           </label>
 
           <div id="event-name-hint" class="govuk-hint">
@@ -60,7 +61,6 @@
         text: "Continue"
       }) }}
 
-      <a class="govuk-link" href="#">Skip this step</a>
     </div>
 
   </div>

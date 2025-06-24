@@ -11,6 +11,7 @@
 <p>Check your answers, and change them if you'd like to, before viewing your search results.</p>
 
 <dl class="govuk-summary-list">
+  
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
       Location
@@ -35,21 +36,6 @@
     </dd>
   </div>
 
-  {% if (data['job-1']) %}
-  
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">
-      Jobs or careers
-    </dt>
-    <dd class="govuk-summary-list__value">
-      {{ data['job-1']  or "No jobs or careers added"}}
-    </dd>
-    <dd class="govuk-summary-list__actions">
-      <a class="govuk-link" href="jobs-and-careers-question">Change<span class="govuk-visually-hidden"> name</span></a>
-    </dd>
-  </div>
-  {% endif %}
-
   {% if (data['subject-1']) %}
 
   <div class="govuk-summary-list__row">
@@ -64,6 +50,21 @@
     </dd>
   </div>
 
+  {% endif %}
+
+  {% if (data['job-1']) %}
+  
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Jobs or careers
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data['job-1']  or "No jobs or careers added"}}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="jobs-and-careers-question">Change<span class="govuk-visually-hidden"> name</span></a>
+    </dd>
+  </div>
   {% endif %}
 
 

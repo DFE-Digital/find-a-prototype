@@ -14,61 +14,16 @@
 
   {{ govukInput({
     label: {
-      text: "Enter a town, city or postcode",
+      text: "Enter a town, city or postcode (optional)",
       classes: "govuk-label--m"
     },
+  hint: {
+    text: "If you want to find everywhere offering a particular subject, you can leave this empty (you must have entered a subject or career)"
+  },
     classes: "govuk-input--width-20",
     id: "location",
     name: "location"
   }) }}
-
-  <div class="govuk-form-group">
-    <fieldset class="govuk-fieldset">
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-        <h1 class="govuk-fieldset__heading">
-          How far would you be happy to travel?
-        </h1>
-      </legend>
-      <div class="govuk-radios" data-module="govuk-radios">
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="travel-location" name="travel-location" type="radio" value="Up to 1 miles">
-          <label class="govuk-label govuk-radios__label" for="travel-location">
-            Up to 1 mile
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="travel-location-2" name="travel-location" type="radio" value="Up to 2 miles">
-          <label class="govuk-label govuk-radios__label" for="travel-location-2">
-            Up to 2 miles
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="travel-location-3" name="travel-location" type="radio" value="Up to 5 miles">
-          <label class="govuk-label govuk-radios__label" for="travel-locatio-3">
-            Up to 5 miles
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="travel-location-4" name="travel-location" type="radio" value="Up to 10 miles">
-          <label class="govuk-label govuk-radios__label" for="travel-location-4">
-            Up to 10 miles
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="travel-location-5" name="travel-location" type="radio" value="Up to 15 miles">
-          <label class="govuk-label govuk-radios__label" for="travel-location-5">
-            Up to 15 miles
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="travel-location-6" name="travel-location" type="radio" value="Up to 25 miles">
-          <label class="govuk-label govuk-radios__label" for="travel-location-6">
-            Up to 25 miles
-          </label>
-        </div>
-      </div>
-    </fieldset>
-  </div>
 
   <div class="govuk-button-group">
 
@@ -76,7 +31,6 @@
       text: "Continue"
     }) }}
 
-    <a class="govuk-link" href="what">Skip this step</a>
     </div>
 
 
