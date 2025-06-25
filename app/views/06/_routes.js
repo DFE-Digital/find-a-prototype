@@ -109,6 +109,49 @@ router.post('/results-type', function(request, response) {
 })
 
 
+router.post('/next-steps', (req, res) => {
+    const { age, 'next-step': nextStep } = req.body;
+  
+    // Guard clause if values are missing
+    if (!age || !nextStep) {
+      return res.redirect('/error-page'); // or render an error template
+    }
+  
+    // Specific condition for /page-a
+    if (
+      (age === 'under-18' || age === '18-21') &&
+      nextStep === 'university'
+    ) {
+      return res.redirect('subjects-18-24');
+    }
+
+    // Route to /page-b
+    if (
+        age === 'under-18' &&
+        (nextStep === 'gcses' || nextStep === 'return')
+    ) {
+        return res.redirect('location');
+    }
+
+      // Rule 3: Route to /page-c
+    if (
+        age === '18-21' &&
+        (nextStep === 'gcses' || nextStep === 'return')
+    ) {
+        return res.redirect('what-adults');
+    }
+
+     // Rule 4: page-d
+    if (age === 'over-24') {
+        return res.redirect('what-adults');
+    }
+    
+    // Default/fallback route
+    return res.redirect(`/${age}/${nextStep}`);
+  });
+  
+
+
 
 
 module.exports = router
