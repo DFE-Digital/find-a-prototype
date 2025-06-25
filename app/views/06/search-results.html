@@ -550,36 +550,43 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   const checkboxes = document.querySelectorAll('input[name="filter"]');
+  const levelCheckboxes = document.querySelectorAll('input[name="level-filter"]'); // ✅ Level filters
   const results = document.querySelectorAll('#search-results > div, #search-results > li');
   const filterContainer = document.getElementById('selected-filters');
-  const activeFiltersHeading = document.getElementById('active-filters-heading'); // ✅ Get the heading
+  const activeFiltersHeading = document.getElementById('active-filters-heading');
   const keywordInput = document.getElementById('option-select-filter-location');
   const distanceSelect = document.getElementById('sort');
   const applyButton = document.getElementById('apply-filters');
+  const clearFiltersLink = document.getElementById('clear-filters');
 
   let submittedKeyword = '';
   let submittedDistance = '2'; // Default distance
   let submittedCategories = [];
+  let submittedLevels = []; // ✅ New: store selected levels
 
   function updateFilters() {
     const keyword = submittedKeyword;
     const distance = submittedDistance;
     const categories = submittedCategories;
+    const levels = submittedLevels;
 
     // Filter results
     results.forEach(result => {
       const category = result.getAttribute('data-category');
+      const level = result.getAttribute('data-level'); // ✅ must be on result elements
       const text = result.textContent;
 
       const matchesCategory = categories.length === 0 || categories.includes(category);
+      const matchesLevel = levels.length === 0 || levels.includes(level);
       const matchesKeyword = keyword === '' || text.toLowerCase().includes(keyword.toLowerCase());
 
-      result.style.display = matchesCategory && matchesKeyword ? '' : 'none';
+      result.style.display = matchesCategory && matchesLevel && matchesKeyword ? '' : 'none';
     });
 
     // Render selected filters
     filterContainer.innerHTML = '';
 
+    // Category tags
     categories.forEach(value => {
       const link = document.createElement('a');
       link.href = '#';
@@ -588,15 +595,30 @@ document.addEventListener('DOMContentLoaded', function () {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const checkbox = Array.from(checkboxes).find(cb => cb.value === value);
-        if (checkbox) {
-          checkbox.checked = false;
-        }
+        if (checkbox) checkbox.checked = false;
         submittedCategories = submittedCategories.filter(c => c !== value);
         updateFilters();
       });
       filterContainer.appendChild(link);
     });
 
+    // ✅ Level tags
+    levels.forEach(value => {
+      const link = document.createElement('a');
+      link.href = '#';
+      link.textContent = value;
+      link.setAttribute('data-filter', value);
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const checkbox = Array.from(levelCheckboxes).find(cb => cb.value === value);
+        if (checkbox) checkbox.checked = false;
+        submittedLevels = submittedLevels.filter(l => l !== value);
+        updateFilters();
+      });
+      filterContainer.appendChild(link);
+    });
+
+    // Keyword tag
     if (keyword !== '') {
       const keywordTag = document.createElement('a');
       keywordTag.href = '#';
@@ -611,6 +633,7 @@ document.addEventListener('DOMContentLoaded', function () {
       filterContainer.appendChild(keywordTag);
     }
 
+    // Distance tag
     if (distance !== '2') {
       const distanceLabel = distanceSelect.options[distanceSelect.selectedIndex].text;
       const distanceTag = document.createElement('a');
@@ -626,30 +649,48 @@ document.addEventListener('DOMContentLoaded', function () {
       filterContainer.appendChild(distanceTag);
     }
 
-    // ✅ Show or hide "You've searched for:" heading
+    // Show or hide "You've searched for" heading
     const anyFiltersActive =
       categories.length > 0 ||
+      levels.length > 0 ||
       keyword !== '' ||
       distance !== '2';
 
     activeFiltersHeading.style.display = anyFiltersActive ? 'block' : 'none';
   }
 
-  // ✅ Run filters only when button clicked
+  // Clear filters
+  clearFiltersLink.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    checkboxes.forEach(cb => cb.checked = false);
+    levelCheckboxes.forEach(cb => cb.checked = false);
+    keywordInput.value = '';
+    submittedKeyword = '';
+    distanceSelect.value = '2';
+    submittedDistance = '2';
+    submittedCategories = [];
+    submittedLevels = [];
+
+    updateFilters();
+  });
+
+  // Apply filters
   applyButton.addEventListener('click', function () {
     submittedKeyword = keywordInput.value.trim();
     submittedDistance = distanceSelect.value;
     submittedCategories = Array.from(checkboxes)
       .filter(cb => cb.checked)
       .map(cb => cb.value);
+    submittedLevels = Array.from(levelCheckboxes)
+      .filter(cb => cb.checked)
+      .map(cb => cb.value);
 
     updateFilters();
   });
 
-  updateFilters(); // Optional: run once on page load
+  updateFilters(); // Initial run
 });
-
-
 
 </script>
 
