@@ -139,10 +139,10 @@
           </div>
           <div id="accordion-default-content-4" class="govuk-accordion__section-content">
             <div class="govuk-form-group">
-              <label class="govuk-label" for="event-name">
-                Enter a keyword
+              <label class="govuk-label" for="subject-filter">
+                Subject or career keywords
               </label>
-              <input class="govuk-input" id="event-name" name="eventName" type="text">
+              <input class="govuk-input" id="subject-filter" name="subject-filter" type="text">
             </div>
           </div>
         </div>
@@ -550,43 +550,44 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   const checkboxes = document.querySelectorAll('input[name="filter"]');
-  const levelCheckboxes = document.querySelectorAll('input[name="level-filter"]'); // ✅ Level filters
+  const levelCheckboxes = document.querySelectorAll('input[name="level-filter"]');
   const results = document.querySelectorAll('#search-results > div, #search-results > li');
   const filterContainer = document.getElementById('selected-filters');
   const activeFiltersHeading = document.getElementById('active-filters-heading');
   const keywordInput = document.getElementById('option-select-filter-location');
+  const subjectInput = document.getElementById('subject-filter'); // ✅ New subject input
   const distanceSelect = document.getElementById('sort');
   const applyButton = document.getElementById('apply-filters');
   const clearFiltersLink = document.getElementById('clear-filters');
 
   let submittedKeyword = '';
-  let submittedDistance = '2'; // Default distance
+  let submittedSubject = ''; // ✅ New subject state
+  let submittedDistance = '2';
   let submittedCategories = [];
-  let submittedLevels = []; // ✅ New: store selected levels
+  let submittedLevels = [];
 
   function updateFilters() {
     const keyword = submittedKeyword;
+    const subject = submittedSubject;
     const distance = submittedDistance;
     const categories = submittedCategories;
     const levels = submittedLevels;
 
-    // Filter results
     results.forEach(result => {
       const category = result.getAttribute('data-category');
-      const level = result.getAttribute('data-level'); // ✅ must be on result elements
+      const level = result.getAttribute('data-level');
       const text = result.textContent;
 
       const matchesCategory = categories.length === 0 || categories.includes(category);
       const matchesLevel = levels.length === 0 || levels.includes(level);
       const matchesKeyword = keyword === '' || text.toLowerCase().includes(keyword.toLowerCase());
+      const matchesSubject = subject === '' || text.toLowerCase().includes(subject.toLowerCase());
 
-      result.style.display = matchesCategory && matchesLevel && matchesKeyword ? '' : 'none';
+      result.style.display = matchesCategory && matchesLevel && matchesKeyword && matchesSubject ? '' : 'none';
     });
 
-    // Render selected filters
     filterContainer.innerHTML = '';
 
-    // Category tags
     categories.forEach(value => {
       const link = document.createElement('a');
       link.href = '#';
@@ -602,7 +603,6 @@ document.addEventListener('DOMContentLoaded', function () {
       filterContainer.appendChild(link);
     });
 
-    // ✅ Level tags
     levels.forEach(value => {
       const link = document.createElement('a');
       link.href = '#';
@@ -618,7 +618,6 @@ document.addEventListener('DOMContentLoaded', function () {
       filterContainer.appendChild(link);
     });
 
-    // Keyword tag
     if (keyword !== '') {
       const keywordTag = document.createElement('a');
       keywordTag.href = '#';
@@ -633,7 +632,20 @@ document.addEventListener('DOMContentLoaded', function () {
       filterContainer.appendChild(keywordTag);
     }
 
-    // Distance tag
+    if (subject !== '') {
+      const subjectTag = document.createElement('a');
+      subjectTag.href = '#';
+      subjectTag.textContent = subject;
+      subjectTag.setAttribute('data-filter', 'subject');
+      subjectTag.addEventListener('click', (e) => {
+        e.preventDefault();
+        submittedSubject = '';
+        subjectInput.value = '';
+        updateFilters();
+      });
+      filterContainer.appendChild(subjectTag);
+    }
+
     if (distance !== '2') {
       const distanceLabel = distanceSelect.options[distanceSelect.selectedIndex].text;
       const distanceTag = document.createElement('a');
@@ -649,24 +661,25 @@ document.addEventListener('DOMContentLoaded', function () {
       filterContainer.appendChild(distanceTag);
     }
 
-    // Show or hide "You've searched for" heading
     const anyFiltersActive =
       categories.length > 0 ||
       levels.length > 0 ||
       keyword !== '' ||
+      subject !== '' ||
       distance !== '2';
 
     activeFiltersHeading.style.display = anyFiltersActive ? 'block' : 'none';
   }
 
-  // Clear filters
   clearFiltersLink.addEventListener('click', function (e) {
     e.preventDefault();
 
     checkboxes.forEach(cb => cb.checked = false);
     levelCheckboxes.forEach(cb => cb.checked = false);
     keywordInput.value = '';
+    subjectInput.value = '';
     submittedKeyword = '';
+    submittedSubject = '';
     distanceSelect.value = '2';
     submittedDistance = '2';
     submittedCategories = [];
@@ -675,9 +688,9 @@ document.addEventListener('DOMContentLoaded', function () {
     updateFilters();
   });
 
-  // Apply filters
   applyButton.addEventListener('click', function () {
     submittedKeyword = keywordInput.value.trim();
+    submittedSubject = subjectInput.value.trim(); // ✅ Capture subject input
     submittedDistance = distanceSelect.value;
     submittedCategories = Array.from(checkboxes)
       .filter(cb => cb.checked)
@@ -691,6 +704,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   updateFilters(); // Initial run
 });
+
 
 </script>
 
