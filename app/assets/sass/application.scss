@@ -55,10 +55,12 @@
     font-size: 19px;
     background-color: govuk-colour('light-grey');
     text-decoration: none;
+    border: 1px solid #b1b4b6
 }
 
 .remove-filters a:hover {
     text-decoration: underline;
+    border: 1px solid govuk-colour('black');
 }
 
 .remove-filters a:after {

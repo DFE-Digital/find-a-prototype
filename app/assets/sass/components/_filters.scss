@@ -118,6 +118,10 @@
     align-items: center;
     justify-content: center;
 }
+
+.remove-filter-button:hover {
+  border: 2px solid #1d70b8; /* GOV.UK blue, for example */
+}
   
   .filter-content {
     display: none;
