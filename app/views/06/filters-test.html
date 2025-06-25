@@ -18,16 +18,34 @@
 
   <div class="govuk-grid-column-one-third">
 
-    <div id="selected-filters" class="remove-filters"></div>
+    <div class="filter-container">
+
+      <div class="filter-search-terms">
 
 
+    <form id="filter-form" class="govuk-form-group" style="margin-bottom: 10px;">
 
-    <form id="filter-form" class="govuk-form-group">
+      <div class="filter-heading">
 
-      <h2 class="govuk-heading-m">Filter</h2>
+      <h2 class="govuk-heading-m" style="margin-bottom: 12px;">Filter</h2>
+
+      </div>
+    
+    </div>
+
+      <div class="filter-buttons">
+
+      <button type="button" class="govuk-button" id="apply-filters">
+        Apply filters
+      </button>
 
       <p><a href="#" id="clear-filters" class="govuk-link">Clear all filters</a></p>
 
+      </div>
+
+
+
+    <div class="filter-list">
 
       <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
         <div class="govuk-accordion__section">
@@ -162,6 +180,9 @@
         Apply filters
       </button>
     </div>
+</div>
+</div>
+
 
 
      <!-- 
@@ -348,6 +369,8 @@
 
 
 <div class="govuk-grid-column-two-thirds">
+  <h2 class="govuk-heading-m">You've searched for:</h2>
+  <div id="selected-filters" class="remove-filters"></div>
 
   <div id="search-results">
 
