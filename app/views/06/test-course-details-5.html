@@ -1,0 +1,171 @@
+{% extends "./layouts/_COURSE-TEST.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "A Level Accounting" %}
+{% set pageDescription = "More information about this course." %}
+{% set withDescription = "true" %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row"> 
+    <div class="govuk-grid-column-two-thirds">  
+
+      <h2 class="govuk-heading-m">About the course</h2>
+
+{{ govukSummaryList({
+
+  rows: [
+    {
+      key: {
+        text: "Course type"
+      },
+      value: {
+        html: "A Level"
+      }
+    },
+    {
+      key: {
+        text: "Course overview"
+      },
+      value: {
+        html: "	
+
+       <p> To get the most from this course you’ll be a whizz at maths, and love solving problems.</p>
+        
+       <p> Every business needs ace accountants and financial experts. And there’s a good amount of job security in this world – because it’s on you to make sure books are balanced and everyone gets paid.</p>
+        
+        <p>While you’ll be spending a lot of your time reporting on financial activity, accounting also requires creative thinking and problem-solving skills.</p>"
+      }
+    },
+    {
+      key: {
+        text: "Level"
+      },
+      value: {
+        html: "Level 3"
+      }
+    },
+    {
+      key: {
+        text: "Delivery method"
+      },
+      value: {
+        html: "In person"
+      }
+    }
+  ]
+}) }}
+
+<h2 class="govuk-heading-m">Location</h2>
+
+{{ govukSummaryList({
+  rows: [
+    {
+      key: {
+        text: "Location and distance"
+      },
+      value: {
+        html: "Manchester - 0.21 miles away"
+      }
+    },
+    {
+      key: {
+        text: "School or college"
+      },
+      value: {
+        html: "Xaverian College"
+      }
+    }
+  ]
+}) }}
+
+<h2 class="govuk-heading-m">Course times</h2>
+
+{{ govukSummaryList({
+  rows: [
+    {
+      key: {
+        text: "Start date"
+      },
+      value: {
+        html: "8 September 2025"
+      }
+    },
+    {
+      key: {
+        text: "Duration"
+      },
+      value: {
+        html: "2 years"
+      }
+    },
+    {
+      key: {
+        text: "Hours"
+      },
+      value: {
+        html: "Full time"
+      }
+    }
+  ]
+}) }}
+
+<h2 class="govuk-heading-m">Requirements</h2>
+
+{{ govukSummaryList({
+  rows: [
+    {
+      key: {
+        text: "Entry requirements	"
+      },
+      value: {
+        html: "Maths and English GCSE grade 4-9"
+      }
+    },
+    {
+      key: {
+        text: "Cost"
+      },
+      value: {
+        html: "£1,200"
+      }
+    }
+  ]
+}) }}
+
+</div>
+
+<div class="govuk-grid-column-one-third">  
+
+  <div class="x-govuk-related-navigation">
+    <nav class="x-govuk-related-navigation__nav-section" aria-labelledby="related-navigation-related-content">
+      <h2 class="x-govuk-related-navigation__main-heading" id="related-navigation-related-content">Explore Xaverian College</h2>
+      <ul class="x-govuk-related-navigation__link-list">
+        <li class="x-govuk-related-navigation__link">
+          <a class="govuk-link x-govuk-related-navigation__section-link x-govuk-related-navigation__section-link--other" href="/school-performance-tables">View the college website</a>
+        </li>
+        <li class="x-govuk-related-navigation__link">
+          <a class="govuk-link x-govuk-related-navigation__section-link x-govuk-related-navigation__section-link--other" href="/types-of-school">View more about this course</a>
+        </li>
+      </ul>
+      <nav class="x-govuk-related-navigation__nav-section" aria-labelledby="related-navigation-explore-the-topic">
+        <h3 class="x-govuk-related-navigation__sub-heading" id="related-navigation-explore-the-topic">Related links</h3>
+        <ul class="x-govuk-related-navigation__link-list">
+          <li class="x-govuk-related-navigation__link">
+            <a class="govuk-link x-govuk-related-navigation__section-link" href="/browse/education/school-life">Explore jobs and careers you could do after this course</a>
+          </li>
+        </ul>
+      </nav>
+    </nav>
+  </div>
+
+
+</div>
+
+      
+
+
+
+
+{% endblock %}
