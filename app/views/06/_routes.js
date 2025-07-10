@@ -3,6 +3,80 @@ const router = express.Router()
 
 // Add your routes here - above the module.exports line
 
+const fs = require("fs");
+const path = require("path");
+
+  router.get('/load-courses', function (req, res) {
+
+    const coursesData = JSON.parse(
+      fs.readFileSync(path.join(__dirname, "../../data/courses.json"), "utf8")
+    );
+
+    // 🔍 Get filters from query string
+    let qualificationFilters = req.query.filter || [];
+    const locationFilter = req.query["option-select-filter-location"] || "";
+    const subjectFilter = req.query["subject-filter"] || "";
+
+    // Convert single value to array for checkboxes
+    if (!Array.isArray(qualificationFilters)) {
+      qualificationFilters = [qualificationFilters];
+    }
+
+    // Debug logs to check filter inputs
+    console.log("Qualification filters:", qualificationFilters);
+    console.log("Location filter:", locationFilter);
+    console.log("Subject filter:", subjectFilter);
+
+    // 🔍 Apply filters
+    let filteredCourses = coursesData;
+
+    // Filter by qualification types (if any selected)
+    if (qualificationFilters.length > 0 && qualificationFilters[0] !== "") {
+      filteredCourses = filteredCourses.filter(course =>
+        qualificationFilters.map(f => f.toLowerCase()).includes(course.type.toLowerCase())
+      );
+    }
+
+    // Filter by location keyword
+    if (locationFilter.trim() !== "") {
+      filteredCourses = filteredCourses.filter(course =>
+        course.location.toLowerCase().includes(locationFilter.toLowerCase())
+      );
+    }
+
+    // Filter by subject or career keywords
+    if (subjectFilter.trim() !== "") {
+      filteredCourses = filteredCourses.filter(course =>
+        course.name.toLowerCase().includes(subjectFilter.toLowerCase()) ||
+        course.overview.toLowerCase().includes(subjectFilter.toLowerCase())
+      );
+    }
+
+    // ✅ Debug filtered results count
+    console.log("Filtered courses count:", filteredCourses.length);
+
+    // ✅ Pagination
+    const page = parseInt(req.query.page) || 1;
+    const perPage = 10;
+    const totalResults = filteredCourses.length;
+    const totalPages = Math.ceil(totalResults / perPage);
+    const start = (page - 1) * perPage;
+    const end = start + perPage;
+    const paginatedCourses = filteredCourses.slice(start, end);
+
+    res.render('06/courses', {
+      courses: paginatedCourses,
+      currentPage: page,
+      totalPages: totalPages,
+      totalResults: totalResults,
+      selectedQualifications: qualificationFilters,
+      selectedLocation: locationFilter,
+      selectedSubject: subjectFilter
+    });
+
+  });
+
+
 
 router.post('/age-results', function(request, response) {
 
