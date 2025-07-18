@@ -94,4 +94,16 @@ Text goes here, override this by overriding the block
   ]
 }) }}
 
+<script>
+  document.addEventListener("submit", function (e) {
+    const form = e.target;
+    // Remove any rogue hidden inputs called "filter" with value "_unchecked"
+    const rogueInputs = form.querySelectorAll('input[name="filter"][value="_unchecked"]');
+    rogueInputs.forEach(input => {
+      input.remove();
+      console.warn('Removed injected _unchecked input');
+    });
+  }, true); // useCapture = true ensures it runs before the browser sends the form
+</script>
+
 {% endblock %}

@@ -6,75 +6,113 @@ const router = express.Router()
 const fs = require("fs");
 const path = require("path");
 
-  router.get('/load-courses', function (req, res) {
-
-    const coursesData = JSON.parse(
+router.get("/load-courses", function (req, res) {
+  // Load course data
+  let coursesData = [];
+  try {
+    coursesData = JSON.parse(
       fs.readFileSync(path.join(__dirname, "../../data/courses.json"), "utf8")
     );
+  } catch (error) {
+    console.error("Error loading course data:", error.message);
+    return res.status(500).send("Error loading course data.");
+  }
 
-    // 🔍 Get filters from query string
-    let qualificationFilters = req.query.filter || [];
-    const locationFilter = req.query["option-select-filter-location"] || "";
-    const subjectFilter = req.query["subject-filter"] || "";
+  // ✅ Get qualification filters from query OR derive from learning-style
+  let qualificationFilters = [];
 
-    // Convert single value to array for checkboxes
-    if (!Array.isArray(qualificationFilters)) {
-      qualificationFilters = [qualificationFilters];
+  if (req.query.filter) {
+    qualificationFilters = Array.isArray(req.query.filter)
+      ? req.query.filter
+      : [req.query.filter];
+  } else {
+    // Use learning-style if no filter provided
+    const style = req.session.data["learning-style"];
+
+    if (style === "academic") {
+      qualificationFilters = ["A Level", "Degree"];
+    } else if (style === "practical") {
+      qualificationFilters = ["BTEC", "Apprenticeship", "Diploma", "T Level"];
+    } else if (style === "both") {
+      qualificationFilters = [
+        "A Level",
+        "Degree",
+        "BTEC",
+        "Apprenticeship",
+        "Diploma",
+        "T Level",
+      ];
     }
+  }
 
-    // Debug logs to check filter inputs
-    console.log("Qualification filters:", qualificationFilters);
-    console.log("Location filter:", locationFilter);
-    console.log("Subject filter:", subjectFilter);
+  // Clean and normalise filter values
+  qualificationFilters = qualificationFilters
+    .map((f) => f.trim().toLowerCase())
+    .filter((f) => f && f !== "_unchecked");
 
-    // 🔍 Apply filters
-    let filteredCourses = coursesData;
+  // ✅ Get other filters from query or session
+  const locationFilter =
+    req.query["option-select-filter-location"] ||
+    req.session.data["location"] ||
+    "";
 
-    // Filter by qualification types (if any selected)
-    if (qualificationFilters.length > 0 && qualificationFilters[0] !== "") {
-      filteredCourses = filteredCourses.filter(course =>
-        qualificationFilters.map(f => f.toLowerCase()).includes(course.type.toLowerCase())
-      );
-    }
+  const subjectFilter =
+    req.query["subject-filter"] ||
+    req.session.data["subject-1"] ||
+    req.session.data["job-1"] ||
+    "";
 
-    // Filter by location keyword
-    if (locationFilter.trim() !== "") {
-      filteredCourses = filteredCourses.filter(course =>
-        course.location.toLowerCase().includes(locationFilter.toLowerCase())
-      );
-    }
+  const locationFilterLower = locationFilter.trim().toLowerCase();
+  const subjectFilterLower = subjectFilter.trim().toLowerCase();
 
-    // Filter by subject or career keywords
-    if (subjectFilter.trim() !== "") {
-      filteredCourses = filteredCourses.filter(course =>
-        course.name.toLowerCase().includes(subjectFilter.toLowerCase()) ||
-        course.overview.toLowerCase().includes(subjectFilter.toLowerCase())
-      );
-    }
+  // ✅ Filter data
+  let filteredCourses = coursesData;
 
-    // ✅ Debug filtered results count
-    console.log("Filtered courses count:", filteredCourses.length);
+  if (qualificationFilters.length > 0) {
+    filteredCourses = filteredCourses.filter((course) =>
+      qualificationFilters.includes((course.type || "").toLowerCase())
+    );
+  }
 
-    // ✅ Pagination
-    const page = parseInt(req.query.page) || 1;
-    const perPage = 10;
-    const totalResults = filteredCourses.length;
-    const totalPages = Math.ceil(totalResults / perPage);
-    const start = (page - 1) * perPage;
-    const end = start + perPage;
-    const paginatedCourses = filteredCourses.slice(start, end);
+  if (locationFilterLower !== "") {
+    filteredCourses = filteredCourses.filter((course) =>
+      (course.location || "").toLowerCase().includes(locationFilterLower)
+    );
+  }
 
-    res.render('06/courses', {
-      courses: paginatedCourses,
-      currentPage: page,
-      totalPages: totalPages,
-      totalResults: totalResults,
-      selectedQualifications: qualificationFilters,
-      selectedLocation: locationFilter,
-      selectedSubject: subjectFilter
-    });
+  if (subjectFilterLower !== "") {
+    filteredCourses = filteredCourses.filter(
+      (course) =>
+        (course.name || "").toLowerCase().includes(subjectFilterLower) ||
+        (course.overview || "").toLowerCase().includes(subjectFilterLower)
+    );
+  }
 
+  // ✅ Pagination logic
+  const page = parseInt(req.query.page) || 1;
+  const perPage = 10;
+  const totalResults = filteredCourses.length;
+  const totalPages = Math.max(1, Math.ceil(totalResults / perPage));
+  const start = (page - 1) * perPage;
+  const end = start + perPage;
+  const paginatedCourses = filteredCourses.slice(start, end);
+
+  // ✅ Render view
+  res.render("06/courses", {
+    courses: paginatedCourses,
+    currentPage: page,
+    totalPages: totalPages,
+    totalResults: totalResults,
+    selectedQualifications: qualificationFilters.map(
+      (q) => q.charAt(0).toUpperCase() + q.slice(1)
+    ),
+    selectedLocation: locationFilter,
+    selectedSubject: subjectFilter,
   });
+});
+
+
+
 
 
 

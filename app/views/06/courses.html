@@ -12,45 +12,129 @@
 
   <div class="govuk-grid-column-one-third">
 
-    <form method="get" action="/load-courses">
+    <form method="get" action="load-courses">
 
-      <!-- Qualification type checkboxes -->
+
       <fieldset class="govuk-fieldset">
-        <legend class="govuk-fieldset__legend">Qualification type</legend>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">Qualification type</legend>
+    
         <div class="govuk-checkboxes govuk-checkboxes--small">
           {% for qual in ["A Level", "Apprenticeship", "BTEC", "Diploma", "Degree", "T Level"] %}
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="filter-{{ qual | replace(" ", "-") }}" name="filter" type="checkbox" value="{{ qual }}" {% if qual in selectedQualifications %}checked{% endif %}>
-              <label class="govuk-label govuk-checkboxes__label" for="filter-{{ qual | replace(" ", "-") }}">{{ qual }}</label>
+              <input class="govuk-checkboxes__input"
+                     id="filter-{{ qual | replace(' ', '-') }}"
+                     name="filter"
+                     type="checkbox"
+                     value="{{ qual }}"
+                     {% if qual in selectedQualifications %}checked{% endif %}>
+              <label class="govuk-label govuk-checkboxes__label" for="filter-{{ qual | replace(' ', '-') }}">{{ qual }}</label>
             </div>
           {% endfor %}
         </div>
       </fieldset>
-
-      <!-- Location filter -->
+    
       <div class="govuk-form-group">
         <label class="govuk-label" for="option-select-filter-location">
           Enter a postcode, town or city
         </label>
-        <input name="option-select-filter-location" id="option-select-filter-location" class="govuk-input" type="text" value="{{ selectedLocation }}">
+        <input class="govuk-input"
+               type="text"
+               id="option-select-filter-location"
+               name="option-select-filter-location"
+               value="{{ selectedLocation }}">
       </div>
-
-      <!-- Subject or career keywords -->
+    
       <div class="govuk-form-group">
         <label class="govuk-label" for="subject-filter">
           Subject or career keywords
         </label>
-        <input class="govuk-input" id="subject-filter" name="subject-filter" type="text" value="{{ selectedSubject }}">
+        <input class="govuk-input"
+               type="text"
+               id="subject-filter"
+               name="subject-filter"
+               value="{{ selectedSubject }}">
       </div>
-
+    
       <button class="govuk-button" type="submit">Apply filters</button>
-
+      
     </form>
+    
+    
 </div>
 
   <div class="govuk-grid-column-two-thirds">
 
+    
+
 <h1 class="govuk-heading-l">Available Courses</h1>
+
+{# Set a flag to detect if any visible filters are present #}
+{% set hasVisibleFilters = false %}
+
+{# Check if at least one real qualification is selected #}
+{% for qual in selectedQualifications %}
+  {% if qual and qual != "_unchecked" %}
+    {% set hasVisibleFilters = true %}
+  {% endif %}
+{% endfor %}
+
+{# Check if location or subject has a value #}
+{% if selectedLocation or selectedSubject %}
+  {% set hasVisibleFilters = true %}
+{% endif %}
+
+
+{% if hasVisibleFilters %}
+  <div id="active-filters" class="govuk-!-margin-top-6">
+    <h2 id="active-filters-heading" class="govuk-heading-m">You've searched for:</h2>
+
+    <div id="selected-filters" class="remove-filters">
+      {# Qualification tags #}
+      {% for qual in selectedQualifications %}
+  {% if qual != "_unchecked" %}
+    {# Rebuild query string excluding the current qualification #}
+    {% set queryString = "" %}
+    {% for q in selectedQualifications %}
+      {% if q != qual and q != "_unchecked" %}
+        {% set queryString = queryString + "&filter=" + q %}
+      {% endif %}
+    {% endfor %}
+    {% set queryString = queryString + "&option-select-filter-location=" + selectedLocation + "&subject-filter=" + selectedSubject %}
+
+    <a href="?page=1{{ queryString | safe }}"
+       class="govuk-tag govuk-tag--blue govuk-!-margin-right-1 govuk-!-margin-bottom-1"
+       aria-label="Remove filter {{ qual }}">
+      {{ qual }}
+    </a>
+  {% endif %}
+{% endfor %}
+
+      {# Location tag #}
+      {% if selectedLocation %}
+        <a href="?{% for q in selectedQualifications %}&filter={{ q }}{% endfor %}&subject-filter={{ selectedSubject }}"
+           class="govuk-tag govuk-tag--green govuk-!-margin-right-1 govuk-!-margin-bottom-1"
+           aria-label="Remove location filter: {{ selectedLocation }}">
+          {{ selectedLocation }}
+        </a>
+      {% endif %}
+
+      {# Subject tag #}
+      {% if selectedSubject %}
+        <a href="?{% for q in selectedQualifications %}&filter={{ q }}{% endfor %}&option-select-filter-location={{ selectedLocation }}"
+           class="govuk-tag govuk-tag--purple govuk-!-margin-right-1 govuk-!-margin-bottom-1"
+           aria-label="Remove keyword filter: {{ selectedSubject }}">
+          {{ selectedSubject }}
+        </a>
+      {% endif %}
+    </div>
+
+    <p class="govuk-body">
+      <a href="/06/load-courses" class="govuk-link" id="clear-all-link">Clear all filters</a>
+    </p>
+  </div>
+{% endif %}
+
+
 
 <p>{{ totalResults }} courses found.</p>
 
@@ -113,11 +197,20 @@
 </div>
 {% endfor %}
 
+{# Build query string to preserve selected filters #}
+{% set filterQuery = "" %}
+{% for qual in selectedQualifications %}
+  {% if qual != "_unchecked" %}
+    {% set filterQuery = filterQuery + "&filter=" + qual %}
+  {% endif %}
+{% endfor %}
+{% set filterQuery = filterQuery + "&option-select-filter-location=" + selectedLocation + "&subject-filter=" + selectedSubject %}
+
 <nav class="govuk-pagination" aria-label="Pagination">
 
   {% if currentPage > 1 %}
     <div class="govuk-pagination__prev">
-      <a class="govuk-link govuk-pagination__link" href="?page={{ currentPage - 1 }}" rel="prev">
+      <a class="govuk-link govuk-pagination__link" href="?page={{ currentPage - 1 }}{{ filterQuery }}" rel="prev">
         <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
           <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
         </svg>
@@ -129,8 +222,15 @@
   {% endif %}
 
   <ul class="govuk-pagination__list">
+    {# Calculate page range for 3 numbers max #}
     {% set startPage = currentPage - 1 %}
     {% set endPage = currentPage + 1 %}
+
+    {% for qual in selectedQualifications %}
+  {% if qual != "_unchecked" and qual != "" %}
+    {% set filterQuery = filterQuery + "&filter=" + qual %}
+  {% endif %}
+{% endfor %}
 
     {% if startPage < 1 %}
       {% set startPage = 1 %}
@@ -151,9 +251,13 @@
       {% endif %}
     {% endif %}
 
+    {# Render page number links #}
     {% for pageNumber in range(startPage, endPage + 1) %}
       <li class="govuk-pagination__item {% if pageNumber == currentPage %}govuk-pagination__item--current{% endif %}">
-        <a class="govuk-link govuk-pagination__link" href="?page={{ pageNumber }}" aria-label="Page {{ pageNumber }}"{% if pageNumber == currentPage %} aria-current="page"{% endif %}>
+        <a class="govuk-link govuk-pagination__link"
+           href="?page={{ pageNumber }}{{ filterQuery }}"
+           aria-label="Page {{ pageNumber }}"
+           {% if pageNumber == currentPage %} aria-current="page"{% endif %}>
           {{ pageNumber }}
         </a>
       </li>
@@ -162,7 +266,7 @@
 
   {% if currentPage < totalPages %}
     <div class="govuk-pagination__next">
-      <a class="govuk-link govuk-pagination__link" href="?page={{ currentPage + 1 }}" rel="next">
+      <a class="govuk-link govuk-pagination__link" href="?page={{ currentPage + 1 }}{{ filterQuery }}" rel="next">
         <span class="govuk-pagination__link-title">
           Next<span class="govuk-visually-hidden"> page</span>
         </span>
@@ -174,7 +278,6 @@
   {% endif %}
 
 </nav>
-
 
 
 
