@@ -1,0 +1,191 @@
+{% extends "./layouts/_COURSE.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = course.name %}
+{% set pageDescription = "More information about this course." %}
+{% set withDescription = "true" %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row"> 
+    <div class="govuk-grid-column-two-thirds">  
+
+
+
+
+{{ govukSummaryList({
+  card: {
+    title: {
+      text: "About the course"
+    }
+  },
+  rows: [
+    {
+      key: {
+        text: "Course type"
+      },
+      value: {
+        text: course.type
+      }
+    },
+    {
+      key: {
+        text: "Course overview"
+      },
+      value: {
+        text: course.overview
+      }
+    },
+    {
+      key: {
+        text: "Level"
+      },
+      value: {
+        html: "Level 3"
+      }
+    },
+    {
+      key: {
+        text: "Delivery method"
+      },
+      value: {
+        html: "In person"
+      }
+    }
+  ]
+}) }}
+
+{{ govukSummaryList({
+  card: {
+    title: {
+      text: "Location"
+    }
+  },
+  rows: [
+    {
+      key: {
+        text: "Location and distance"
+      },
+      value: {
+        text: course.location
+      }
+    },
+    {
+      key: {
+        text: "School or college"
+      },
+      value: {
+        text: course.provider
+      },
+      actions: {
+        items: [
+          {
+            href: "#",
+            text: "View on a map",
+            visuallyHiddenText: "name"
+          }
+        ]
+      }
+    }
+  ]
+}) }}
+
+{{ govukSummaryList({
+  card: {
+    title: {
+      text: "Course times"
+    }
+  },
+  rows: [
+    {
+      key: {
+        text: "Start date"
+      },
+      value: {
+        html: "8 September 2025"
+      }
+    },
+    {
+      key: {
+        text: "Duration"
+      },
+      value: {
+        html: "2 years"
+      }
+    },
+    {
+      key: {
+        text: "Hours"
+      },
+      value: {
+        html: "Full time"
+      }
+    }
+  ]
+}) }}
+
+{{ govukSummaryList({
+  card: {
+    title: {
+      text: "Requirements"
+    }
+  },
+  rows: [
+    {
+      key: {
+        text: "Entry requirements	"
+      },
+      value: {
+        text: course.requirements
+      }
+    },
+    {
+      key: {
+        text: "Cost"
+      },
+      value: {
+        html: "£1,200"
+      }
+    }
+  ]
+}) }}
+
+</div>
+
+<div class="govuk-grid-column-one-third">  
+
+  <div class="x-govuk-related-navigation">
+    <nav class="x-govuk-related-navigation__nav-section" aria-labelledby="related-navigation-related-content">
+      <h2 class="x-govuk-related-navigation__main-heading" id="related-navigation-related-content">Explore {{ course.provider }}</h2>
+      <ul class="x-govuk-related-navigation__link-list">
+        <li class="x-govuk-related-navigation__link">
+          <a class="govuk-link x-govuk-related-navigation__section-link x-govuk-related-navigation__section-link--other" href="/school-performance-tables">View the college website</a>
+        </li>
+        <li class="x-govuk-related-navigation__link">
+          <a class="govuk-link x-govuk-related-navigation__section-link x-govuk-related-navigation__section-link--other" href="/types-of-school">View more about this course</a>
+        </li>
+      </ul>
+      <nav class="x-govuk-related-navigation__nav-section" aria-labelledby="related-navigation-explore-the-topic">
+        <h3 class="x-govuk-related-navigation__sub-heading" id="related-navigation-explore-the-topic">Related links</h3>
+        <ul class="x-govuk-related-navigation__link-list">
+          <li class="x-govuk-related-navigation__link">
+            <a class="govuk-link x-govuk-related-navigation__section-link" href="/browse/education/school-life">Explore jobs and careers you could do after this course</a>
+          </li>
+          <li class="x-govuk-related-navigation__link">
+            <a class="govuk-link x-govuk-related-navigation__section-link" href="/browse/education/school-life">More information about {{ course.type }}s</a>
+          </li>
+        </ul>
+      </nav>
+    </nav>
+  </div>
+
+
+</div>
+
+      
+
+
+
+
+{% endblock %}
