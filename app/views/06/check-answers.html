@@ -24,6 +24,8 @@
     </dd>
   </div>
 
+  {% if (data['travel-location']) %}
+
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
       Travel distance
@@ -35,6 +37,8 @@
       <a class="govuk-link" href="how-far">Change<span class="govuk-visually-hidden"> address</span></a>
     </dd>
   </div>
+
+  {% endif %}
 
   {% if (data['subject-1']) %}
 
@@ -91,6 +95,21 @@
       <a class="govuk-link" href="apprenticeships-or-courses">Change<span class="govuk-visually-hidden"> address</span></a>
     </dd>
   </div>-->
+  {% if (data['qualification-level']) %}
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Level you're looking for
+    </dt>
+    <dd class="govuk-summary-list__value">
+      <p>{{ data['qualification-level'] or "No education added"}}</p> 
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="level-adult">Change<span class="govuk-visually-hidden"> address</span></a>
+    </dd>
+  </div>
+{% endif %}
+
   {% if (data['level-of-education']) %}
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">

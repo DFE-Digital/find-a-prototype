@@ -56,6 +56,38 @@ router.get("/load-courses", function (req, res) {
   }
 
   qualificationFilters = qualificationFilters
+  .map((f) => f.trim().toLowerCase())
+  .filter((f) => f && f !== "_unchecked");
+
+    // Get qualification filters from query or level-adult
+    let levelAdult = [];
+
+    if (req.query.filter) {
+        levelAdult = Array.isArray(req.query.filter)
+        ? req.query.filter
+        : [req.query.filter];
+    } else {
+      const level = req.session.data["qualification-level"];
+  
+      if (level === "level-1-2") {
+        levelAdult = ["GCSE", "Apprenticeship"];
+      } else if (level === "level-3") {
+        levelAdult = ["BTEC", "Apprenticeship", "Diploma", "A Level", "T Level"];
+    } else if (level === "level-4-7") {
+        levelAdult = ["Diploma", "Degree"];
+      } else if (level === "all") {
+        levelAdult = [
+          "A Level",
+          "Degree",
+          "BTEC",
+          "Apprenticeship",
+          "Diploma",
+          "T Level",
+        ];
+      }
+    }
+
+    levelAdult = levelAdult
     .map((f) => f.trim().toLowerCase())
     .filter((f) => f && f !== "_unchecked");
 
@@ -197,6 +229,20 @@ router.post('/job-subject-all', function(request, response) {
     }
     else {
         response.redirect("subjects")
+    }
+})
+
+router.post('/job-subject-adult', function(request, response) {
+
+    var searchAdult = request.session.data['search-adult']
+    if (searchAdult == "By a course name, subject, job or career"){
+        response.redirect("subjects-18-24")
+    }
+    else if (searchAdult == "See all options in my location"){
+        response.redirect("location-adults")
+    }
+    else {
+        response.redirect("location-adults-2")
     }
 })
 

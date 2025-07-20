@@ -39,7 +39,6 @@
                      id="filter-{{ qual | replace(' ', '-') }}"
                      name="filter"
                      type="checkbox"
-                     value="{{ qual }}"
                      {% if qual in selectedQualifications %}checked{% endif %}>
               <label class="govuk-label govuk-checkboxes__label" for="filter-{{ qual | replace(' ', '-') }}">{{ qual }}</label>
             </div>
@@ -56,8 +55,7 @@
         <input class="govuk-input"
                type="text"
                id="option-select-filter-location"
-               name="option-select-filter-location"
-               value="{{ selectedLocation }}">
+               name="option-select-filter-location">
       </div>
 
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
@@ -69,8 +67,7 @@
         <input class="govuk-input"
                type="text"
                id="subject-filter"
-               name="subject-filter"
-               value="{{ selectedSubject }}">
+               name="subject-filter">
       </div>
     
       <button class="govuk-button" type="submit">Apply filters</button>
