@@ -7,7 +7,6 @@ const fs = require("fs");
 const path = require("path");
 
 router.get("/load-courses", function (req, res) {
-
   // Load course data
   let coursesData = [];
   try {
@@ -19,7 +18,7 @@ router.get("/load-courses", function (req, res) {
     return res.status(500).send("Error loading course data.");
   }
 
-  // Helper to generate unique slugs for course links
+  // Helper to generate unique slugs
   const generateSlug = (course) => {
     return (
       (course.name || "") + "-" + (course.provider || "")
@@ -29,68 +28,34 @@ router.get("/load-courses", function (req, res) {
       .replace(/(^-|-$)/g, "");
   };
 
-  // Get qualification filters from query or learning-style
-  let qualificationFilters = [];
+  // ✅ Map levels to qualification types
+  const qualificationMap = {
+    "level-1-2": ["BTEC", "Apprenticeship"],
+    "level-3": ["A Level", "T Level", "Apprenticeship"],
+    "level-4-7": ["Degree", "Apprenticeship"]
+  };
 
-  if (req.query.filter) {
-    qualificationFilters = Array.isArray(req.query.filter)
-      ? req.query.filter
-      : [req.query.filter];
-  } else {
-    const style = req.session.data["learning-style"];
-
-    if (style === "I prefer academic courses") {
-      qualificationFilters = ["A Level", "Degree"];
-    } else if (style === "I prefer practical courses") {
-      qualificationFilters = ["BTEC", "Apprenticeship", "Diploma", "T Level"];
-    } else if (style === "I'd like to see both academic and practical courses") {
-      qualificationFilters = [
-        "A Level",
-        "Degree",
-        "BTEC",
-        "Apprenticeship",
-        "Diploma",
-        "T Level",
-      ];
-    }
+  // ✅ Get qualification-level filters from checkboxes
+  let selectedLevels = req.query["qualification-level"] || [];
+  if (!Array.isArray(selectedLevels)) {
+    selectedLevels = [selectedLevels];
   }
 
-  qualificationFilters = qualificationFilters
-  .map((f) => f.trim().toLowerCase())
-  .filter((f) => f && f !== "_unchecked");
+  // ✅ Convert selected levels into qualification types
+  let levelMappedQualifications = selectedLevels.flatMap(level => qualificationMap[level] || []);
 
-    // Get qualification filters from query or level-adult
-    let levelAdult = [];
+  // ✅ Get normal qualification filters from checkboxes
+  let qualificationFilters = req.query.filter || [];
+  if (!Array.isArray(qualificationFilters)) {
+    qualificationFilters = [qualificationFilters];
+  }
 
-    if (req.query.filter) {
-        levelAdult = Array.isArray(req.query.filter)
-        ? req.query.filter
-        : [req.query.filter];
-    } else {
-      const level = req.session.data["qualification-level"];
-  
-      if (level === "level-1-2") {
-        levelAdult = ["GCSE", "Apprenticeship"];
-      } else if (level === "level-3") {
-        levelAdult = ["BTEC", "Apprenticeship", "Diploma", "A Level", "T Level"];
-    } else if (level === "level-4-7") {
-        levelAdult = ["Diploma", "Degree"];
-      } else if (level === "all") {
-        levelAdult = [
-          "A Level",
-          "Degree",
-          "BTEC",
-          "Apprenticeship",
-          "Diploma",
-          "T Level",
-        ];
-      }
-    }
+  // ✅ Merge and normalise both filters
+  qualificationFilters = [...qualificationFilters, ...levelMappedQualifications]
+    .map(f => f.trim().toLowerCase())
+    .filter(f => f && f !== "_unchecked");
 
-    levelAdult = levelAdult
-    .map((f) => f.trim().toLowerCase())
-    .filter((f) => f && f !== "_unchecked");
-
+  // ✅ Get other filters from query or session
   const locationFilter =
     req.query["option-select-filter-location"] ||
     req.session.data["location"] ||
@@ -105,7 +70,7 @@ router.get("/load-courses", function (req, res) {
   const locationFilterLower = locationFilter.trim().toLowerCase();
   const subjectFilterLower = subjectFilter.trim().toLowerCase();
 
-  // Filter the full course list
+  // ✅ Filter the full course list
   let filteredCourses = coursesData;
 
   if (qualificationFilters.length > 0) {
@@ -128,7 +93,7 @@ router.get("/load-courses", function (req, res) {
     );
   }
 
-  // Pagination
+  // ✅ Pagination
   const page = parseInt(req.query.page) || 1;
   const perPage = 10;
   const totalResults = filteredCourses.length;
@@ -136,7 +101,7 @@ router.get("/load-courses", function (req, res) {
   const start = (page - 1) * perPage;
   const end = start + perPage;
 
-  // Slice and attach slugs
+  // ✅ Add slugs
   const paginatedCourses = filteredCourses.slice(start, end).map((course) => ({
     ...course,
     slug: generateSlug(course),
@@ -152,12 +117,16 @@ router.get("/load-courses", function (req, res) {
     ),
     selectedLocation: locationFilter,
     selectedSubject: subjectFilter,
+    selectedLevels: selectedLevels
   });
 
   console.log("🔍 Slugs from paginatedCourses:");
-  paginatedCourses.forEach(c => console.log(c.slug));
-
+  paginatedCourses.forEach((c) => console.log(c.slug));
 });
+
+
+
+
 
 
 

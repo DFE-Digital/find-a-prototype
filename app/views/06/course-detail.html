@@ -69,6 +69,15 @@
       },
       value: {
         text: course.location
+      },
+      actions: {
+        items: [
+          {
+            href: "#",
+            text: "View on a map",
+            visuallyHiddenText: "name"
+          }
+        ]
       }
     },
     {
@@ -82,7 +91,7 @@
         items: [
           {
             href: "#",
-            text: "View on a map",
+            text: "View website",
             visuallyHiddenText: "name"
           }
         ]
@@ -160,10 +169,7 @@
       <h2 class="x-govuk-related-navigation__main-heading" id="related-navigation-related-content">Explore {{ course.provider }}</h2>
       <ul class="x-govuk-related-navigation__link-list">
         <li class="x-govuk-related-navigation__link">
-          <a class="govuk-link x-govuk-related-navigation__section-link x-govuk-related-navigation__section-link--other" href="/school-performance-tables">View the college website</a>
-        </li>
-        <li class="x-govuk-related-navigation__link">
-          <a class="govuk-link x-govuk-related-navigation__section-link x-govuk-related-navigation__section-link--other" href="/types-of-school">View more about this course</a>
+          <a class="govuk-link x-govuk-related-navigation__section-link x-govuk-related-navigation__section-link--other" href="/school-performance-tables">View all courses at {{ course.provider }}</a>
         </li>
       </ul>
       <nav class="x-govuk-related-navigation__nav-section" aria-labelledby="related-navigation-explore-the-topic">

@@ -39,6 +39,7 @@
                      id="filter-{{ qual | replace(' ', '-') }}"
                      name="filter"
                      type="checkbox"
+                     value="{{ qual }}"
                      {% if qual in selectedQualifications %}checked{% endif %}>
               <label class="govuk-label govuk-checkboxes__label" for="filter-{{ qual | replace(' ', '-') }}">{{ qual }}</label>
             </div>
@@ -69,7 +70,33 @@
                id="subject-filter"
                name="subject-filter">
       </div>
-    
+
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Qualification level</legend>
+      
+        <div class="govuk-checkboxes govuk-checkboxes--small">
+          {% for level in ["level-1-2", "level-3", "level-4-7"] %}
+            {% set label = {
+              "level-1-2": "Level 1 or 2 (like GCSEs)",
+              "level-3": "Level 3 (like BTECs and A levels)",
+              "level-4-7": "Level 4 to 7 (like diplomas and degrees)"
+            }[level] %}
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input"
+                     id="qualification-level-{{ level }}"
+                     name="qualification-level"
+                     type="checkbox"
+                     value="{{ level }}"
+                     {% if level in selectedLevels %}checked{% endif %}>
+              <label class="govuk-label govuk-checkboxes__label" for="qualification-level-{{ level }}">
+                {{ label }}
+              </label>
+            </div>
+          {% endfor %}
+        </div>
+      </fieldset>
+      
+    <br>
       <button class="govuk-button" type="submit">Apply filters</button>
 
       <p class="govuk-body">
@@ -103,6 +130,13 @@
 {% if selectedLocation or selectedSubject %}
   {% set hasVisibleFilters = true %}
 {% endif %}
+
+{% set levelLabels = {
+  "level-1-2": "Level 1 or 2",
+  "level-3": "Level 3",
+  "level-4-7": "Level 4 to 7"
+} %}
+
 
 
 {% if hasVisibleFilters %}
@@ -147,6 +181,32 @@
           {{ selectedSubject }}
         </a>
       {% endif %}
+
+      {# Qualification level tags #}
+{% for level in selectedLevels %}
+  {% if levelLabels[level] %}
+    {% set queryString = "" %}
+    {# Keep all other selected levels except current one #}
+    {% for other in selectedLevels %}
+      {% if other != level %}
+        {% set queryString = queryString + "&qualification-level=" + other %}
+      {% endif %}
+    {% endfor %}
+    {# Re-include selected qualifications #}
+    {% for q in selectedQualifications %}
+      {% set queryString = queryString + "&filter=" + q %}
+    {% endfor %}
+    {# Re-include other filters #}
+    {% set queryString = queryString + "&option-select-filter-location=" + selectedLocation + "&subject-filter=" + selectedSubject %}
+
+    <a href="?page=1{{ queryString | safe }}"
+       class="govuk-tag govuk-tag--yellow govuk-!-margin-right-1 govuk-!-margin-bottom-1"
+       aria-label="Remove level filter: {{ levelLabels[level] }}">
+      {{ levelLabels[level] }}
+    </a>
+  {% endif %}
+{% endfor %}
+
     </div>
 
   
