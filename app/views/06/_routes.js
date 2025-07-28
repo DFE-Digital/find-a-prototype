@@ -35,19 +35,50 @@ router.get("/load-courses", function (req, res) {
     "level-4-7": ["Degree", "Apprenticeship"]
   };
 
-  // ✅ Get qualification-level filters from checkboxes
-  let selectedLevels = req.query["qualification-level"] || [];
-  if (!Array.isArray(selectedLevels)) {
-    selectedLevels = [selectedLevels];
+ // ✅ Get qualification-level filters from checkboxes or apply fallback
+ let selectedLevels = req.query["qualification-level"] || req.session.data["qualification-level"] || [];
+ if (!Array.isArray(selectedLevels)) {
+   selectedLevels = [selectedLevels];
+ }
+ selectedLevels = selectedLevels.filter(level => level && level !== "_unchecked");
+
+
+// 🌟 Fallback: if no levels/filters selected, infer from age and next step
+const age = req.session.data["age"];
+const nextStep = req.session.data["next-steps"];
+const validAges = ["under-18", "18-21", "over-24"];
+if (selectedLevels.length === 0 && (!req.query.filter || req.query.filter.length === 0)) {
+  if (nextStep === "university" && validAges.includes(age)) {
+    selectedLevels = ["level-4-7"];
   }
+}
 
-  // ✅ Convert selected levels into qualification types
-  let levelMappedQualifications = selectedLevels.flatMap(level => qualificationMap[level] || []);
+// ✅ Map selected levels to qualification types
+let levelMappedQualifications = selectedLevels.flatMap(level => qualificationMap[level] || []);
 
-  // ✅ Get normal qualification filters from checkboxes
-  let qualificationFilters = req.query.filter || [];
-  if (!Array.isArray(qualificationFilters)) {
-    qualificationFilters = [qualificationFilters];
+// ✅ Get normal qualification filters from checkboxes
+let qualificationFilters = req.query.filter || [];
+if (!Array.isArray(qualificationFilters)) {
+  qualificationFilters = [qualificationFilters];
+}
+
+
+  // 🌟 Fallback: use age or next-steps radio to infer level if nothing is selected
+  if (qualificationFilters.length === 0 && levelMappedQualifications.length === 0) {
+    const age = req.session.data["age"];
+    const nextStep = req.session.data["next-steps"];
+    const validAges = ["under-18", "18-21", "over-24"];
+    let fallbackLevels = [];
+
+    if (nextStep === "university" && validAges.includes(age)) {
+      fallbackLevels = ["level-4-7"];
+    }
+
+    selectedLevels = [...selectedLevels, ...fallbackLevels];
+    levelMappedQualifications = [
+      ...levelMappedQualifications,
+      ...fallbackLevels.flatMap(level => qualificationMap[level] || [])
+    ];
   }
 
   // ✅ Merge and normalise both filters
@@ -129,7 +160,6 @@ router.get("/load-courses", function (req, res) {
 
 
 
-
 router.get('/course/:slug', function (req, res) {
     console.log("✅ Reached /06/course/:slug");
     const slug = req.params.slug;
@@ -164,9 +194,11 @@ router.get('/course/:slug', function (req, res) {
   });
   
   
+  router.get('/clear-session-and-go', function (req, res) {
+    req.session.data = {} // Clear all session data
+    res.redirect('current-situation') // Replace with your desired page
+  })
   
-
-
 
 router.post('/age-results', function(request, response) {
 

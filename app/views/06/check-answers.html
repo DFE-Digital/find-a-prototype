@@ -34,7 +34,7 @@
       {{ data['travel-location'] }}
     </dd>
     <dd class="govuk-summary-list__actions">
-      <a class="govuk-link" href="how-far">Change<span class="govuk-visually-hidden"> address</span></a>
+      <a class="govuk-link" href="location">Change<span class="govuk-visually-hidden"> address</span></a>
     </dd>
   </div>
 
@@ -47,10 +47,10 @@
       Subjects
     </dt>
     <dd class="govuk-summary-list__value">
-      {{ data['subject-1']  or "No subjects added"}}
+      {{ data['subject-1'] }}
     </dd>
     <dd class="govuk-summary-list__actions">
-      <a class="govuk-link" href="school-subjects-question">Change<span class="govuk-visually-hidden"> name</span></a>
+      <a class="govuk-link" href="subjects">Change<span class="govuk-visually-hidden"> name</span></a>
     </dd>
   </div>
 
@@ -63,10 +63,10 @@
       Jobs or careers
     </dt>
     <dd class="govuk-summary-list__value">
-      {{ data['job-1']  or "No jobs or careers added"}}
+      {{ data['job-1'] }}
     </dd>
     <dd class="govuk-summary-list__actions">
-      <a class="govuk-link" href="jobs-and-careers-question">Change<span class="govuk-visually-hidden"> name</span></a>
+      <a class="govuk-link" href="jobs">Change<span class="govuk-visually-hidden"> name</span></a>
     </dd>
   </div>
   {% endif %}
@@ -77,7 +77,7 @@
       Course preference
     </dt>
     <dd class="govuk-summary-list__value">
-      {{ data['learning-style'] or "No learning style added" }}
+      {{ data['learning-style'] }}
     </dd>
     <dd class="govuk-summary-list__actions">
       <a class="govuk-link" href="learning-method">Change<span class="govuk-visually-hidden"> address</span></a>
@@ -102,7 +102,7 @@
       Level you're looking for
     </dt>
     <dd class="govuk-summary-list__value">
-      <p>{{ data['qualification-level'] or "No education added"}}</p> 
+      <p>{{ data['qualification-level'] }}</p> 
     </dd>
     <dd class="govuk-summary-list__actions">
       <a class="govuk-link" href="level-adult">Change<span class="govuk-visually-hidden"> address</span></a>
@@ -116,7 +116,7 @@
       Level you're looking for
     </dt>
     <dd class="govuk-summary-list__value">
-      <p>{{ data['level-of-education'] or "No education added"}}</p> 
+      <p>{{ data['level-of-education'] }}</p> 
     </dd>
     <dd class="govuk-summary-list__actions">
       <a class="govuk-link" href="level-of-education">Change<span class="govuk-visually-hidden"> address</span></a>
