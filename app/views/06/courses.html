@@ -166,21 +166,65 @@
 
       {# Location tag #}
       {% if selectedLocation %}
-        <a href="?{% for q in selectedQualifications %}&filter={{ q }}{% endfor %}&subject-filter={{ selectedSubject }}"
-           class="govuk-tag govuk-tag--green govuk-!-margin-right-1 govuk-!-margin-bottom-1"
-           aria-label="Remove location filter: {{ selectedLocation }}">
-          {{ selectedLocation }}
-        </a>
-      {% endif %}
+  {% set queryString = "" %}
+  {# Keep all qualification filters #}
+  {% for q in selectedQualifications %}
+    {% if q != "_unchecked" %}
+      {% set queryString = queryString + "&filter=" + q %}
+    {% endif %}
+  {% endfor %}
+
+  {# Keep all qualification levels #}
+  {% for level in selectedLevels %}
+    {% if level %}
+      {% set queryString = queryString + "&qualification-level=" + level %}
+    {% endif %}
+  {% endfor %}
+
+  {# Keep subject, but exclude location #}
+  {% if selectedSubject %}
+    {% set queryString = queryString + "&subject-filter=" + selectedSubject %}
+  {% endif %}
+
+  <a href="?page=1{{ queryString | safe }}"
+     class="govuk-tag govuk-tag--green govuk-!-margin-right-1 govuk-!-margin-bottom-1"
+     aria-label="Remove location filter: {{ selectedLocation }}">
+    {{ selectedLocation }}
+  </a>
+{% endif %}
+
+    
 
       {# Subject tag #}
       {% if selectedSubject %}
-        <a href="?{% for q in selectedQualifications %}&filter={{ q }}{% endfor %}&option-select-filter-location={{ selectedLocation }}"
-           class="govuk-tag govuk-tag--purple govuk-!-margin-right-1 govuk-!-margin-bottom-1"
-           aria-label="Remove keyword filter: {{ selectedSubject }}">
-          {{ selectedSubject }}
-        </a>
+      {% set queryString = "" %}
+      {# Keep all qualification filters #}
+      {% for q in selectedQualifications %}
+        {% if q != "_unchecked" %}
+          {% set queryString = queryString + "&filter=" + q %}
+        {% endif %}
+      {% endfor %}
+    
+      {# Keep all qualification levels #}
+      {% for level in selectedLevels %}
+        {% if level %}
+          {% set queryString = queryString + "&qualification-level=" + level %}
+        {% endif %}
+      {% endfor %}
+    
+      {# Keep location, but exclude subject #}
+      {% if selectedLocation %}
+        {% set queryString = queryString + "&option-select-filter-location=" + selectedLocation %}
       {% endif %}
+    
+      <a href="?page=1{{ queryString | safe }}"
+         class="govuk-tag govuk-tag--purple govuk-!-margin-right-1 govuk-!-margin-bottom-1"
+         aria-label="Remove keyword filter: {{ selectedSubject }}">
+        {{ selectedSubject }}
+      </a>
+    {% endif %}
+    
+
 
       {# Qualification level tags #}
       {% for level in selectedLevels %}
