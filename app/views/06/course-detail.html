@@ -112,7 +112,7 @@
         text: "Start date"
       },
       value: {
-        text: course.start
+        text: course.start | govukDate
       }
     },
     {
@@ -154,7 +154,7 @@
         text: "Cost"
       },
       value: {
-        text: course.cost
+        text: course.cost | currency
       }
     }
   ]
