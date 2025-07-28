@@ -3,6 +3,7 @@ const router = express.Router()
 
 // Add your routes here - above the module.exports line
 
+
 const fs = require("fs");
 const path = require("path");
 
@@ -35,50 +36,46 @@ router.get("/load-courses", function (req, res) {
     "level-4-7": ["Degree", "Apprenticeship"]
   };
 
- // ✅ Get qualification-level filters from checkboxes or apply fallback
- let selectedLevels = req.query["qualification-level"] || req.session.data["qualification-level"] || [];
- if (!Array.isArray(selectedLevels)) {
-   selectedLevels = [selectedLevels];
- }
- selectedLevels = selectedLevels.filter(level => level && level !== "_unchecked");
-
-
-// 🌟 Fallback: if no levels/filters selected, infer from age and next step
-const age = req.session.data["age"];
-const nextStep = req.session.data["next-steps"];
-const validAges = ["under-18", "18-21", "over-24"];
-if (selectedLevels.length === 0 && (!req.query.filter || req.query.filter.length === 0)) {
-  if (nextStep === "university" && validAges.includes(age)) {
-    selectedLevels = ["level-4-7"];
-  }
-}
-
-// ✅ Map selected levels to qualification types
-let levelMappedQualifications = selectedLevels.flatMap(level => qualificationMap[level] || []);
-
-// ✅ Get normal qualification filters from checkboxes
-let qualificationFilters = req.query.filter || [];
-if (!Array.isArray(qualificationFilters)) {
-  qualificationFilters = [qualificationFilters];
-}
-
-
-  // 🌟 Fallback: use age or next-steps radio to infer level if nothing is selected
-  if (qualificationFilters.length === 0 && levelMappedQualifications.length === 0) {
-    const age = req.session.data["age"];
-    const nextStep = req.session.data["next-steps"];
-    const validAges = ["under-18", "18-21", "over-24"];
-    let fallbackLevels = [];
-
-    if (nextStep === "university" && validAges.includes(age)) {
-      fallbackLevels = ["level-4-7"];
+  // ✅ Get qualification-level filters
+  let selectedLevels = [];
+  if (req.query["qualification-level"]) {
+    selectedLevels = req.query["qualification-level"];
+    if (!Array.isArray(selectedLevels)) {
+      selectedLevels = [selectedLevels];
     }
+  } else if (
+    req.session.data["qualification-level"] &&
+    !req.query.filter &&
+    !req.query["option-select-filter-location"] &&
+    !req.query["subject-filter"]
+  ) {
+    selectedLevels = [req.session.data["qualification-level"]];
+  }
 
-    selectedLevels = [...selectedLevels, ...fallbackLevels];
-    levelMappedQualifications = [
-      ...levelMappedQualifications,
-      ...fallbackLevels.flatMap(level => qualificationMap[level] || [])
-    ];
+  selectedLevels = selectedLevels.filter(level => level && level !== "_unchecked");
+
+  // 🌟 Fallback: infer from next-steps and age if no filters applied
+  const age = req.session.data["age"];
+  const nextStep = req.session.data["next-steps"];
+  const validAges = ["under-18", "18-21", "over-24"];
+  if (
+    selectedLevels.length === 0 &&
+    (!req.query.filter || req.query.filter.length === 0)
+  ) {
+    if (nextStep === "university" && validAges.includes(age)) {
+      selectedLevels = ["level-4-7"];
+    }
+  }
+
+  // ✅ Map selected levels to qualification types
+  let levelMappedQualifications = selectedLevels.flatMap(
+    level => qualificationMap[level] || []
+  );
+
+  // ✅ Get qualification filters from checkboxes
+  let qualificationFilters = req.query.filter || [];
+  if (!Array.isArray(qualificationFilters)) {
+    qualificationFilters = [qualificationFilters];
   }
 
   // ✅ Merge and normalise both filters
@@ -101,26 +98,25 @@ if (!Array.isArray(qualificationFilters)) {
   const locationFilterLower = locationFilter.trim().toLowerCase();
   const subjectFilterLower = subjectFilter.trim().toLowerCase();
 
-  // ✅ Filter the full course list
+  // ✅ Filter the course list
   let filteredCourses = coursesData;
 
   if (qualificationFilters.length > 0) {
-    filteredCourses = filteredCourses.filter((course) =>
+    filteredCourses = filteredCourses.filter(course =>
       qualificationFilters.includes((course.type || "").toLowerCase())
     );
   }
 
   if (locationFilterLower !== "") {
-    filteredCourses = filteredCourses.filter((course) =>
+    filteredCourses = filteredCourses.filter(course =>
       (course.location || "").toLowerCase().includes(locationFilterLower)
     );
   }
 
   if (subjectFilterLower !== "") {
-    filteredCourses = filteredCourses.filter(
-      (course) =>
-        (course.name || "").toLowerCase().includes(subjectFilterLower) ||
-        (course.overview || "").toLowerCase().includes(subjectFilterLower)
+    filteredCourses = filteredCourses.filter(course =>
+      (course.name || "").toLowerCase().includes(subjectFilterLower) ||
+      (course.overview || "").toLowerCase().includes(subjectFilterLower)
     );
   }
 
@@ -133,7 +129,7 @@ if (!Array.isArray(qualificationFilters)) {
   const end = start + perPage;
 
   // ✅ Add slugs
-  const paginatedCourses = filteredCourses.slice(start, end).map((course) => ({
+  const paginatedCourses = filteredCourses.slice(start, end).map(course => ({
     ...course,
     slug: generateSlug(course),
   }));
@@ -144,7 +140,7 @@ if (!Array.isArray(qualificationFilters)) {
     totalPages: totalPages,
     totalResults: totalResults,
     selectedQualifications: qualificationFilters.map(
-      (q) => q.charAt(0).toUpperCase() + q.slice(1)
+      q => q.charAt(0).toUpperCase() + q.slice(1)
     ),
     selectedLocation: locationFilter,
     selectedSubject: subjectFilter,
@@ -152,8 +148,9 @@ if (!Array.isArray(qualificationFilters)) {
   });
 
   console.log("🔍 Slugs from paginatedCourses:");
-  paginatedCourses.forEach((c) => console.log(c.slug));
+  paginatedCourses.forEach(c => console.log(c.slug));
 });
+
 
 
 

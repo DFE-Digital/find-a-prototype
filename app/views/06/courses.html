@@ -77,9 +77,9 @@
         <div class="govuk-checkboxes govuk-checkboxes--small">
           {% for level in ["level-1-2", "level-3", "level-4-7"] %}
             {% set label = {
-              "level-1-2": "Level 1 or 2 (like GCSEs)",
-              "level-3": "Level 3 (like BTECs and A levels)",
-              "level-4-7": "Level 4 to 7 (like diplomas and degrees)"
+              "level-1-2": "Level 1 or 2",
+              "level-3": "Level 3",
+              "level-4-7": "Level 4 to 7"
             }[level] %}
             <div class="govuk-checkboxes__item">
               <input class="govuk-checkboxes__input"
@@ -184,22 +184,51 @@
 
       {# Qualification level tags #}
       {% for level in selectedLevels %}
-      {% if level != "_unchecked" %}
-        {% set label = {
-          "level-1-2": "Level 1 or 2",
-          "level-3": "Level 3",
-          "level-4-7": "Level 4 to "
-        }[level] %}
-    
-        {% if label %}
-          <a href="?{% for q in selectedQualifications %}&filter={{ q }}{% endfor %}&option-select-filter-location={{ selectedLocation }}&subject-filter={{ selectedSubject }}"
-            class="govuk-tag govuk-tag--yellow govuk-!-margin-right-1 govuk-!-margin-bottom-1"
-            aria-label="Remove level filter: {{ label }}">
-            {{ label }}
-          </a>
-        {% endif %}
+  {% if level %}
+    {# Rebuild query string without this level #}
+    {% set remainingLevels = [] %}
+    {% for l in selectedLevels %}
+      {% if l != level and l != "_unchecked" %}
+        {% set remainingLevels = remainingLevels.append(l) %}
       {% endif %}
     {% endfor %}
+
+    {# Map remaining levels back to qualification types #}
+    {% set mappedQuals = [] %}
+    {% for rl in remainingLevels %}
+      {% if rl == "level-1-2" %}
+        {% set mappedQuals = mappedQuals.append("btec") %}
+        {% set mappedQuals = mappedQuals.append("apprenticeship") %}
+      {% elseif rl == "level-3" %}
+        {% set mappedQuals = mappedQuals.append("a level") %}
+        {% set mappedQuals = mappedQuals.append("t level") %}
+        {% set mappedQuals = mappedQuals.append("apprenticeship") %}
+      {% elseif rl == "level-4-7" %}
+        {% set mappedQuals = mappedQuals.append("degree") %}
+        {% set mappedQuals = mappedQuals.append("apprenticeship") %}
+      {% endif %}
+    {% endfor %}
+
+    {# Add query string with new levels and mapped quals #}
+    {% set query = "" %}
+    {% for q in mappedQuals %}
+      {% set query = query + "&filter=" + q %}
+    {% endfor %}
+    {% for rl in remainingLevels %}
+      {% set query = query + "&qualification-level=" + rl %}
+    {% endfor %}
+    {% set query = query + "&option-select-filter-location=" + selectedLocation + "&subject-filter=" + selectedSubject %}
+
+    <a href="?page=1{{ query | safe }}"
+       class="govuk-tag govuk-tag--yellow govuk-!-margin-right-1 govuk-!-margin-bottom-1"
+       aria-label="Remove level filter: {{ level }}">
+      {% if level == "level-1-2" %}Level 1 or 2{% endif %}
+      {% if level == "level-3" %}Level 3{% endif %}
+      {% if level == "level-4-7" %}Level 4 to 7{% endif %}
+    </a>
+  {% endif %}
+{% endfor %}
+
     
 
     </div>
