@@ -179,7 +179,19 @@
             <a class="govuk-link x-govuk-related-navigation__section-link" href="/browse/education/school-life">Explore jobs and careers you could do after this course</a>
           </li>
           <li class="x-govuk-related-navigation__link">
-            <a class="govuk-link x-govuk-related-navigation__section-link" href="/browse/education/school-life">More information about {{ course.type }}s</a>
+            {% if course.type == "Degree" %}
+              <a class="govuk-link x-govuk-related-navigation__section-link" href="../about-degrees">More information about Degrees</a>
+            {% elif course.type == "BTEC" %}
+              <a class="govuk-link x-govuk-related-navigation__section-link" href="../about-btecs">More information about BTECs</a>
+            {% elif course.type == "Apprenticeship" %}
+              <a class="govuk-link x-govuk-related-navigation__section-link" href="../about-apprenticeships">More information about Apprenticeships</a>
+            {% elif course.type == "A Level" %}
+              <a class="govuk-link x-govuk-related-navigation__section-link" href="../about-a-levels">More information about A Levels</a>
+            {% elif course.type == "T Level" %}
+              <a class="govuk-link x-govuk-related-navigation__section-link" href="../about-t-levels">More information about T Levels</a>
+            {% elif course.type == "Diploma" %}
+              <a class="govuk-link x-govuk-related-navigation__section-link" href="../about-diplomas">More information about Diplomas</a>
+            {% endif %}
           </li>
         </ul>
       </nav>

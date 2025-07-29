@@ -14,6 +14,32 @@
   
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
+      Age
+    </dt>
+    <dd class="govuk-summary-list__value">
+     {{ data['age'] }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="location">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+    </dd>
+  </div>
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      What you want to do
+    </dt>
+    <dd class="govuk-summary-list__value">
+     {{ data['next-step'] }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="location">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+    </dd>
+  </div>
+
+  {% if (data['location']) %}
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
       Location
     </dt>
     <dd class="govuk-summary-list__value">
@@ -23,6 +49,8 @@
       <a class="govuk-link" href="location">Change<span class="govuk-visually-hidden"> date of birth</span></a>
     </dd>
   </div>
+
+  {% endif %}
 
   {% if (data['travel-location']) %}
 
