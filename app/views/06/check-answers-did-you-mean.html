@@ -10,6 +10,10 @@
 <h1 class="govuk-heading-l">What you've told us</h1>
 <p>Check your answers, and change them if you'd like to, before viewing your search results.</p>
 
+<div class="govuk-inset-text">
+  You entered "Mahs" - did you mean "Maths"? <a href="">Update my search</a>
+</div>
+
 <dl class="govuk-summary-list">
   
   <div class="govuk-summary-list__row">
@@ -188,70 +192,3 @@
 </button>
 </form>
 {% endblock %}
-
-{% block footer %}
-
-{% from "govuk/components/footer/macro.njk" import govukFooter %}
-
-{{ govukFooter({
-  navigation: [
-    {
-      title: "Website information",
-      width: "two-thirds",
-      columns: 2,
-      items: [
-        {
-          href: "#",
-          text: "About us"
-        },
-        {
-          href: "#",
-          text: "Help"
-        },
-        {
-          href: "#",
-          text: "Privacy and cookies"
-        },
-        {
-          href: "#",
-          text: "Accessibility statement"
-        },
-        {
-          href: "#",
-          text: "Terms and conditions"
-        }
-      ]
-    },
-    {
-      title: "Sites for other UK countries",
-      width: "one-third",
-      items: [
-        {
-          href: "#",
-          text: "Scotland"
-        },
-        {
-          href: "#",
-          text: "Wales"
-        },
-        {
-          href: "#",
-          text: "Northern Ireland"
-        }
-      ]
-    },
-    {
-      title: "Additional views",
-      width: "full",
-      items: [
-        {
-          href: "check-answers-did-you-mean",
-          text: "'Did you mean?'"
-        }
-      ]
-    }
-  ]
-}) }}
-
-{% endblock %}
-

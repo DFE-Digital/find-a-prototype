@@ -1,0 +1,760 @@
+{% extends "./layouts/_RESULTS.html" %}
+
+<!--Find the person in the data-->
+
+{% set withoutDescription = "true" %}
+{% set pageHeading = "Search results" %}
+{% set pageDescription = "Use the filters to explore these nearby courses." %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-one-third">
+
+    <form method="get" action="load-courses">
+
+      <div class="filter-container">
+
+        <div class="filter-search-terms">
+  
+        <div class="filter-heading">
+
+        <h2 class="govuk-heading-m">Filter</h2>
+
+        </div>
+
+        </div>
+
+        <div class="filter-list">
+
+      <fieldset class="govuk-fieldset">
+
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Qualification type</legend>
+    
+        <div class="govuk-checkboxes govuk-checkboxes--small">
+          
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="filter-A-Level" name="filter" type="checkbox" value="A Level">
+              <label class="govuk-label govuk-checkboxes__label" for="filter-A-Level">A Level</label>
+            </div>
+          
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="filter-Apprenticeship" name="filter" type="checkbox" value="Apprenticeship">
+              <label class="govuk-label govuk-checkboxes__label" for="filter-Apprenticeship">Apprenticeship</label>
+            </div>
+          
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="filter-BTEC" name="filter" type="checkbox" value="BTEC">
+              <label class="govuk-label govuk-checkboxes__label" for="filter-BTEC">BTEC</label>
+            </div>
+          
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="filter-Diploma" name="filter" type="checkbox" value="Diploma">
+              <label class="govuk-label govuk-checkboxes__label" for="filter-Diploma">Diploma</label>
+            </div>
+          
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="filter-Degree" name="filter" type="checkbox" value="Degree">
+              <label class="govuk-label govuk-checkboxes__label" for="filter-Degree">Degree</label>
+            </div>
+          
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="filter-T-Level" name="filter" type="checkbox" value="T Level">
+              <label class="govuk-label govuk-checkboxes__label" for="filter-T-Level">T Level</label>
+            </div>
+          
+        </div>
+      </fieldset>
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="option-select-filter-location">
+          Enter a postcode, town or city
+        </label>
+        <input class="govuk-input" type="text" id="option-select-filter-location" name="option-select-filter-location">
+      </div>
+
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="subject-filter">
+          Subject or career keywords
+        </label>
+        <input class="govuk-input" type="text" id="subject-filter" name="subject-filter">
+      </div>
+
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Qualification level</legend>
+      
+        <div class="govuk-checkboxes govuk-checkboxes--small">
+          
+            
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="qualification-level-level-1-2" name="qualification-level" type="checkbox" value="level-1-2">
+              <label class="govuk-label govuk-checkboxes__label" for="qualification-level-level-1-2">
+                Level 1 or 2
+              </label>
+            </div>
+          
+            
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="qualification-level-level-3" name="qualification-level" type="checkbox" value="level-3">
+              <label class="govuk-label govuk-checkboxes__label" for="qualification-level-level-3">
+                Level 3
+              </label>
+            </div>
+          
+            
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="qualification-level-level-4-7" name="qualification-level" type="checkbox" value="level-4-7">
+              <label class="govuk-label govuk-checkboxes__label" for="qualification-level-level-4-7">
+                Level 4 to 7
+              </label>
+            </div>
+          
+        </div>
+      </fieldset>
+      
+    <br>
+      <button class="govuk-button" type="submit">Apply filters</button>
+
+      <p class="govuk-body">
+        <a href="/06/load-courses" class="govuk-link" id="clear-all-link">Clear all filters</a>
+      </p>
+      
+    
+    
+  </div>
+</div></form>
+</div>
+
+
+  <div class="govuk-grid-column-two-thirds">
+
+<h1 class="govuk-heading-l">Available Courses</h1>
+
+<p><a href="clear-session-and-go">Search again</a> </p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  <div id="active-filters" class="govuk-!-margin-top-6">
+    <h2 id="active-filters-heading" class="govuk-heading-m">You've searched for:</h2>
+
+    <div id="selected-filters" class="remove-filters">
+      
+      
+
+      
+      
+  
+  
+  
+
+  
+  
+
+  
+  
+    
+  
+
+  <a href="?page=1&amp;subject-filter=Arts" class="govuk-tag govuk-tag--green govuk-!-margin-right-1 govuk-!-margin-bottom-1" aria-label="Remove location filter: Manchester">
+    Manchester
+  </a>
+
+
+    
+
+      
+      
+      
+      
+      
+    
+      
+      
+    
+      
+      
+        
+      
+    
+      <a href="?page=1&amp;option-select-filter-location=Manchester" class="govuk-tag govuk-tag--purple govuk-!-margin-right-1 govuk-!-margin-bottom-1" aria-label="Remove keyword filter: Arts">
+        Arts
+      </a>
+    
+    
+
+
+      
+      
+
+    
+
+    </div>
+
+  
+  </div>
+
+
+
+
+<p>13 courses found.</p>
+
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Performing Arts A Level
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/performing-arts-a-level-bright-futures-academy">
+          View more details<span class="govuk-visually-hidden"> about Performing Arts A Level</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Provider
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Bright Futures Academy
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Manchester
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course type
+        </dt>
+        <dd class="govuk-summary-list__value">
+          A Level
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Requirements
+        </dt>
+        <dd class="govuk-summary-list__value">
+          GCSEs in relevant subjects
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Overview
+        </dt>
+        <dd class="govuk-summary-list__value">
+          The A Level programme is designed to develop your knowledge, confidence, and employability skills in Performing Arts. You will be taught by experienced tutors, participate in collaborative assignments, and benefit from industry insights. On completion, you will be well-equipped to progress into further study or directly enter your chosen career path.
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Performing Arts Degree
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/performing-arts-degree-university-of-manchester">
+          View more details<span class="govuk-visually-hidden"> about Performing Arts Degree</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Provider
+        </dt>
+        <dd class="govuk-summary-list__value">
+          University of Manchester
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Manchester
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course type
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Degree
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Requirements
+        </dt>
+        <dd class="govuk-summary-list__value">
+          A Levels or equivalent Level 3 qualification
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Overview
+        </dt>
+        <dd class="govuk-summary-list__value">
+          The Degree programme is designed to develop your knowledge, confidence, and employability skills in Performing Arts. You will be taught by experienced tutors, participate in collaborative assignments, and benefit from industry insights. On completion, you will be well-equipped to progress into further study or directly enter your chosen career path.
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Performing Arts Degree
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/performing-arts-degree-university-of-manchester">
+          View more details<span class="govuk-visually-hidden"> about Performing Arts Degree</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Provider
+        </dt>
+        <dd class="govuk-summary-list__value">
+          University of Manchester
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Manchester
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course type
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Degree
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Requirements
+        </dt>
+        <dd class="govuk-summary-list__value">
+          A Levels or equivalent Level 3 qualification
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Overview
+        </dt>
+        <dd class="govuk-summary-list__value">
+          The Degree programme is designed to develop your knowledge, confidence, and employability skills in Performing Arts. You will be taught by experienced tutors, participate in collaborative assignments, and benefit from industry insights. On completion, you will be well-equipped to progress into further study or directly enter your chosen career path.
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Performing Arts Diploma
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/performing-arts-diploma-skillwise-training">
+          View more details<span class="govuk-visually-hidden"> about Performing Arts Diploma</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Provider
+        </dt>
+        <dd class="govuk-summary-list__value">
+          SkillWise Training
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Manchester
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course type
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Diploma
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Requirements
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Entry level qualification or prior experience
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Overview
+        </dt>
+        <dd class="govuk-summary-list__value">
+          The Diploma programme is designed to develop your knowledge, confidence, and employability skills in Performing Arts. You will be taught by experienced tutors, participate in collaborative assignments, and benefit from industry insights. On completion, you will be well-equipped to progress into further study or directly enter your chosen career path.
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Performing Arts Diploma
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/performing-arts-diploma-manchester-college">
+          View more details<span class="govuk-visually-hidden"> about Performing Arts Diploma</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Provider
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Manchester College
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Manchester
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course type
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Diploma
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Requirements
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Entry level qualification or prior experience
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Overview
+        </dt>
+        <dd class="govuk-summary-list__value">
+          The Diploma programme is designed to develop your knowledge, confidence, and employability skills in Performing Arts. You will be taught by experienced tutors, participate in collaborative assignments, and benefit from industry insights. On completion, you will be well-equipped to progress into further study or directly enter your chosen career path.
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Performing Arts Apprenticeship
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/performing-arts-apprenticeship-skillwise-training">
+          View more details<span class="govuk-visually-hidden"> about Performing Arts Apprenticeship</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Provider
+        </dt>
+        <dd class="govuk-summary-list__value">
+          SkillWise Training
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Manchester
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course type
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Apprenticeship
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Requirements
+        </dt>
+        <dd class="govuk-summary-list__value">
+          GCSEs in English and Maths
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Overview
+        </dt>
+        <dd class="govuk-summary-list__value">
+          The Apprenticeship programme is designed to develop your knowledge, confidence, and employability skills in Performing Arts. You will be taught by experienced tutors, participate in collaborative assignments, and benefit from industry insights. On completion, you will be well-equipped to progress into further study or directly enter your chosen career path.
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Performing Arts Diploma
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/performing-arts-diploma-manchester-college">
+          View more details<span class="govuk-visually-hidden"> about Performing Arts Diploma</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Provider
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Manchester College
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Manchester
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course type
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Diploma
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Requirements
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Entry level qualification or prior experience
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Overview
+        </dt>
+        <dd class="govuk-summary-list__value">
+          The Diploma programme is designed to develop your knowledge, confidence, and employability skills in Performing Arts. You will be taught by experienced tutors, participate in collaborative assignments, and benefit from industry insights. On completion, you will be well-equipped to progress into further study or directly enter your chosen career path.
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Performing Arts A Level
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/performing-arts-a-level-bright-futures-academy">
+          View more details<span class="govuk-visually-hidden"> about Performing Arts A Level</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Provider
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Bright Futures Academy
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Manchester
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course type
+        </dt>
+        <dd class="govuk-summary-list__value">
+          A Level
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Requirements
+        </dt>
+        <dd class="govuk-summary-list__value">
+          GCSEs in relevant subjects
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Overview
+        </dt>
+        <dd class="govuk-summary-list__value">
+          The A Level programme is designed to develop your knowledge, confidence, and employability skills in Performing Arts. You will be taught by experienced tutors, participate in collaborative assignments, and benefit from industry insights. On completion, you will be well-equipped to progress into further study or directly enter your chosen career path.
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<h3 class="govuk-heading-m">You might also be interested in</h3>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Performing Arts BTEC
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/performing-arts-btec-manchester-college">
+          View more details<span class="govuk-visually-hidden"> about Performing Arts BTEC</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Provider
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Manchester College
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Manchester
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course type
+        </dt>
+        <dd class="govuk-summary-list__value">
+          BTEC
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Requirements
+        </dt>
+        <dd class="govuk-summary-list__value">
+          GCSEs or equivalent Level 2 qualification
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Overview
+        </dt>
+        <dd class="govuk-summary-list__value">
+          The BTEC programme is designed to develop your knowledge, confidence, and employability skills in Performing Arts. You will be taught by experienced tutors, participate in collaborative assignments, and benefit from industry insights. On completion, you will be well-equipped to progress into further study or directly enter your chosen career path.
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+<h4 class="govuk-heading-s">Why am I seeing this?</h4> 
+<p>Exploring options in related areas or with similar skills could help you find something suitable. </p>
+
+        </div></div>
+
+
+{% endblock %}
+
