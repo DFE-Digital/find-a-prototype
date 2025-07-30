@@ -1,3 +1,8 @@
 {
-  "serviceName": "Explore your options after school or college"
+  "serviceName": "Explore your options after school or college",
+  "plugins": {
+  "govuk-frontend": {
+    "rebrand": true
+  }
+}
 }

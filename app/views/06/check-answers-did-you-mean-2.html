@@ -10,6 +10,10 @@
 <h1 class="govuk-heading-l">What you've told us</h1>
 <p>Check your answers, and change them if you'd like to, before viewing your search results.</p>
 
+<div class="govuk-inset-text">
+  You entered "Not for profit" - did you mean "Working for a charity"? <a href="">Update my search</a>
+</div>
+
 <dl class="govuk-summary-list">
   
   <div class="govuk-summary-list__row">
@@ -107,7 +111,7 @@
       Jobs or careers
     </dt>
     <dd class="govuk-summary-list__value">
-      {{ data['job-1'] }}
+      Not for profit
     </dd>
     <dd class="govuk-summary-list__actions">
       <a class="govuk-link" href="jobs">Change<span class="govuk-visually-hidden"> name</span></a>
@@ -148,13 +152,13 @@
     <dd class="govuk-summary-list__value">
       {% if data['qualification-level'] == 'none' %}
       Learn skills and experience without a qualification
-    {% elseif data['qualification-level'] == 'level-1-2' %}
+    {% elseif data['next-step'] == 'level-1-2' %}
     Level 1 or 2 (like GCSEs)
-    {% elseif data['qualification-level'] == 'level-3' %}
+    {% elseif data['next-step'] == 'level-3' %}
     Level 3 (like BTECs and A levels)
-    {% elseif data['qualification-level'] == 'level-4-7' %}
+    {% elseif data['next-step'] == 'level-4-7' %}
     Level 4 to 7 (like diplomas and degrees)
-    {% elseif data['qualification-level'] == 'all' %}
+    {% elseif data['next-step'] == 'all' %}
     Show me everything
     {% else %}
       Not provided
@@ -188,74 +192,3 @@
 </button>
 </form>
 {% endblock %}
-
-{% block footer %}
-
-{% from "govuk/components/footer/macro.njk" import govukFooter %}
-
-{{ govukFooter({
-  navigation: [
-    {
-      title: "Website information",
-      width: "two-thirds",
-      columns: 2,
-      items: [
-        {
-          href: "#",
-          text: "About us"
-        },
-        {
-          href: "#",
-          text: "Help"
-        },
-        {
-          href: "#",
-          text: "Privacy and cookies"
-        },
-        {
-          href: "#",
-          text: "Accessibility statement"
-        },
-        {
-          href: "#",
-          text: "Terms and conditions"
-        }
-      ]
-    },
-    {
-      title: "Sites for other UK countries",
-      width: "one-third",
-      items: [
-        {
-          href: "#",
-          text: "Scotland"
-        },
-        {
-          href: "#",
-          text: "Wales"
-        },
-        {
-          href: "#",
-          text: "Northern Ireland"
-        }
-      ]
-    },
-    {
-      title: "Additional views",
-      width: "full",
-      items: [
-        {
-          href: "check-answers-did-you-mean",
-          text: "'Did you mean?' - misspelling"
-        },
-        {
-          href: "check-answers-did-you-mean-2",
-          text: "'Did you mean?' - different term"
-        }
-      ]
-    }
-  ]
-}) }}
-
-{% endblock %}
-
