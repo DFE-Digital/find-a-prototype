@@ -28,6 +28,29 @@
 @import "components/filters-2";
 
 
+/* Hide toggle button on desktop */
+@media (min-width: 641px) {
+    #toggle-filters {
+      display: none !important;
+    }
+  
+    #filter-panel {
+      display: block !important; /* Always show filters on desktop */
+    }
+  }
+  
+  /* Hide filters by default on mobile */
+  @media (max-width: 640px) {
+    #filter-panel {
+      display: none;
+    }
+  
+    #filter-panel.active {
+      display: block;
+    }
+  }
+  
+
 .govuk-width-container { @include govuk-width-container; }
 
 .govuk-header__link .govuk-header__logotype{

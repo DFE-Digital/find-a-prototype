@@ -12,13 +12,6 @@
 
   <div class="govuk-grid-column-one-third">
 
-    <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-3 govuk-!-display-none-print" 
-    id="toggle-filters" type="button">
-Show filters
-</button>
-
-<div id="filter-panel" class="filter-container" hidden>
-
     <form method="get" action="load-courses">
 
       <div class="filter-container">
@@ -113,7 +106,6 @@ Show filters
     </form>
     
   </div>
-</div>
 </div>
 </div>
 
@@ -512,24 +504,6 @@ Show filters
   ]
 }) }}
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const toggleButton = document.getElementById('toggle-filters');
-    const filterPanel = document.getElementById('filter-panel');
-
-    toggleButton.addEventListener('click', function () {
-      const isActive = filterPanel.classList.contains('active');
-
-      if (isActive) {
-        filterPanel.classList.remove('active');
-        toggleButton.textContent = 'Show filters';
-      } else {
-        filterPanel.classList.add('active');
-        toggleButton.textContent = 'Hide filters';
-      }
-    });
-  });
-</script>
 
 {% endblock %}
 
