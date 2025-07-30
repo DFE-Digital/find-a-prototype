@@ -8,7 +8,25 @@ const fs = require("fs");
 const path = require("path");
 
 router.get("/load-courses", function (req, res) {
-  // Load course data
+
+  console.log("Session data:", req.session.data);
+
+  // 🔧 Labels and Mappings
+  const levelLabels = {
+    "level-1-2": "Level 1 or 2",
+    "level-3": "Level 3",
+    "level-4-7": "Level 4 to 7"
+  };
+
+  const qualificationMap = {
+    "level-1-2": ["BTEC", "Apprenticeship"],
+    "level-3": ["A Level", "T Level", "Apprenticeship"],
+    "level-4-7": ["Degree", "Apprenticeship"]
+  };
+
+  const validAges = ["under-18", "18-21", "over-24"];
+
+  // 📥 Load course data
   let coursesData = [];
   try {
     coursesData = JSON.parse(
@@ -19,7 +37,7 @@ router.get("/load-courses", function (req, res) {
     return res.status(500).send("Error loading course data.");
   }
 
-  // Helper to generate unique slugs
+  // 🧱 Slug generator
   const generateSlug = (course) => {
     return (
       (course.name || "") + "-" + (course.provider || "")
@@ -29,14 +47,12 @@ router.get("/load-courses", function (req, res) {
       .replace(/(^-|-$)/g, "");
   };
 
-  // ✅ Qualification map
-  const qualificationMap = {
-    "level-1-2": ["BTEC", "Apprenticeship"],
-    "level-3": ["A Level", "T Level", "Apprenticeship"],
-    "level-4-7": ["Degree", "Apprenticeship"]
-  };
+  // 🧠 Load inputs
+  const age = req.session.data["age"] || req.query["age"];
+  const nextStep = req.session.data["next-step"] || req.query["next-step"];
+  const learningStyle = req.session.data["learning-style"];
 
-  // ✅ Get selected levels
+  // ✅ Selected levels
   let selectedLevels = [];
   if (req.query["qualification-level"]) {
     selectedLevels = req.query["qualification-level"];
@@ -53,36 +69,30 @@ router.get("/load-courses", function (req, res) {
   }
   selectedLevels = selectedLevels.filter(level => level && level !== "_unchecked");
 
-  // 🌟 Fallback: university + valid age → level 4–7
-  const age = req.session.data["age"];
-  const nextStep = req.session.data["next-steps"];
-  const validAges = ["under-18", "18-21", "over-24"];
+  // ✅ Qualification filters
+  let qualificationFilters = req.query.filter || [];
+  if (!Array.isArray(qualificationFilters)) {
+    qualificationFilters = [qualificationFilters];
+  }
+
+  // 🌟 Fallback: if no levels or filters, and university + valid age
   if (
     selectedLevels.length === 0 &&
-    (!req.query.filter || req.query.filter.length === 0)
+    qualificationFilters.length === 0 &&
+    !req.query["option-select-filter-location"] &&
+    !req.query["subject-filter"]
   ) {
     if (nextStep === "university" && validAges.includes(age)) {
       selectedLevels = ["level-4-7"];
     }
   }
 
-  // ✅ Map levels to qualification types
-  let levelMappedQualifications = selectedLevels.flatMap(
-    level => qualificationMap[level] || []
-  );
-
-  // ✅ Get qualification filters
-  let qualificationFilters = req.query.filter || [];
-  if (!Array.isArray(qualificationFilters)) {
-    qualificationFilters = [qualificationFilters];
-  }
-
-  // 🌟 Learning style logic
-  const learningStyle = req.session.data["learning-style"];
+  // 🌟 Learning style fallback
   if (
     qualificationFilters.length === 0 &&
     selectedLevels.length === 0 &&
-    (!req.query["option-select-filter-location"] && !req.query["subject-filter"])
+    !req.query["option-select-filter-location"] &&
+    !req.query["subject-filter"]
   ) {
     if (learningStyle === "I prefer academic courses") {
       qualificationFilters = ["A Level", "Degree"];
@@ -93,17 +103,20 @@ router.get("/load-courses", function (req, res) {
     }
   }
 
-  // ✅ Merge filters
+  // ✅ Map levels to qualification types and merge filters
+  const levelMappedQualifications = selectedLevels.flatMap(
+    level => qualificationMap[level] || []
+  );
+
   qualificationFilters = [...qualificationFilters, ...levelMappedQualifications]
     .map(f => f.trim().toLowerCase())
     .filter(f => f && f !== "_unchecked");
 
-  // ✅ Get other filters
+  // ✅ Other filters: location and subject
   const locationFilter =
     req.query["option-select-filter-location"] ||
     req.session.data["location"] ||
     "";
-
   const subjectFilter =
     req.query["subject-filter"] ||
     req.session.data["subject-1"] ||
@@ -113,7 +126,7 @@ router.get("/load-courses", function (req, res) {
   const locationFilterLower = locationFilter.trim().toLowerCase();
   const subjectFilterLower = subjectFilter.trim().toLowerCase();
 
-  // ✅ Filter courses
+  // 🔍 Apply filtering
   let filteredCourses = coursesData;
 
   if (qualificationFilters.length > 0) {
@@ -135,7 +148,7 @@ router.get("/load-courses", function (req, res) {
     );
   }
 
-  // ✅ Pagination
+  // 📄 Pagination
   const page = parseInt(req.query.page) || 1;
   const perPage = 10;
   const totalResults = filteredCourses.length;
@@ -143,12 +156,12 @@ router.get("/load-courses", function (req, res) {
   const start = (page - 1) * perPage;
   const end = start + perPage;
 
-  // ✅ Add slugs
   const paginatedCourses = filteredCourses.slice(start, end).map(course => ({
     ...course,
     slug: generateSlug(course),
   }));
 
+  // 🖥️ Render page
   res.render("06/courses", {
     courses: paginatedCourses,
     currentPage: page,
@@ -159,9 +172,11 @@ router.get("/load-courses", function (req, res) {
     ),
     selectedLocation: locationFilter,
     selectedSubject: subjectFilter,
-    selectedLevels: selectedLevels
+    selectedLevels: selectedLevels,
+    selectedLevelTags: selectedLevels.map(level => levelLabels[level] || level),
   });
 
+  // 🧪 Debug
   console.log("🔍 Slugs from paginatedCourses:");
   paginatedCourses.forEach(c => console.log(c.slug));
 });

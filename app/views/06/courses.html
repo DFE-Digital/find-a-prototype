@@ -189,6 +189,7 @@ Show filters
     {% endif %}
   {% endfor %}
 
+
   {# Keep subject, but exclude location #}
   {% if selectedSubject %}
     {% set queryString = queryString + "&subject-filter=" + selectedSubject %}
