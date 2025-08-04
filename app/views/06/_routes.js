@@ -275,6 +275,20 @@ router.post('/job-subject-adult', function(request, response) {
     }
 })
 
+router.post('/job-subject-adult-2', function(request, response) {
+
+  var searchAdult2 = request.session.data['search-adult']
+  if (searchAdult2 == "By a course name, subject, job or career"){
+      response.redirect("subjects-18-24")
+  }
+  else if (searchAdult2 == "See all options in my location"){
+      response.redirect("location-adults")
+  }
+  else {
+      response.redirect("location-adults-2")
+  }
+})
+
 router.post('/subjects-question', function(request, response) {
 
     var subjectQuestion = request.session.data['school-subjects-radios']
@@ -297,65 +311,6 @@ router.post('/jobs-question', function(request, response) {
     }
 })
 
-router.post('/results-type', function(request, response) {
-
-    var publishDate = request.session.data['subject-1']
-    var jobOrCareer = request.session.data['job-1'];
-    var jobRadios = request.session.data['jobs-careers-radios'];
-    var subjectRadios = request.session.data['school-subjects-radios'];
-
-    if (publishDate == "Business"){
-        response.redirect("search-results-business")
-    } 
-    else if (publishDate == "business"){
-        response.redirect("search-results-business")
-    } 
-    else if (publishDate == "business studies"){
-        response.redirect("search-results-business")
-    }
-    else if (publishDate == "Business Studies"){
-        response.redirect("search-results-business")
-    }
-    else if (publishDate == "Business studies"){
-        response.redirect("search-results-business")
-    }
-    else if (publishDate == "Biology"){
-        response.redirect("search-results-biology")
-    } 
-    else if (publishDate == "biology"){
-        response.redirect("search-results-biology")
-    }
-    else if (jobOrCareer == "Business"){
-        response.redirect("search-results-business")
-    } 
-    else if (jobOrCareer == "business"){
-        response.redirect("search-results-business")
-    } 
-    else if (jobOrCareer == "business studies"){
-        response.redirect("search-results-business")
-    }
-    else if (jobOrCareer == "Business Studies"){
-        response.redirect("search-results-business")
-    }
-    else if (jobOrCareer == "Business studies"){
-        response.redirect("search-results-business")
-    }
-    else if (jobOrCareer == "Biology"){
-        response.redirect("search-results-biology")
-    } 
-    else if (jobOrCareer == "biology"){
-        response.redirect("search-results-biology")
-    }
-    else if (jobRadios == "No"){
-        response.redirect("search-results-all")
-    }
-    else if (subjectRadios == "No"){
-        response.redirect("search-results-all")
-    }
-    else {
-        response.redirect("not-built-yet")
-    }
-})
 
 
 router.post('/next-steps', (req, res) => {
@@ -387,7 +342,7 @@ router.post('/next-steps', (req, res) => {
         age === '18-21' &&
         (nextStep === 'gcses' || nextStep === 'return')
     ) {
-        return res.redirect('what-adults');
+        return res.redirect('what-adults-2');
     }
 
      // Rule 4: page-d
@@ -398,8 +353,47 @@ router.post('/next-steps', (req, res) => {
     // Default/fallback route
     return res.redirect(`/${age}/${nextStep}`);
   });
-  
 
+  
+  router.post('/levels-or-not', function (req, res) {
+    req.session.data['age'] = req.body['age'];
+    req.session.data['next-step'] = req.body['next-step'];
+    res.redirect('check-answers');
+  });
+  
+  router.post('/level-or-not-2', function (req, res) {
+    req.session.data['search-adult'] = req.body['search-adult'];
+  
+    // Check logic here
+    if (
+      req.session.data['age'] === 'over-24' &&
+      req.session.data['next-step'] === 'university' &&
+      req.session.data['search-adult'] === 'Answer a couple of questions to get more personalised results'
+    ) {
+      return res.redirect('check-answers');
+    }
+
+    else {
+      response.redirect("levels-adult")
+  }
+  
+    // Fallback or default routing
+    res.redirect('/default-page');
+  });
+
+
+  router.get('/level-or-check', function (req, res) {
+    const a = req.session.data['age'];
+    const b = req.session.data['next-step'];
+    const c = req.session.data['search-adult'];
+  
+    if (a === 'over-24' && b === 'university' && c === 'Answer a couple of questions to get more personalised results') {
+      return res.redirect('check-answers');
+    }
+  
+    return res.redirect('level-adult');
+  });
+  
 
 
 
