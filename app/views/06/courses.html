@@ -102,6 +102,43 @@ Show filters
           {% endfor %}
         </div>
       </fieldset>
+<br>
+      <!-- Learning method -->
+<fieldset class="govuk-fieldset">
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+    Learning method
+  </legend>
+
+  <div class="govuk-checkboxes govuk-checkboxes--small">
+    {% for method in ["Online", "Classroom based", "Work based", "Blended learning"] %}
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="learning-method-{{ loop.index }}" name="learning-method" type="checkbox" value="{{ method }}">
+        <label class="govuk-label govuk-checkboxes__label" for="learning-method-{{ loop.index }}">
+          {{ method }}
+        </label>
+      </div>
+    {% endfor %}
+  </div>
+</fieldset>
+<br>
+<!-- Course hours -->
+<fieldset class="govuk-fieldset">
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+    Course hours
+  </legend>
+
+  <div class="govuk-checkboxes govuk-checkboxes--small">
+    {% for hours in ["Full time", "Part time", "Flexible"] %}
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="course-hours-{{ loop.index }}" name="course-hours" type="checkbox" value="{{ hours }}">
+        <label class="govuk-label govuk-checkboxes__label" for="course-hours-{{ loop.index }}">
+          {{ hours }}
+        </label>
+      </div>
+    {% endfor %}
+  </div>
+</fieldset>
+
       
     <br>
       <button class="govuk-button" type="submit">Apply filters</button>
