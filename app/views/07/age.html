@@ -1,0 +1,69 @@
+{% extends "./layouts/_QUESTION.html" %}
+{% set back = true %}
+
+{% block content %}
+
+
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row">
+
+      <form action="check-answers" method="post" novalidate>
+      <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-l">
+          About you
+        </h1>
+    
+        <p>This is optional but telling us will mean we can show you more relevant results. Some types of training are only available for specific age groups.</p>
+
+        <p><a href="https://www.skillsforcareers.education.gov.uk/your-training-options">Discover the different training options</a> </p>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" role="group" aria-describedby="age-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+              <h1 class="govuk-fieldset__heading">
+                How old are you? (optional)
+              </h1>
+            </legend>
+            <div class="govuk-radios" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="age-under-18" name="age" type="radio" value="under-18">
+                <label class="govuk-label govuk-radios__label" for="age-under-18">
+                  Under 18 years old
+                </label>
+              </div>
+        
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="age-18-21" name="age" type="radio" value="18-24">
+                <label class="govuk-label govuk-radios__label" for="age-18-21">
+                  Between 18 and 24
+                </label>
+              </div>
+        
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="age-over-24" name="age" type="radio" value="over-24">
+                <label class="govuk-label govuk-radios__label" for="age-over-24">
+                  Over 24 years old
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        
+        <div class="govuk-button-group">
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+        </div>
+      </div>
+    </form>
+
+      
+    </div>
+  </div>
+
+
+
+{% endblock %}

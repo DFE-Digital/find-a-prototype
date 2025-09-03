@@ -1,0 +1,194 @@
+{% extends "./layouts/_QUESTION.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Where would you like to study?" %}
+{% set withoutDescription = "true" %}
+
+
+{% block service %}
+<form action="load-courses" method="post" novalidate>
+<h1 class="govuk-heading-l">What you've told us</h1>
+<p>Check your answers, and change them if you'd like to, before viewing your search results.</p>
+
+<div class="govuk-inset-text">
+  You entered "Mahs" - did you mean "Maths"? <a href="">Update my search</a>
+</div>
+
+<dl class="govuk-summary-list">
+  
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Age
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {% if data['age'] == 'under-18' %}
+      Younger than 18
+    {% elseif data['age'] == '18-21' %}
+      Between 18 and 24 years old
+    {% elseif data['age'] == 'over-24' %}
+      Over 24
+    {% else %}
+      Not provided
+    {% endif %}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="location">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+    </dd>
+  </div>
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      What you want to do
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {% if data['next-step'] == 'gcses' %}
+      Explore options after your GCSEs
+    {% elseif data['next-step'] == 'university' %}
+    Find university or other higher education options
+    {% elseif data['next-step'] == 'return' %}
+    Return to education or training, after a break or whilst working
+    {% else %}
+      Not provided
+    {% endif %}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="location">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+    </dd>
+  </div>
+
+  {% if (data['location']) %}
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Location
+    </dt>
+    <dd class="govuk-summary-list__value">
+     {{ data['location'] }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="location">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+    </dd>
+  </div>
+
+  {% endif %}
+
+  {% if (data['travel-location']) %}
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Travel distance
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data['travel-location'] }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="location">Change<span class="govuk-visually-hidden"> address</span></a>
+    </dd>
+  </div>
+
+  {% endif %}
+
+  {% if (data['subject-1']) %}
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Subjects
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data['subject-1'] }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="subjects">Change<span class="govuk-visually-hidden"> name</span></a>
+    </dd>
+  </div>
+
+  {% endif %}
+
+  {% if (data['job-1']) %}
+  
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Jobs or careers
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data['job-1'] }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="jobs">Change<span class="govuk-visually-hidden"> name</span></a>
+    </dd>
+  </div>
+  {% endif %}
+
+  {% if (data['learning-style']) %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Course preference
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data['learning-style'] }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="learning-method">Change<span class="govuk-visually-hidden"> address</span></a>
+    </dd>
+  </div>
+  {% endif %}
+  <!--<div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Apprenticeships and courses
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data['apprenticeship-or-course'] or "No apprenticeships or courses added"}}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="apprenticeships-or-courses">Change<span class="govuk-visually-hidden"> address</span></a>
+    </dd>
+  </div>-->
+  {% if (data['qualification-level']) %}
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Level you're looking for
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {% if data['qualification-level'] == 'none' %}
+      Learn skills and experience without a qualification
+    {% elseif data['next-step'] == 'level-1-2' %}
+    Level 1 or 2 (like GCSEs)
+    {% elseif data['next-step'] == 'level-3' %}
+    Level 3 (like BTECs and A levels)
+    {% elseif data['next-step'] == 'level-4-7' %}
+    Level 4 to 7 (like diplomas and degrees)
+    {% elseif data['next-step'] == 'all' %}
+    Show me everything
+    {% else %}
+      Not provided
+    {% endif %}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="level-adult">Change<span class="govuk-visually-hidden"> address</span></a>
+    </dd>
+  </div>
+{% endif %}
+
+  {% if (data['level-of-education']) %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Level you're looking for
+    </dt>
+    <dd class="govuk-summary-list__value">
+      <p>{{ data['level-of-education'] }}</p> 
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="level-of-education">Change<span class="govuk-visually-hidden"> address</span></a>
+    </dd>
+  </div>
+
+{% endif %}
+</dl>
+<p>Find out <a href="ai">how we use AI</a> to bring you relevant results.</p>
+
+<button type="submit" class="govuk-button" data-module="govuk-button">
+  Search
+</button>
+</form>
+{% endblock %}

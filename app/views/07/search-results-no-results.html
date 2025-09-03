@@ -1,0 +1,32 @@
+{% extends "./layouts/_RESULTS.html" %}
+
+{% set back = "true" %}
+{% set withDescriptionAndLink = "true" %}
+{% set pageHeading = "Find a course results" %}
+{% set pageDescription = "Find courses based on the subject and location you showed interested in." %}
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-two-thirds">  
+
+    
+
+   <h1 class="govuk-heading-l">It looks like we can't find anything based on your answers</h1>
+
+   <div class="govuk-inset-text">
+    You searched for: [subjects/interests], [location], [distance].
+  </div>
+
+   <p>Try making your search broader.  </p>
+
+<p>If you searched for something really specific try using a more general description. For example instead of searching for ‘set designer’ try ‘creative and artistic jobs’.   </p>
+
+<p>Or you could increase the distance or <a href="">try a different location</a>. </p>
+
+<p>Or <a href="">browse all courses and training near to you</a>. </p>
+
+  </div>
+</div>
+
+{% endblock %}
