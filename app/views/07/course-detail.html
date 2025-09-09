@@ -2,8 +2,7 @@
 
 {% set back = "true" %}
 {% set pageHeading = course.name %}
-{% set pageDescription = "More information about this course." %}
-{% set withDescription = "true" %}
+{% set withoutDescription = "true" %}
 
 {% block content %}
 
@@ -12,7 +11,7 @@
     <div class="govuk-grid-column-two-thirds">  
 
 
-
+{% if course.type == "Degree" %}
 
 {{ govukSummaryList({
   card: {
@@ -23,18 +22,10 @@
   rows: [
     {
       key: {
-        text: "Course type"
+        text: "Qualification type"
       },
       value: {
         text: course.type
-      }
-    },
-    {
-      key: {
-        text: "Course overview"
-      },
-      value: {
-        text: course.overview
       }
     },
     {
@@ -47,10 +38,34 @@
     },
     {
       key: {
-        text: "Delivery method"
+        text: "Entry requirements"
       },
       value: {
-        text: course.delivery
+        text: course.requirements
+      }
+    },
+    {
+      key: {
+        text: "Tuition fee"
+      },
+      value: {
+        text: course.cost | currency
+      }
+    },
+    {
+      key: {
+        text: "Awarding organisation"
+      },
+      value: {
+        text: course.awardingOrganisation
+      }
+    },
+    {
+      key: {
+        text: "Course description"
+      },
+      value: {
+        text: course.overview
       }
     }
   ]
@@ -65,24 +80,7 @@
   rows: [
     {
       key: {
-        text: "Location and distance"
-      },
-      value: {
-        text: course.location
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "View on a map",
-            visuallyHiddenText: "name"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "School or college"
+        text: "University"
       },
       value: {
         text: course.provider
@@ -96,6 +94,31 @@
           }
         ]
       }
+    },
+    {
+      key: {
+        text: "Campus name"
+      },
+      value: {
+        text: course.campusName
+      }
+    },
+    {
+      key: {
+        text: "Campus address"
+      },
+      value: {
+        text: course.campusAddress
+      },
+      actions: {
+        items: [
+          {
+            href: "#",
+            text: "View on a map",
+            visuallyHiddenText: "name"
+          }
+        ]
+      }
     }
   ]
 }) }}
@@ -103,16 +126,24 @@
 {{ govukSummaryList({
   card: {
     title: {
-      text: "Course times"
+      text: "Course details"
     }
   },
   rows: [
+  {
+    key: {
+      text: "Delivery method"
+    },
+    value: {
+      text: course.deliveryMethod
+    }
+  },
     {
       key: {
         text: "Start date"
       },
       value: {
-        text: course.start | govukDate
+        text: course.startDate | govukDate
       }
     },
     {
@@ -134,13 +165,202 @@
   ]
 }) }}
 
+{{ govukButton({
+  text: "Go to course"
+}) }}
+
+
+{% elseif course.type == "Apprenticeship" %}
+
 {{ govukSummaryList({
   card: {
     title: {
-      text: "Requirements"
+      text: "About the course"
     }
   },
   rows: [
+    {
+      key: {
+        text: "Qualification type"
+      },
+      value: {
+        text: course.type
+      }
+    },
+    {
+      key: {
+        text: "Level"
+      },
+      value: {
+        text: course.level
+      }
+    },
+    {
+      key: {
+        text: "Entry requirements"
+      },
+      value: {
+        text: course.requirements
+      }
+    },
+    {
+      key: {
+        text: "Wage"
+      },
+      value: {
+        text: course.wage | currency
+      }
+    },
+    {
+      key: {
+        text: "Position available"
+      },
+      value: {
+        text: course.positionAvailable
+      }
+    },
+    {
+      key: {
+        text: "Course description"
+      },
+      value: {
+        text: course.overview
+      }
+    }
+  ]
+}) }}
+
+{{ govukSummaryList({
+  card: {
+    title: {
+      text: "Location"
+    }
+  },
+  rows: [
+    {
+      key: {
+        text: "Employer"
+      },
+      value: {
+        text: course.employer
+      },
+      actions: {
+        items: [
+          {
+            href: "#",
+            text: "View website",
+            visuallyHiddenText: "name"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Employer address"
+      },
+      value: {
+        text: course.employerAddress
+      },
+      actions: {
+        items: [
+          {
+            href: "#",
+            text: "View on a map",
+            visuallyHiddenText: "name"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "About this employer"
+      },
+      value: {
+        text: course.aboutEmployer
+      }
+    },
+    {
+      key: {
+        text: "Training provider"
+      },
+      value: {
+        text: course.trainingProvider
+      }
+    }
+  ]
+}) }}
+
+{{ govukSummaryList({
+  card: {
+    title: {
+      text: "Course details"
+    }
+  },
+  rows: [
+  {
+    key: {
+      text: "Delivery method"
+    },
+    value: {
+      text: course.deliveryMethod
+    }
+  },
+    {
+      key: {
+        text: "Start date"
+      },
+      value: {
+        text: course.startDate | govukDate
+      }
+    },
+    {
+      key: {
+        text: "Duration"
+      },
+      value: {
+        text: course.duration
+      }
+    },
+    {
+      key: {
+        text: "Hours"
+      },
+      value: {
+        text: course.time
+      }
+    }
+  ]
+}) }}
+
+{{ govukButton({
+  text: "Go to Apprenticeship opportunity"
+}) }}
+
+{% else %}
+
+{{ govukSummaryList({
+  card: {
+    title: {
+      text: "About the course"
+    }
+  },
+  rows: [
+    {
+      key: {
+        text: "Course type"
+      },
+      value: {
+        text: course.type
+      }
+    },
+    {
+      key: {
+        text: "Level"
+      },
+      value: {
+        text: course.level
+      }
+    },
     {
       key: {
         text: "Entry requirements	"
@@ -156,9 +376,112 @@
       value: {
         text: course.cost | currency
       }
+    },
+    {
+      key: {
+        text: "Course overview"
+      },
+      value: {
+        text: course.overview
+      }
+    }
+
+  ]
+}) }}
+
+{{ govukSummaryList({
+  card: {
+    title: {
+      text: "Location"
+    }
+  },
+  rows: [
+    {
+      key: {
+        text: "Provider"
+      },
+      value: {
+        text: course.provider
+      },
+      actions: {
+        items: [
+          {
+            href: "#",
+            text: "View website",
+            visuallyHiddenText: "name"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Provider location"
+      },
+      value: {
+        text: course.location
+      },
+      actions: {
+        items: [
+          {
+            href: "#",
+            text: "View on a map",
+            visuallyHiddenText: "name"
+          }
+        ]
+      }
     }
   ]
 }) }}
+
+{{ govukSummaryList({
+  card: {
+    title: {
+      text: "Course details"
+    }
+  },
+  rows: [
+  {
+    key: {
+      text: "Delivery method"
+    },
+    value: {
+      text: course.deliveryMethod
+    }
+  },
+    {
+      key: {
+        text: "Start date"
+      },
+      value: {
+        text: course.startDate | govukDate
+      }
+    },
+    {
+      key: {
+        text: "Duration"
+      },
+      value: {
+        text: course.duration
+      }
+    },
+    {
+      key: {
+        text: "Hours"
+      },
+      value: {
+        text: course.time
+      }
+    }
+  ]
+}) }}
+
+{{ govukButton({
+  text: "Go to course"
+}) }}
+
+{% endif %}
+
+
 
 </div>
 
@@ -166,11 +489,15 @@
 
   <div class="x-govuk-related-navigation">
     <nav class="x-govuk-related-navigation__nav-section" aria-labelledby="related-navigation-related-content">
+      {% if course.type == "Apprenticeship" %}
+      {% else %}
       <h2 class="x-govuk-related-navigation__main-heading" id="related-navigation-related-content">Explore {{ course.provider }}</h2>
       <ul class="x-govuk-related-navigation__link-list">
+        
         <li class="x-govuk-related-navigation__link">
           <a class="govuk-link x-govuk-related-navigation__section-link x-govuk-related-navigation__section-link--other" href="">View all courses at {{ course.provider }} (opens in a new tab)</a>
         </li>
+        {% endif %}
       </ul>
       <nav class="x-govuk-related-navigation__nav-section" aria-labelledby="related-navigation-explore-the-topic">
         <h3 class="x-govuk-related-navigation__sub-heading" id="related-navigation-explore-the-topic">Related links</h3>

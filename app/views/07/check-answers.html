@@ -86,18 +86,23 @@
   </div>
 {% endif %}
 
+{% if (data['age']) %}
 
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
     Age
   </dt>
   <dd class="govuk-summary-list__value">
-    {% if data['age'] == 'under-18' %}
+    {% if data['age'] == '16-17' %}
     Under 18
-  {% elseif data['age'] == '18-24' %}
-    Between 18 and 24
-  {% elseif data['age'] == 'over-24' %}
-    Older than 24
+  {% elseif data['age'] == '18' %}
+    18
+    {% elseif data['age'] == '19' %}
+    19
+  {% elseif data['age'] == '20-24' %}
+    20-24
+  {% elseif data['age'] == 'over-25' %}
+    25 or older
   {% else %}
     Not provided
   {% endif %}
@@ -107,7 +112,7 @@
   </dd>
 </div>
 
-
+{% endif %}
 
 
 </dl>

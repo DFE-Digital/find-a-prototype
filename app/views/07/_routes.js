@@ -224,8 +224,22 @@ router.get('/course/:slug', function (req, res) {
   
   router.get('/clear-session-and-go', function (req, res) {
     req.session.data = {} // Clear all session data
-    res.redirect('current-situation') // Replace with your desired page
+    res.redirect('location') // Replace with your desired page
   })
+
+  router.post("/levels", (req, res) => {
+    // Pull the submitted values (can be string or array depending on selection count)
+    const raw = req.session.data["levels"] || [];
+    const selected = Array.isArray(raw) ? raw : [raw];
+  
+    // If 'none' OR 'level-1-2' selected => go to 'age'
+    if (selected.includes("none") || selected.includes("level-1-2")) {
+      return res.redirect("age");
+    }
+  
+    // Otherwise => go to 'check-answers'
+    return res.redirect("check-answers");
+  });
   
 
 router.post('/age-results', function(request, response) {

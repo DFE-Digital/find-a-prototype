@@ -157,9 +157,11 @@ Show filters
 
   <div class="govuk-grid-column-two-thirds">
 
-<h1 class="govuk-heading-l">Available Courses</h1>
+<h1 class="govuk-heading-l">Available courses</h1>
 
 <p><a href="clear-session-and-go">Search again</a> </p>
+
+<p>{{ totalResults }} courses found.</p>
 
 <p class="govuk-body govuk-!-margin-bottom-6">
   <span class="govuk-!-font-weight-bold">Sort courses by:</span> 
@@ -169,14 +171,11 @@ Show filters
 </span>    
  | 
 <span class="govuk-!-margin-left-2 govuk-!-margin-right-1">
-    <a href="/records?sortOrder=lastName" class="govuk-link govuk-link--no-visited-state">Start date</a>
+    <a href="/records?sortOrder=lastName" class="govuk-link govuk-link--no-visited-state">Relevance</a>
 </span>
 </p>
 
 
-
-
-<p>{{ totalResults }} courses found.</p>
 
 {% for course in courses %}
 <div class="govuk-summary-card">
@@ -186,7 +185,7 @@ Show filters
     </h2>
     <ul class="govuk-summary-card__actions">
       <li class="govuk-summary-card__action">
-        <a class="govuk-link" href="/06/course/{{ course.slug }}">
+        <a class="govuk-link" href="/07/course/{{ course.slug }}">
           View more details<span class="govuk-visually-hidden"> about {{ course.name }}</span>
         </a>
       </li>
