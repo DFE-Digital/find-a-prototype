@@ -119,7 +119,7 @@ router.get("/load-courses", function (req, res) {
     "";
   const subjectFilter =
     req.query["subject-filter"] ||
-    req.session.data["subject-1"] ||
+    req.session.data["interest-1"] ||
     req.session.data["job-1"] ||
     "";
 

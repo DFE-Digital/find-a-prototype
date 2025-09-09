@@ -37,7 +37,7 @@ Show filters
 
       <fieldset class="govuk-fieldset">
 
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Qualification type</legend>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Course type</legend>
     
         <div class="govuk-checkboxes govuk-checkboxes--small">
           {% for qual in ["A Level", "Apprenticeship", "BTEC", "Diploma", "Degree", "T Level"] %}
@@ -70,7 +70,7 @@ Show filters
 
       <div class="govuk-form-group">
         <label class="govuk-label" for="subject-filter">
-          Subject or career keywords
+          Keyword
         </label>
         <input class="govuk-input"
                type="text"
@@ -78,8 +78,10 @@ Show filters
                name="subject-filter">
       </div>
 
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
       <fieldset class="govuk-fieldset">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Qualification level</legend>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Course level</legend>
       
         <div class="govuk-checkboxes govuk-checkboxes--small">
           {% for level in ["level-1-2", "level-3", "level-4-7"] %}
@@ -93,16 +95,17 @@ Show filters
                      id="qualification-level-{{ level }}"
                      name="qualification-level"
                      type="checkbox"
-                     value="{{ level }}"
+                     value="{{ levels }}"
                      {% if level in selectedLevels %}checked{% endif %}>
-              <label class="govuk-label govuk-checkboxes__label" for="qualification-level-{{ level }}">
+              <label class="govuk-label govuk-checkboxes__label" for="qualification-level-{{ levels }}">
                 {{ label }}
               </label>
             </div>
           {% endfor %}
         </div>
       </fieldset>
-<br>
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
       <!-- Learning method -->
 <fieldset class="govuk-fieldset">
   <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
@@ -120,7 +123,7 @@ Show filters
     {% endfor %}
   </div>
 </fieldset>
-<br>
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 <!-- Course hours -->
 <fieldset class="govuk-fieldset">
   <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
@@ -133,6 +136,25 @@ Show filters
         <input class="govuk-checkboxes__input" id="course-hours-{{ loop.index }}" name="course-hours" type="checkbox" value="{{ hours }}">
         <label class="govuk-label govuk-checkboxes__label" for="course-hours-{{ loop.index }}">
           {{ hours }}
+        </label>
+      </div>
+    {% endfor %}
+  </div>
+</fieldset>
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+<!-- Course hours -->
+<fieldset class="govuk-fieldset">
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+    Course hours
+  </legend>
+
+  <div class="govuk-checkboxes govuk-checkboxes--small">
+    {% for times in ["Daytime", "Evening", "Weekend", "Day or block release"] %}
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="course-times-{{ loop.index }}" name="course-times" type="checkbox" value="{{ times }}">
+        <label class="govuk-label govuk-checkboxes__label" for="course-times-{{ loop.index }}">
+          {{ times }}
         </label>
       </div>
     {% endfor %}
