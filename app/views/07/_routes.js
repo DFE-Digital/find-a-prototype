@@ -246,7 +246,7 @@ router.get('/course/:slug', function (req, res) {
 
   router.post("/levels", (req, res) => {
     // Pull the submitted values (can be string or array depending on selection count)
-    const raw = req.session.data["levels"] || [];
+    const raw = req.session.data["qualification-level"] || [];
     const selected = Array.isArray(raw) ? raw : [raw];
   
     // If 'none' OR 'level-1-2' selected => go to 'age'
