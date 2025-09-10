@@ -63,7 +63,8 @@ Show filters
         <input class="govuk-input"
                type="text"
                id="option-select-filter-location"
-               name="option-select-filter-location">
+               name="option-select-filter-location"
+               value="{{ selectedLocation }}">
       </div>
 
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
@@ -81,30 +82,36 @@ Show filters
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
       <fieldset class="govuk-fieldset">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Course level</legend>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Qualification level</legend>
       
         <div class="govuk-checkboxes govuk-checkboxes--small">
-          {% for level in ["level-1-2", "level-3", "level-4-7"] %}
-            {% set label = {
-              "level-1-2": "Level 1 or 2 (like GCSEs)",
-              "level-3": "Level 3 (like BTECs and A levels)",
-              "level-4-7": "Level 4 to 7 (like diplomas and degrees)"
-            }[level] %}
+          {% set allLevels = [
+            { value: "entry", label: "Entry level (like entry level functional skills)" },
+            { value: "level-1", label: "Level 1 (like first certificate)" },
+            { value: "level-2", label: "Level 2 (like GCSEs)" },
+            { value: "level-3", label: "Level 3 (like A levels)" },
+            { value: "level-4", label: "Level 4 (like high national certificate)" },
+            { value: "level-5", label: "Level 5 (like diplomas)" },
+            { value: "level-6", label: "Level 6 (like degree)" },
+            { value: "level-7", label: "Level 7 (like masters degree)" }
+          ] %}
+      
+          {% for level in allLevels %}
             <div class="govuk-checkboxes__item">
               <input class="govuk-checkboxes__input"
-                     id="qualification-level-{{ level }}"
+                     id="qualification-level-{{ level.value }}"
                      name="qualification-level"
                      type="checkbox"
-                     value="{{ levels }}"
-                     {% if level in selectedLevels %}checked{% endif %}>
-              <label class="govuk-label govuk-checkboxes__label" for="qualification-level-{{ levels }}">
-                {{ label }}
+                     value="{{ level.value }}"
+                     {% if level.value in selectedLevels %}checked{% endif %}>
+              <label class="govuk-label govuk-checkboxes__label"
+                     for="qualification-level-{{ level.value }}">
+                {{ level.label }}
               </label>
             </div>
           {% endfor %}
         </div>
       </fieldset>
-
 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
       <!-- Learning method -->
 <fieldset class="govuk-fieldset">

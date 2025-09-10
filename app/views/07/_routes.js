@@ -8,20 +8,29 @@ const fs = require("fs");
 const path = require("path");
 
 router.get("/load-courses", function (req, res) {
-
   console.log("Session data:", req.session.data);
 
   // 🔧 Labels and Mappings
   const levelLabels = {
-    "level-1-2": "Level 1 or 2",
+    "entry": "Entry level",
+    "level-1": "Level 1",
+    "level-2": "Level 2",
     "level-3": "Level 3",
-    "level-4-7": "Level 4 to 7"
+    "level-4": "Level 4",
+    "level-5": "Level 5",
+    "level-6": "Level 6",
+    "level-7": "Level 7"
   };
 
   const qualificationMap = {
-    "level-1-2": ["BTEC", "Apprenticeship"],
-    "level-3": ["A Level", "T Level", "Apprenticeship"],
-    "level-4-7": ["Degree", "Apprenticeship"]
+    "entry": ["Functional Skills"],
+    "level-1": ["BTEC", "Apprenticeship"],
+    "level-2": ["BTEC", "Apprenticeship"],
+    "level-3": ["A Level", "BTEC", "T Level", "Apprenticeship"],
+    "level-4": ["Diploma"],
+    "level-5": ["Diploma"],
+    "level-6": ["Degree"],
+    "level-7": ["Degree"]
   };
 
   const validAges = ["under-18", "18-21", "over-24"];
@@ -52,25 +61,23 @@ router.get("/load-courses", function (req, res) {
   const nextStep = req.session.data["next-step"] || req.query["next-step"];
   const learningStyle = req.session.data["learning-style"];
 
-  // ✅ Selected levels
-  let selectedLevels = [];
-  if (req.query["qualification-level"]) {
-    selectedLevels = req.query["qualification-level"];
-    if (!Array.isArray(selectedLevels)) {
-      selectedLevels = [selectedLevels];
-    }
-  } else if (
-    req.session.data["qualification-level"] &&
-    !req.query.filter &&
-    !req.query["option-select-filter-location"] &&
-    !req.query["subject-filter"]
-  ) {
-    selectedLevels = [req.session.data["qualification-level"]];
-  }
-  selectedLevels = selectedLevels.filter(level => level && level !== "_unchecked");
+  // ✅ Get selected levels
+  const getArray = (input) =>
+    Array.isArray(input) ? input : input ? [input] : [];
+  
+  let selectedLevels = getArray(
+    req.query["qualification-level"] || req.session.data["qualification-level"]
+  );
+
+  // 🧹 Normalise & fallback from legacy grouped levels
+  selectedLevels = selectedLevels.flatMap(level => {
+    if (level === "level-1-2") return ["level-1", "level-2"];
+    if (level === "level-4-7") return ["level-4", "level-5", "level-6", "level-7"];
+    return [level];
+  }).filter(level => level && level !== "_unchecked");
 
   // ✅ Qualification filters
-  let qualificationFilters = req.query.filter || [];
+  let qualificationFilters = getArray(req.query.filter || req.session.data["filter"]);
   if (!Array.isArray(qualificationFilters)) {
     qualificationFilters = [qualificationFilters];
   }
@@ -83,7 +90,7 @@ router.get("/load-courses", function (req, res) {
     !req.query["subject-filter"]
   ) {
     if (nextStep === "university" && validAges.includes(age)) {
-      selectedLevels = ["level-4-7"];
+      selectedLevels = ["level-4", "level-5", "level-6", "level-7"];
     }
   }
 
@@ -112,11 +119,12 @@ router.get("/load-courses", function (req, res) {
     .map(f => f.trim().toLowerCase())
     .filter(f => f && f !== "_unchecked");
 
-  // ✅ Other filters: location and subject
+  // ✅ Other filters
   const locationFilter =
     req.query["option-select-filter-location"] ||
     req.session.data["location"] ||
     "";
+
   const subjectFilter =
     req.query["subject-filter"] ||
     req.session.data["interest-1"] ||
@@ -167,9 +175,11 @@ router.get("/load-courses", function (req, res) {
     currentPage: page,
     totalPages: totalPages,
     totalResults: totalResults,
-    selectedQualifications: qualificationFilters.map(
-      q => q.charAt(0).toUpperCase() + q.slice(1)
-    ),
+    selectedQualifications: Array.from(new Set([
+      ...qualificationFilters,
+      ...levelMappedQualifications
+    ])).map(q => q.charAt(0).toUpperCase() + q.slice(1)),
+
     selectedLocation: locationFilter,
     selectedSubject: subjectFilter,
     selectedLevels: selectedLevels,
@@ -180,8 +190,6 @@ router.get("/load-courses", function (req, res) {
   console.log("🔍 Slugs from paginatedCourses:");
   paginatedCourses.forEach(c => console.log(c.slug));
 });
-
-
 
 
 
