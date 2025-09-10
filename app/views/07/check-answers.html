@@ -34,8 +34,23 @@
       Distance
     </dt>
     <dd class="govuk-summary-list__value">
-      {{ data['travel-location'] }}
+      {% if data['travel-location'] == '1 mile' %}
+      Up to 1 mile
+    {% elseif data['travel-location'] == '2 miles' %}
+    Up to 2 miles
+    {% elseif data['travel-location'] == '5 miles' %}
+    Up to 5 miles
+    {% elseif data['travel-location'] == '10 miles' %}
+    Up to 10 miles
+    {% elseif data['travel-location'] == '15 miles' %}
+    Up to 15 miles
+    {% elseif data['travel-location'] == '25 miles' %}
+    Up to 25 miles
+    {% else %}
+      Not provided
+    {% endif %}
     </dd>
+
     <dd class="govuk-summary-list__actions">
       <a class="govuk-link" href="location">Change<span class="govuk-visually-hidden"> address</span></a>
     </dd>

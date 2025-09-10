@@ -168,6 +168,14 @@ router.get("/load-courses", function (req, res) {
     ...course,
     slug: generateSlug(course),
   }));
+  
+
+  // Travel distance
+
+  const travelDistance =
+  req.query["travel-location"] ||
+  req.session.data["travel-location"] ||
+  "";
 
   // 🖥️ Render page
   res.render("07/courses", {
@@ -184,6 +192,7 @@ router.get("/load-courses", function (req, res) {
     selectedSubject: subjectFilter,
     selectedLevels: selectedLevels,
     selectedLevelTags: selectedLevels.map(level => levelLabels[level] || level),
+    travelDistance: travelDistance,
   });
 
   // 🧪 Debug
