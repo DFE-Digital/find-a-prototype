@@ -3,7 +3,6 @@
 .filter-container {
     border: 1px solid #B1B4B6;
     width: 100%; /* Full width */
-    margin-bottom: 20px;
   }
   
   .filter-header {
@@ -117,10 +116,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.remove-filter-button:hover {
-  border: 2px solid #1d70b8; /* GOV.UK blue, for example */
 }
   
   .filter-content {

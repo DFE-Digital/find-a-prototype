@@ -54,34 +54,34 @@
       {{ data['interest-1'] }} {% if (data['interest-2']) %}, {{ data['interest-2'] }}{% endif %}{% if (data['interest-3']) %}, {{ data['interest-3'] }}{% endif %}
     </dd>
     <dd class="govuk-summary-list__actions">
-      <a class="govuk-link" href="subjects">Change<span class="govuk-visually-hidden"> name</span></a>
+      <a class="govuk-link" href="interests">Change<span class="govuk-visually-hidden"> name</span></a>
     </dd>
   </div>
 
   {% endif %}
 
 
-  {% if (data['levels']) %}
+  {% if (data['qualification-level']) %}
 
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
       Level you're looking for
     </dt>
     <dd class="govuk-summary-list__value">
-      {% if data['levels'] == 'none' %}
+      {% if data['qualification-level'] == 'none' %}
       Get skills and experience (without a qualification)
-    {% elseif data['levels'] == 'level-1-2' %}
+    {% elseif data['qualification-level'] == 'level-1-2' %}
     Level 1 or 2 (like GCSEs)
-    {% elseif data['levels'] == 'level-3' %}
+    {% elseif data['qualification-level'] == 'level-3' %}
     Level 3 (like BTECs and A levels)
-    {% elseif data['levels'] == 'level-4-7' %}
+    {% elseif data['qualification-level'] == 'level-4-7' %}
     Level 4 to 7 (like diplomas and degrees)
     {% else %}
       Not provided
     {% endif %}
     </dd>
     <dd class="govuk-summary-list__actions">
-      <a class="govuk-link" href="level-adult">Change<span class="govuk-visually-hidden"> address</span></a>
+      <a class="govuk-link" href="level">Change<span class="govuk-visually-hidden"> address</span></a>
     </dd>
   </div>
 {% endif %}
@@ -108,7 +108,7 @@
   {% endif %}
   </dd>
   <dd class="govuk-summary-list__actions">
-    <a class="govuk-link" href="location">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+    <a class="govuk-link" href="age">Change<span class="govuk-visually-hidden"> date of birth</span></a>
   </dd>
 </div>
 
