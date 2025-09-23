@@ -1,0 +1,67 @@
+{% extends "./layouts/_QUESTION.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Where would you like to study?" %}
+{% set withoutDescription = "true" %}
+
+
+{% block service %}
+
+  <div data-module="moj-add-another">
+    <form action="learning-method" method="post" novalidate>
+
+      <h1 class="govuk-heading-l">What courses, subjects, jobs or careers are you interested in?</h1>
+
+      <p>You can be as specific as you like. For example:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>maths</li>
+          <li>bricklaying</li>
+          <li>working with animals</li>
+          <li>something in the public sector</li>
+        </ul>
+
+        <br>
+  
+      <fieldset class="govuk-fieldset moj-add-another__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--m govuk-!-font-weight-bold" for="job[0][first_name]">
+            Enter an interest
+          </label>
+          
+          <div id="event-name-hint" class="govuk-hint">
+            You can enter one thing at a time, then press 'Add another' if you want to include more. Enter anything from a single word to a full sentence.
+          </div>
+
+          <input class="govuk-input" id="job-1" name="job-1" type="text" data-name="person[%index%][first_name]" data-id="job[%index%][first_name]">
+  
+        </div>
+  
+      </fieldset>
+  
+      <div class="moj-button-action">
+  
+        <button type="submit" class="govuk-button govuk-button--secondary moj-add-another__add-button govuk-!-margin-bottom-4" data-module="govuk-button">
+          Add another
+        </button>
+  
+      </div>
+
+  
+  </div>
+
+
+  <hr class="govuk-section-break govuk-section-break--m govuk-section-break">
+
+    
+  <div class="govuk-button-group">
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+  </div>
+
+  </div>
+</div>
+</form>
+
+{% endblock %}

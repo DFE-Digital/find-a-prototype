@@ -1,0 +1,71 @@
+{% extends "./layouts/_HOME.html" %}
+
+
+{% block content %}
+
+
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row">
+
+      <div class="govuk-grid-column-two-thirds">
+
+
+        <h2 class="govuk-heading-l">
+          Prototype v8 
+        </h2>
+
+        {{ govukWarningText({
+            text: "This prototype is currently in progress. Some things may not work as you would expect.",
+            iconFallbackText: "Warning"
+          }) }}
+
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    
+        <h2 class="govuk-heading-m">What's new</h2>
+
+        <ul class="govuk-list govuk-list--bullet">
+            <li><a href="https://dfedigital.atlassian.net/browse/FAB-331">FAB-331</a> accessibility improvements - including 'clear filters' links for each filter group</li>
+        </ul>
+
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+        <h2 class="govuk-heading-m">Working data</h2>
+
+        <p>These are the locations and interests that will pull through results for this version of the prototype.</p>
+
+        <h3 class="govuk-heading-s">Location</h3>
+            <ul class="govuk-list govuk-list--bullet">
+                <li>Birmingham</li>
+                <li>Leeds</li>
+                <li>Manchester</li>
+            </ul>
+
+        <h3 class="govuk-heading-s">Interest</h3>
+            <ul class="govuk-list govuk-list--bullet">
+                <li>Art</li>
+                <li>Business</li>
+                <li>Computing</li>
+                <li>Construction</li>
+                <li>Engineering</li>
+                <li>Hospitality</li>
+                <li>Health</li>
+                <li>Journalism</li>
+                <li>Media</li>
+            </ul>
+
+
+            <hr class="govuk-section-break govuk-section-break--m govuk-section-break">
+
+        {{ govukButton({
+          text: "Start now",
+          href: "index",
+          isStartButton: true
+        }) }}
+    
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

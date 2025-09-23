@@ -1,0 +1,209 @@
+{% extends "./layouts/_QUESTION.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Where would you like to study?" %}
+{% set withoutDescription = "true" %}
+
+
+{% block service %}
+<form action="load-courses" method="post" novalidate>
+<h1 class="govuk-heading-l">Check your answers</h1>
+
+<dl class="govuk-summary-list">
+
+  {% if (data['location']) %}
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Location
+    </dt>
+    <dd class="govuk-summary-list__value">
+     {{ data['location'] }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="location">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+    </dd>
+  </div>
+
+  {% endif %}
+
+  {% if (data['travel-location']) %}
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Distance
+    </dt>
+    <dd class="govuk-summary-list__value">
+    {% if data['travel-location'] == '2 miles' %}
+    Up to 2 miles
+    {% elseif data['travel-location'] == '5 miles' %}
+    Up to 5 miles
+    {% elseif data['travel-location'] == '10 miles' %}
+    Up to 10 miles
+    {% elseif data['travel-location'] == '15 miles' %}
+    Up to 15 miles
+    {% elseif data['travel-location'] == '25 miles' %}
+    Up to 25 miles
+    {% else %}
+      Not provided
+    {% endif %}
+    </dd>
+
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="location">Change<span class="govuk-visually-hidden"> address</span></a>
+    </dd>
+  </div>
+
+  {% endif %}
+
+
+  {% if (data['interest-1']) %}
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Interests
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ data['interest-1'] }} {% if (data['interest-2']) %}, {{ data['interest-2'] }}{% endif %}{% if (data['interest-3']) %}, {{ data['interest-3'] }}{% endif %}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="interests">Change<span class="govuk-visually-hidden"> name</span></a>
+    </dd>
+  </div>
+
+  {% endif %}
+
+
+  {% if (data['qualification-level']) %}
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Level you're looking for
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {% if data['qualification-level'] == 'none' %}
+      Get skills and experience (without a qualification)
+    {% elseif data['qualification-level'] == 'level-1-2' %}
+    Level 1 or 2 (like GCSEs)
+    {% elseif data['qualification-level'] == 'level-3' %}
+    Level 3 (like BTECs and A levels)
+    {% elseif data['qualification-level'] == 'level-4-7' %}
+    Level 4 to 7 (like diplomas and degrees)
+    {% else %}
+      Not provided
+    {% endif %}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="level">Change<span class="govuk-visually-hidden"> address</span></a>
+    </dd>
+  </div>
+{% endif %}
+
+{% if (data['age']) %}
+
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">
+    Age
+  </dt>
+  <dd class="govuk-summary-list__value">
+    {% if data['age'] == '16-17' %}
+    Under 18
+  {% elseif data['age'] == '18' %}
+    18
+    {% elseif data['age'] == '19' %}
+    19
+  {% elseif data['age'] == '20-24' %}
+    20-24
+  {% elseif data['age'] == 'over-25' %}
+    25 or older
+  {% else %}
+    Not provided
+  {% endif %}
+  </dd>
+  <dd class="govuk-summary-list__actions">
+    <a class="govuk-link" href="age">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+  </dd>
+</div>
+
+{% endif %}
+
+
+</dl>
+<p>Find out <a href="ai">how we use AI</a> to bring you relevant results.</p>
+
+<button type="submit" class="govuk-button" data-module="govuk-button">
+  Search
+</button>
+</form>
+{% endblock %}
+
+{% block footer %}
+
+{% from "govuk/components/footer/macro.njk" import govukFooter %}
+
+{{ govukFooter({
+  navigation: [
+    {
+      title: "Website information",
+      width: "two-thirds",
+      columns: 2,
+      items: [
+        {
+          href: "#",
+          text: "About us"
+        },
+        {
+          href: "#",
+          text: "Help"
+        },
+        {
+          href: "#",
+          text: "Privacy and cookies"
+        },
+        {
+          href: "#",
+          text: "Accessibility statement"
+        },
+        {
+          href: "#",
+          text: "Terms and conditions"
+        }
+      ]
+    },
+    {
+      title: "Sites for other UK countries",
+      width: "one-third",
+      items: [
+        {
+          href: "#",
+          text: "Scotland"
+        },
+        {
+          href: "#",
+          text: "Wales"
+        },
+        {
+          href: "#",
+          text: "Northern Ireland"
+        }
+      ]
+    },
+    {
+      title: "Additional views",
+      width: "full",
+      items: [
+        {
+          href: "check-answers-did-you-mean",
+          text: "'Did you mean?' - misspelling"
+        },
+        {
+          href: "check-answers-did-you-mean-2",
+          text: "'Did you mean?' - different term"
+        }
+      ]
+    }
+  ]
+}) }}
+
+{% endblock %}
+

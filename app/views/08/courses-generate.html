@@ -1,0 +1,33 @@
+{% extends "./layouts/_RESULTS.html" %}
+
+
+{% set withoutDescription = "true" %}
+{% set pageHeading = "Search results" %}
+{% set pageDescription = "Use the filters to explore these nearby courses." %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">Generate people</h1>
+      <p class="govuk-body">Submitting this form will generate JSON data about people.</p>
+      <p class="govuk-body">Each person in the data will have the following attributes:</p>
+      <ul class="govuk-list govuk-list--bullet">
+          <li>National Insurance Number</li>
+          <li>Family (last) name</li>
+          <li>Given (first) name</li>
+          <li>Date of birth (between 18 years old and 65 years old)</li>
+          <li>Job title</li>
+          <li>Favourite food</li>
+          <li>Car (consisting of type, make and model)</li>
+        </ul>
+      <p class="govuk-body">You can create any number of people. These people will be presented in a table on the next page for you to view.</p>
+      
+      <form action="load-courses" method="post">
+        <button type="submit" class="govuk-button">View courses</button>
+      </form>
+
+  </div>
+</div>
+{% endblock %}

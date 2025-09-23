@@ -1,0 +1,617 @@
+{% extends "./layouts/_RESULTS.html" %}
+
+<!--Find the person in the data-->
+
+{% set withoutDescription = "true" %}
+{% set pageHeading = "Search results" %}
+{% set pageDescription = "Use the filters to explore these nearby courses." %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-one-third">
+
+    <form method="get" action="load-courses">
+
+      <div class="filter-container">
+
+        <div class="filter-search-terms">
+  
+        <div class="filter-heading">
+
+        <h2 class="govuk-heading-m">Filter</h2>
+
+        </div>
+
+        </div>
+
+        <div class="filter-list">
+
+      <fieldset class="govuk-fieldset">
+
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Qualification type</legend>
+    
+        <div class="govuk-checkboxes govuk-checkboxes--small">
+          
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="filter-A-Level" name="filter" type="checkbox" value="A Level">
+              <label class="govuk-label govuk-checkboxes__label" for="filter-A-Level">A Level</label>
+            </div>
+          
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="filter-Apprenticeship" name="filter" type="checkbox" value="Apprenticeship">
+              <label class="govuk-label govuk-checkboxes__label" for="filter-Apprenticeship">Apprenticeship</label>
+            </div>
+          
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="filter-BTEC" name="filter" type="checkbox" value="BTEC">
+              <label class="govuk-label govuk-checkboxes__label" for="filter-BTEC">BTEC</label>
+            </div>
+          
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="filter-Diploma" name="filter" type="checkbox" value="Diploma">
+              <label class="govuk-label govuk-checkboxes__label" for="filter-Diploma">Diploma</label>
+            </div>
+          
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="filter-Degree" name="filter" type="checkbox" value="Degree">
+              <label class="govuk-label govuk-checkboxes__label" for="filter-Degree">Degree</label>
+            </div>
+          
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="filter-T-Level" name="filter" type="checkbox" value="T Level">
+              <label class="govuk-label govuk-checkboxes__label" for="filter-T-Level">T Level</label>
+            </div>
+          
+        </div>
+      </fieldset>
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="option-select-filter-location">
+          Enter a postcode, town or city
+        </label>
+        <input class="govuk-input" type="text" id="option-select-filter-location" name="option-select-filter-location">
+      </div>
+
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="subject-filter">
+          Subject or career keywords
+        </label>
+        <input class="govuk-input" type="text" id="subject-filter" name="subject-filter">
+      </div>
+
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Qualification level</legend>
+      
+        <div class="govuk-checkboxes govuk-checkboxes--small">
+          
+            
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="qualification-level-level-1-2" name="qualification-level" type="checkbox" value="level-1-2">
+            <label class="govuk-label govuk-checkboxes__label" for="qualification-level-level-1-2">
+              Level 1 or 2 (like GCSEs)
+            </label>
+          </div>
+        
+          
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="qualification-level-level-3" name="qualification-level" type="checkbox" value="level-3">
+            <label class="govuk-label govuk-checkboxes__label" for="qualification-level-level-3">
+              Level 3 (like BTECs and A levels)
+            </label>
+          </div>
+        
+          
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="qualification-level-level-4-7" name="qualification-level" type="checkbox" value="level-4-7">
+            <label class="govuk-label govuk-checkboxes__label" for="qualification-level-level-4-7">
+              Level 4 to 7 (like diplomas and degrees)
+            </label>
+          </div>
+          
+        </div>
+      </fieldset>
+      
+    <br>
+      <button class="govuk-button" type="submit">Apply filters</button>
+
+      <p class="govuk-body">
+        <a href="/06/load-courses" class="govuk-link" id="clear-all-link">Clear all filters</a>
+      </p>
+      
+    
+    
+  </div>
+</div></form>
+</div>
+
+
+  <div class="govuk-grid-column-two-thirds">
+
+<h1 class="govuk-heading-l">Available Courses</h1>
+
+<p><a href="clear-session-and-go">Search again</a> </p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  <div id="active-filters" class="govuk-!-margin-top-6">
+    <h2 id="active-filters-heading" class="govuk-heading-m">You've searched for:</h2>
+
+    <div id="selected-filters" class="remove-filters">
+      
+      
+
+      
+      
+  
+  
+  
+
+  
+  
+
+  
+  
+    
+
+
+
+    
+
+      
+      
+      
+      
+      
+    
+      
+      
+    
+      
+      
+        
+      
+    
+      <a href="?page=1&amp;option-select-filter-location=Manchester" class="govuk-tag govuk-tag--purple govuk-!-margin-right-1 govuk-!-margin-bottom-1" aria-label="Remove keyword filter: Arts">
+        History
+      </a>
+    
+      <a href="?page=1&amp;option-select-filter-location=Manchester" class="govuk-tag govuk-tag--purple govuk-!-margin-right-1 govuk-!-margin-bottom-1" aria-label="Remove keyword filter: Arts">
+        A level
+      </a>
+
+
+      
+      
+
+    
+
+    </div>
+
+  
+  </div>
+
+
+
+
+<p>10 courses found.</p>
+
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      History A Level
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/history-a-level-durham-sixth-form">
+          View more details<span class="govuk-visually-hidden"> about History A Level</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Provider</dt>
+        <dd class="govuk-summary-list__value">Durham Sixth Form</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Location</dt>
+        <dd class="govuk-summary-list__value">Durham</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Course type</dt>
+        <dd class="govuk-summary-list__value">A Level</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Requirements</dt>
+        <dd class="govuk-summary-list__value">GCSEs in relevant subjects</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Overview</dt>
+        <dd class="govuk-summary-list__value">The A Level programme is designed to develop your knowledge, confidence, and employability skills in History. You will be taught by experienced tutors, engage with a range of historical periods, and develop analytical skills through essay writing and source evaluation. On completion, you will be well-equipped to progress into further study or careers in history, politics, or education.</dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      History A Level
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/history-a-level-leeds-sixth-form">
+          View more details<span class="govuk-visually-hidden"> about History A Level</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Provider</dt>
+        <dd class="govuk-summary-list__value">Leeds Sixth Form</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Location</dt>
+        <dd class="govuk-summary-list__value">Leeds</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Course type</dt>
+        <dd class="govuk-summary-list__value">A Level</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Requirements</dt>
+        <dd class="govuk-summary-list__value">GCSEs in relevant subjects</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Overview</dt>
+        <dd class="govuk-summary-list__value">This A Level in History offers an in-depth exploration of topics such as Tudor England, the Cold War, and the struggle for civil rights. You will develop critical thinking and research skills to support academic or professional pathways.</dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      History A Level
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/history-a-level-bristol-sixth-form">
+          View more details<span class="govuk-visually-hidden"> about History A Level</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Provider</dt>
+        <dd class="govuk-summary-list__value">Bristol Sixth Form</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Location</dt>
+        <dd class="govuk-summary-list__value">Bristol</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Course type</dt>
+        <dd class="govuk-summary-list__value">A Level</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Requirements</dt>
+        <dd class="govuk-summary-list__value">GCSEs in relevant subjects</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Overview</dt>
+        <dd class="govuk-summary-list__value">Explore the dynamics of modern history with topics ranging from Weimar Germany to British imperialism. This A Level develops your ability to argue effectively and assess evidence critically.</dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      English A Level
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/english-a-level-leeds-sixth-form">
+          View more details<span class="govuk-visually-hidden"> about English A Level</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Provider</dt>
+        <dd class="govuk-summary-list__value">Leeds Sixth Form</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Location</dt>
+        <dd class="govuk-summary-list__value">Leeds</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Course type</dt>
+        <dd class="govuk-summary-list__value">A Level</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Requirements</dt>
+        <dd class="govuk-summary-list__value">GCSEs in English Language and Literature</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Overview</dt>
+        <dd class="govuk-summary-list__value">
+          The English A Level programme explores classic and contemporary literature, language analysis, and the historical context of key texts. Students will develop skills in critical thinking, essay writing, and understanding how literature reflects and shapes society through different periods in <strong>history</strong>.
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      History A Level
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/history-a-level-hillview-school">
+          View more details<span class="govuk-visually-hidden"> about History A Level</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Provider</dt>
+        <dd class="govuk-summary-list__value">Hillview School</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Location</dt>
+        <dd class="govuk-summary-list__value">Birmingham</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Course type</dt>
+        <dd class="govuk-summary-list__value">A Level</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Requirements</dt>
+        <dd class="govuk-summary-list__value">GCSEs in relevant subjects</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Overview</dt>
+        <dd class="govuk-summary-list__value">Our A Level History course provides comprehensive insights into medieval, early modern, and contemporary periods. Suitable for students aiming for university or heritage careers.</dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      History A Level
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/history-a-level-oakwood-high">
+          View more details<span class="govuk-visually-hidden"> about History A Level</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Provider</dt>
+        <dd class="govuk-summary-list__value">Oakwood High</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Location</dt>
+        <dd class="govuk-summary-list__value">Sheffield</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Course type</dt>
+        <dd class="govuk-summary-list__value">A Level</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Requirements</dt>
+        <dd class="govuk-summary-list__value">GCSEs in relevant subjects</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Overview</dt>
+        <dd class="govuk-summary-list__value">This course explores themes such as monarchy and revolution, the British Empire, and 20th-century conflict. It enhances your ability to think critically and present arguments coherently.</dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      History A Level
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/history-a-level-city-academy">
+          View more details<span class="govuk-visually-hidden"> about History A Level</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Provider</dt>
+        <dd class="govuk-summary-list__value">City Academy</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Location</dt>
+        <dd class="govuk-summary-list__value">London</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Course type</dt>
+        <dd class="govuk-summary-list__value">A Level</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Requirements</dt>
+        <dd class="govuk-summary-list__value">GCSEs in relevant subjects</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Overview</dt>
+        <dd class="govuk-summary-list__value">Gain a detailed understanding of European and world history, from ancient Rome to post-war reconstruction. This A Level is ideal for students interested in global politics and international relations.</dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      History A Level
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/history-a-level-north-star-academy">
+          View more details<span class="govuk-visually-hidden"> about History A Level</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Provider</dt>
+        <dd class="govuk-summary-list__value">North Star Academy</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Location</dt>
+        <dd class="govuk-summary-list__value">Liverpool</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Course type</dt>
+        <dd class="govuk-summary-list__value">A Level</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Requirements</dt>
+        <dd class="govuk-summary-list__value">GCSEs in relevant subjects</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Overview</dt>
+        <dd class="govuk-summary-list__value">Explore themes in local, national and international history. Our course promotes historical inquiry and independent research to prepare you for future study or public sector careers.</dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      History A Level
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/history-a-level-bright-futures-academy">
+          View more details<span class="govuk-visually-hidden"> about History A Level</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Provider</dt>
+        <dd class="govuk-summary-list__value">Bright Futures Academy</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Location</dt>
+        <dd class="govuk-summary-list__value">Manchester</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Course type</dt>
+        <dd class="govuk-summary-list__value">A Level</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Requirements</dt>
+        <dd class="govuk-summary-list__value">GCSEs in relevant subjects</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Overview</dt>
+        <dd class="govuk-summary-list__value">This A Level covers a breadth of British and international history, encouraging independent thinking and debate. It is well-suited to students considering law or politics degrees.</dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      History A Level
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="/06/course/history-a-level-greenwood-academy">
+          View more details<span class="govuk-visually-hidden"> about History A Level</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Provider</dt>
+        <dd class="govuk-summary-list__value">Greenwood Academy</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Location</dt>
+        <dd class="govuk-summary-list__value">Nottingham</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Course type</dt>
+        <dd class="govuk-summary-list__value">A Level</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Requirements</dt>
+        <dd class="govuk-summary-list__value">GCSEs in relevant subjects</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Overview</dt>
+        <dd class="govuk-summary-list__value">Study the historical roots of today’s political and social structures. This A Level sharpens your analytical skills and prepares you for university-level study in the humanities.</dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+
+        </div></div>
+
+
+{% endblock %}
+

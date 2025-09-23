@@ -7,65 +7,106 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-xl">
+    <h1 class="govuk-heading-l">
       Explore your options after school or college
     </h1>
 
     <h2 class="govuk-heading-m">
-      Current version
+      In progress
     </h2>
 
-    <p>Simplified journey - September 2025</p> <p><a href="07/index">View prototype</a></p>
+    <h3 class="govuk-heading-s">v8 - October 2025</h3> 
+
+    <p>This prototype is still in development.</p>
+    
+    {{ govukButton({
+      text: "View prototype",
+      href: "08/start-page"
+    }) }}
+
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
     <h2 class="govuk-heading-m">
-      Previous versions
+      Latest baselined
     </h2>
 
-    <p>Private beta - July 2025</p> <p><a href="06/index">View prototype</a></p>
+    <h3 class="govuk-heading-s">v7 - September 2025</h3> 
 
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-    <p>Final Alpha iterations based on in person UR feedback</p> 
+    <p>This prototype has been baselined. Jira stories have been written based on this version.</p>
     
-    <details class="govuk-details">
-      <summary class="govuk-details__summary">
-        <span class="govuk-details__summary-text">
-          Help using the prototype
-        </span>
-      </summary>
-      <div class="govuk-details__text">
-        <h2 class="govuk-heading-s">Help using the prototype</h2>
-        <p>After clicking 'start now', there are 2 options depending on which user journey you want to explore. Use the:</p>
+    {{ govukButton({
+      text: "View prototype",
+      href: "07/start-page"
+    }) }}
+
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break">
+    
+    
+    <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-with-summary-sections">
+      <div class="govuk-accordion__section">
+        <div class="govuk-accordion__section-header">
+          <h2 class="govuk-accordion__section-heading">
+            <span class="govuk-accordion__section-button" id="accordion-with-summary-sections-heading-1">
+              Previous versions
+            </span>
+          </h2>
+          <div class="govuk-accordion__section-summary govuk-body" id="accordion-with-summary-sections-summary-1">
+            View all versions of the prototype from Alpha and Public Beta.
+          </div>
+        </div>
+        <div id="accordion-with-summary-sections-content-1" class="govuk-accordion__section-content">
+         
+          <p>Private beta - July 2025</p> <p><a href="06/index">View prototype</a></p>
+
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+          <p>Final Alpha iterations based on in person UR feedback</p> 
+          
+          <details class="govuk-details">
+            <summary class="govuk-details__summary">
+              <span class="govuk-details__summary-text">
+                Help using the prototype
+              </span>
+            </summary>
+            <div class="govuk-details__text">
+              <h2 class="govuk-heading-s">Help using the prototype</h2>
+              <p>After clicking 'start now', there are 2 options depending on which user journey you want to explore. Use the:</p>
+              
+              <ul>
+                <li>'find all courses nearby' option for the <strong>browse</strong> journey</li>
+                <li>'answer a few questions for more specific results' option for the search <strong>guided journey</strong></li>
+              </ul>
         
-        <ul>
-          <li>'find all courses nearby' option for the <strong>browse</strong> journey</li>
-          <li>'answer a few questions for more specific results' option for the search <strong>guided journey</strong></li>
-        </ul>
-  
-        <p>In the guided journey, enter 'business' into the 'jobs or careers' question to see business-related results. The first 2 results on the search results screen can be viewed.</p>
-  
-        <p>You can also enter 'biology' to see biology and science-related results.</p>
-  
-        <p>Go directly to the screens showing an <a href="https://find-a-course-prototype-e5269d0a0fb0.herokuapp.com/05/search-results-few-results-biology">example of when there are few search results</a> and an <a href="https://find-a-course-prototype-e5269d0a0fb0.herokuapp.com/05/search-results-no-results-biology">example of when there are no search results</a>.</p>
-  
-        <p>Note that most external links, including those to provider websites, are not currently working.</p>      </div>
-    </details>
-    
-    <p> <a href="05/index">View prototype</a></p>
+              <p>In the guided journey, enter 'business' into the 'jobs or careers' question to see business-related results. The first 2 results on the search results screen can be viewed.</p>
+        
+              <p>You can also enter 'biology' to see biology and science-related results.</p>
+        
+              <p>Go directly to the screens showing an <a href="https://find-a-course-prototype-e5269d0a0fb0.herokuapp.com/05/search-results-few-results-biology">example of when there are few search results</a> and an <a href="https://find-a-course-prototype-e5269d0a0fb0.herokuapp.com/05/search-results-no-results-biology">example of when there are no search results</a>.</p>
+        
+              <p>Note that most external links, including those to provider websites, are not currently working.</p>      </div>
+          </details>
+          
+          <p> <a href="05/index">View prototype</a></p>
+      
+      
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+      
+          <p>Adding updated version of browse for in person UR sessions</p> <p> <a href="04/index">View prototype</a></p>
+      
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+      
+          <p>Guided journey and browse for use in Userzoom sessions.</p> <p> <a href="03/guided-journey/index">View prototype</a></p>
+      
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+      
+          <p>First attempt at recreating Figma designs.</p> <p> <a href="02/index">View prototype</a></p>
+      
+        </div>
+      </div>
+      
 
+      
+        </div>
+      </div>
+    </div>
 
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-
-    <p>Adding updated version of browse for in person UR sessions</p> <p> <a href="04/index">View prototype</a></p>
-
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-
-    <p>Guided journey and browse for use in Userzoom sessions.</p> <p> <a href="03/guided-journey/index">View prototype</a></p>
-
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-
-    <p>First attempt at recreating Figma designs.</p> <p> <a href="02/index">View prototype</a></p>
-
-  </div>
-</div>
-
-{% endblock %}
+    {% endblock %}

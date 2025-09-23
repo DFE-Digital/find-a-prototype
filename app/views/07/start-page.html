@@ -1,0 +1,73 @@
+{% extends "./layouts/_HOME.html" %}
+
+
+{% block content %}
+
+
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row">
+
+      <div class="govuk-grid-column-two-thirds">
+
+
+        <h2 class="govuk-heading-l">
+          Prototype v7
+        </h2>
+
+        <p>This prototype has been baselined.</p> 
+        <p>No further changes will be made to it.</p>
+
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    
+        <h2 class="govuk-heading-m">What's new</h2>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li><a href="https://dfedigital.atlassian.net/browse/FAB-333?atlOrigin=eyJpIjoiYzE2MWJiYmQwNGE5NDQ1NmExMjY1OWE4NTg4M2VjYTEiLCJwIjoiaiJ9">FAB-333</a> Added the 'simplified journey'</li>
+            <li><a href="https://dfedigital.atlassian.net/browse/FAB-332?atlOrigin=eyJpIjoiMTQ5MDZkYzEyOWRjNDA2NGIxODdkZmZkMjI1NmZmOTgiLCJwIjoiaiJ9">FAB-332</a> Amended search filters - removed tags</li>
+            <li><a href="https://dfedigital.atlassian.net/browse/FAB-353?atlOrigin=eyJpIjoiZDgyMDk3YjIyNzhmNDVhNTkxMjJkYTc5YTAxZTE3MGQiLCJwIjoiaiJ9">FAB-353</a> Updated course details pages</li>
+            <li><a href="https://dfedigital.atlassian.net/browse/FAB-334?atlOrigin=eyJpIjoiNjhhMzBmZmZhOWYxNGRkODk5ZDA0ZDhlOTJmMjJjZmMiLCJwIjoiaiJ9">FAB-334</a> Added sort options to the search results page</li>
+
+        </ul>
+
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+        <h2 class="govuk-heading-m">Working data</h2>
+
+        <p>These are the locations and interests that will pull through results for this version of the prototype.</p>
+
+        <h3 class="govuk-heading-s">Location</h3>
+            <ul class="govuk-list govuk-list--bullet">
+                <li>Birmingham</li>
+                <li>Leeds</li>
+                <li>Manchester</li>
+            </ul>
+
+        <h3 class="govuk-heading-s">Interest</h3>
+            <ul class="govuk-list govuk-list--bullet">
+                <li>Art</li>
+                <li>Business</li>
+                <li>Computing</li>
+                <li>Construction</li>
+                <li>Engineering</li>
+                <li>Hospitality</li>
+                <li>Health</li>
+                <li>Journalism</li>
+                <li>Media</li>
+            </ul>
+
+
+            <hr class="govuk-section-break govuk-section-break--m govuk-section-break">
+
+        {{ govukButton({
+          text: "Start now",
+          href: "index",
+          isStartButton: true
+        }) }}
+    
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

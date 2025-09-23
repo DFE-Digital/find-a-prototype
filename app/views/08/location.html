@@ -1,0 +1,92 @@
+{% extends "./layouts/_QUESTION.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Where would you like to study?" %}
+{% set withoutDescription = "true" %}
+
+
+{% block service %}
+<form action="interests" method="post" novalidate>
+
+  <h1 class="govuk-heading-l">
+    Where do you want to study?
+  </h1>
+
+  <p>You can search anywhere in England.</p>
+
+  <p>However, some courses are only available to people living in the local area. This is more common for short courses or those aiming to help you find employment. And can apply even if it is online training. Check with the provider if you are unsure. </p>
+
+  {{ govukInput({
+    label: {
+      text: "Enter a town, city or postcode",
+      classes: "govuk-label--m"
+    },
+    classes: "govuk-input--width-20",
+    id: "location",
+    name: "location"
+  }) }}
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+        <h1 class="govuk-fieldset__heading">
+          How far would you be happy to travel?
+        </h1>
+      </legend>
+      <div class="govuk-radios" data-module="govuk-radios">
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="travel-location-2" name="travel-location" type="radio" value="2 miles">
+          <label class="govuk-label govuk-radios__label" for="travel-location-2">
+            Up to 2 miles
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="travel-location-3" name="travel-location" type="radio" value="5 miles">
+          <label class="govuk-label govuk-radios__label" for="travel-location-3">
+            Up to 5 miles
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="travel-location-4" name="travel-location" type="radio" value="10 miles">
+          <label class="govuk-label govuk-radios__label" for="travel-location-4">
+            Up to 10 miles
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="travel-location-5" name="travel-location" type="radio" value="15 miles">
+          <label class="govuk-label govuk-radios__label" for="travel-location-5">
+            Up to 15 miles
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="travel-location-6" name="travel-location" type="radio" value="30 miles">
+          <label class="govuk-label govuk-radios__label" for="travel-location-6">
+            Up to 30 miles
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="travel-location-7" name="travel-location" type="radio" value="Any location">
+          <label class="govuk-label govuk-radios__label" for="travel-location-7">
+            Any location
+          </label>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="govuk-button-group">
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+    </div>
+
+
+    </div>
+  </form>
+
+  </div>
+</div>
+
+{% endblock %}
