@@ -12,7 +12,7 @@
 
   <div class="govuk-grid-column-full">
     <h1 class="govuk-heading-l">Your search results</h1>
-    <p class="govuk-body-l">Showing {{ totalResults }} courses near <strong>{{ data['location'] }}</strong> {% if data['interest-1'] %} for <strong> {{ data['interest-1'] }}  </strong> {% endif %} {% if data['interest-2'] %}, <strong> {{ data['interest-2'] }}  </strong> {% endif %} {% if data['interest-3'] %}, <strong> {{ data['interest-3'] }}  </strong> {% endif %} at <strong> 
+    <p class="govuk-body-l">Showing {{ totalResults }} courses {% if data['location'] %} near <strong>{{ data['location'] }}</strong>{% endif %} {% if data['interest-1'] %} for <strong> {{ data['interest-1'] }}  </strong> {% endif %} {% if data['interest-2'] %}, <strong> {{ data['interest-2'] }}  </strong> {% endif %} {% if data['interest-3'] %}, <strong> {{ data['interest-3'] }}  </strong> {% endif %} at <strong> 
       {% if data['qualification-level'] == 'level-1-2' %}
       Level 1 or 2
       {% elseif data['qualification-level'] == 'level-3' %}
