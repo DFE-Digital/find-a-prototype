@@ -10,6 +10,25 @@
 
 <div class="govuk-grid-row">
 
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-l">Your search results</h1>
+    <p class="govuk-body-l">Showing {{ totalResults }} courses near <strong>{{ data['location'] }}</strong> {% if data['interest-1'] %} for <strong> {{ data['interest-1'] }}  </strong> {% endif %} {% if data['interest-2'] %}, <strong> {{ data['interest-2'] }}  </strong> {% endif %} {% if data['interest-3'] %}, <strong> {{ data['interest-3'] }}  </strong> {% endif %} at <strong> 
+      {% if data['qualification-level'] == 'level-1-2' %}
+      Level 1 or 2
+      {% elseif data['qualification-level'] == 'level-3' %}
+      Level 3
+      {% elseif data['qualification-level'] == 'level-4-7' %}
+      Level 4 to 7
+      {% endif %}</strong></p>
+
+      <p><a href="clear-session-and-go">Search again</a> </p>
+  
+      <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    </div>
+
+
+  
   <div class="govuk-grid-column-one-third">
 
     <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-3 govuk-!-display-none-print" 
@@ -58,17 +77,6 @@ Show filters
     {% endif %}
     
 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="option-select-filter-location">
-          Enter a postcode, town or city
-        </label>
-        <input class="govuk-input"
-               type="text"
-               id="option-select-filter-location"
-               name="option-select-filter-location"
-               value="{{ selectedLocation }}">
-      </div>
 
       {{ govukSelect({
         id: "travel-location",
@@ -202,7 +210,7 @@ Show filters
       <button class="govuk-button" type="submit">Apply filters</button>
 
       <p class="govuk-body">
-        <a href="/06/load-courses" class="govuk-link" id="clear-all-link">Clear all filters</a>
+        <a href="/08/load-courses" class="govuk-link" id="clear-all-link">Clear all filters</a>
       </p>
       
     </form>
@@ -215,11 +223,8 @@ Show filters
 
   <div class="govuk-grid-column-two-thirds">
 
-<h1 class="govuk-heading-l">Available courses</h1>
+<h2 class="govuk-heading-m">Available courses</h2>
 
-<p><a href="clear-session-and-go">Search again</a> </p>
-
-<p>{{ totalResults }} courses found.</p>
 
 <p class="govuk-body govuk-!-margin-bottom-6">
   <span class="govuk-!-font-weight-bold">Sort courses by:</span> 

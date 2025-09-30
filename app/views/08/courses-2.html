@@ -1,5 +1,5 @@
 {% extends "./layouts/_RESULTS.html" %}
-
+{% from "./macros/clear-filter-link.njk" import clearFilterLink %}
 <!--Find the person in the data-->
 
 {% set withoutDescription = "true" %}
@@ -11,6 +11,13 @@
 <div class="govuk-grid-row">
 
   <div class="govuk-grid-column-one-third">
+
+    <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-3 govuk-!-display-none-print" 
+    id="toggle-filters" type="button">
+Show filters
+</button>
+
+<div id="filter-panel" class="filter-container" hidden>
 
     <form method="get" action="load-courses">
 
@@ -30,7 +37,7 @@
 
       <fieldset class="govuk-fieldset">
 
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Qualification type</legend>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Course type</legend>
     
         <div class="govuk-checkboxes govuk-checkboxes--small">
           {% for qual in ["A Level", "Apprenticeship", "BTEC", "Diploma", "Degree", "T Level"] %}
@@ -46,7 +53,10 @@
           {% endfor %}
         </div>
       </fieldset>
-
+      {% if selectedQualifications.length > 0 %}
+      {{ clearFilterLink("filter", query) }}
+    {% endif %}
+    
 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
       <div class="govuk-form-group">
@@ -56,45 +66,137 @@
         <input class="govuk-input"
                type="text"
                id="option-select-filter-location"
-               name="option-select-filter-location">
+               name="option-select-filter-location"
+               value="{{ selectedLocation }}">
       </div>
 
+      {{ govukSelect({
+        id: "travel-location",
+        name: "travel-location",
+        label: {
+          text: "Travel distance"
+        },
+        items: [
+          { value: "", text: "Select a distance" },
+          { value: "2 miles", text: "Up to 2 miles", selected: travelDistance == "2 miles" },
+          { value: "5 miles", text: "Up to 5 miles", selected: travelDistance == "5 miles" },
+          { value: "10 miles", text: "Up to 10 miles", selected: travelDistance == "10 miles" },
+          { value: "15 miles", text: "Up to 15 miles", selected: travelDistance == "15 miles" },
+          { value: "30 miles", text: "Up to 30 miles", selected: travelDistance == "30 miles" }
+        ]
+      }) }}
+
+      {% if selectedLocation %}
+  {{ clearFilterLink("option-select-filter-location", query) }}
+{% endif %}
+
+<!--
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
       <div class="govuk-form-group">
         <label class="govuk-label" for="subject-filter">
-          Subject or career keywords
+          Keyword
         </label>
         <input class="govuk-input"
                type="text"
                id="subject-filter"
                name="subject-filter">
       </div>
+-->
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Qualification level</legend>
       
         <div class="govuk-checkboxes govuk-checkboxes--small">
-          {% for level in ["level-1-2", "level-3", "level-4-7"] %}
-            {% set label = {
-              "level-1-2": "Level 1 or 2 (like GCSEs)",
-              "level-3": "Level 3 (like BTECs and A levels)",
-              "level-4-7": "Level 4 to 7 (like diplomas and degrees)"
-            }[level] %}
+          {% set allLevels = [
+            { value: "entry", label: "Entry level (like entry level functional skills)" },
+            { value: "level-1", label: "Level 1 (like first certificate)" },
+            { value: "level-2", label: "Level 2 (like GCSEs)" },
+            { value: "level-3", label: "Level 3 (like A levels)" },
+            { value: "level-4", label: "Level 4 (like high national certificate)" },
+            { value: "level-5", label: "Level 5 (like diplomas)" },
+            { value: "level-6", label: "Level 6 (like degree)" },
+            { value: "level-7", label: "Level 7 (like masters degree)" }
+          ] %}
+      
+          {% for level in allLevels %}
             <div class="govuk-checkboxes__item">
               <input class="govuk-checkboxes__input"
-                     id="qualification-level-{{ level }}"
+                     id="qualification-level-{{ level.value }}"
                      name="qualification-level"
                      type="checkbox"
-                     value="{{ level }}"
-                     {% if level in selectedLevels %}checked{% endif %}>
-              <label class="govuk-label govuk-checkboxes__label" for="qualification-level-{{ level }}">
-                {{ label }}
+                     value="{{ level.value }}"
+                     {% if level.value in selectedLevels %}checked{% endif %}>
+              <label class="govuk-label govuk-checkboxes__label"
+                     for="qualification-level-{{ level.value }}">
+                {{ level.label }}
               </label>
             </div>
           {% endfor %}
         </div>
       </fieldset>
+      {% if selectedLevels.length > 0 %}
+  {{ clearFilterLink("qualification-level", query) }}
+{% endif %}
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+      <!-- Learning method -->
+<fieldset class="govuk-fieldset">
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+    Learning method
+  </legend>
+
+  <div class="govuk-checkboxes govuk-checkboxes--small">
+    {% for method in ["Online", "Classroom based", "Work based", "Blended learning"] %}
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="learning-method-{{ loop.index }}" name="learning-method" type="checkbox" value="{{ method }}">
+        <label class="govuk-label govuk-checkboxes__label" for="learning-method-{{ loop.index }}">
+          {{ method }}
+        </label>
+      </div>
+    {% endfor %}
+  </div>
+</fieldset>
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+<!-- Course hours -->
+<fieldset class="govuk-fieldset">
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+    Course hours
+  </legend>
+
+  <div class="govuk-checkboxes govuk-checkboxes--small">
+    {% for hours in ["Full time", "Part time", "Flexible"] %}
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="course-hours-{{ loop.index }}" name="course-hours" type="checkbox" value="{{ hours }}">
+        <label class="govuk-label govuk-checkboxes__label" for="course-hours-{{ loop.index }}">
+          {{ hours }}
+        </label>
+      </div>
+    {% endfor %}
+  </div>
+</fieldset>
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+<!-- Course hours -->
+<fieldset class="govuk-fieldset">
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+    Course study time
+  </legend>
+
+  <div class="govuk-checkboxes govuk-checkboxes--small">
+    {% for times in ["Daytime", "Evening", "Weekend", "Day or block release"] %}
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="course-times-{{ loop.index }}" name="course-times" type="checkbox" value="{{ times }}">
+        <label class="govuk-label govuk-checkboxes__label" for="course-times-{{ loop.index }}">
+          {{ times }}
+        </label>
+      </div>
+    {% endfor %}
+  </div>
+</fieldset>
+
       
     <br>
       <button class="govuk-button" type="submit">Apply filters</button>
@@ -108,182 +210,30 @@
   </div>
 </div>
 </div>
+</div>
 
 
   <div class="govuk-grid-column-two-thirds">
 
-<h1 class="govuk-heading-l">Available Courses</h1>
+<h1 class="govuk-heading-l">Available courses</h1>
 
 <p><a href="clear-session-and-go">Search again</a> </p>
 
-{# Set a flag to detect if any visible filters are present #}
-{% set hasVisibleFilters = false %}
-
-{# Check if at least one real qualification is selected #}
-{% for qual in selectedQualifications %}
-  {% if qual and qual != "_unchecked" %}
-    {% set hasVisibleFilters = true %}
-  {% endif %}
-{% endfor %}
-
-{# Check if location or subject has a value #}
-{% if selectedLocation or selectedSubject %}
-  {% set hasVisibleFilters = true %}
-{% endif %}
-
-{% set levelLabels = {
-  "level-1-2": "Level 1 or 2 (like GCSEs)",
-  "level-3": "Level 3 (like BTECs and A levels)",
-  "level-4-7": "Level 4 to 7 (like diplomas and degrees)"
-} %}
-
-
-
-{% if hasVisibleFilters %}
-  <div id="active-filters" class="govuk-!-margin-top-6">
-    <h2 id="active-filters-heading" class="govuk-heading-m">You've searched for:</h2>
-
-    <div id="selected-filters" class="remove-filters">
-      {# Qualification tags #}
-      {% for qual in selectedQualifications %}
-  {% if qual != "_unchecked" %}
-    {# Rebuild query string excluding the current qualification #}
-    {% set queryString = "" %}
-    {% for q in selectedQualifications %}
-      {% if q != qual and q != "_unchecked" %}
-        {% set queryString = queryString + "&filter=" + q %}
-      {% endif %}
-    {% endfor %}
-    {% set queryString = queryString + "&option-select-filter-location=" + selectedLocation + "&subject-filter=" + selectedSubject %}
-
-    <a href="?page=1{{ queryString | safe }}"
-       class="govuk-tag govuk-tag--blue govuk-!-margin-right-1 govuk-!-margin-bottom-1"
-       aria-label="Remove filter {{ qual }}">
-      {{ qual }}
-    </a>
-  {% endif %}
-{% endfor %}
-
-      {# Location tag #}
-      {% if selectedLocation %}
-  {% set queryString = "" %}
-  {# Keep all qualification filters #}
-  {% for q in selectedQualifications %}
-    {% if q != "_unchecked" %}
-      {% set queryString = queryString + "&filter=" + q %}
-    {% endif %}
-  {% endfor %}
-
-  {# Keep all qualification levels #}
-  {% for level in selectedLevels %}
-    {% if level %}
-      {% set queryString = queryString + "&qualification-level=" + level %}
-    {% endif %}
-  {% endfor %}
-
-  {# Keep subject, but exclude location #}
-  {% if selectedSubject %}
-    {% set queryString = queryString + "&subject-filter=" + selectedSubject %}
-  {% endif %}
-
-  <a href="?page=1{{ queryString | safe }}"
-     class="govuk-tag govuk-tag--green govuk-!-margin-right-1 govuk-!-margin-bottom-1"
-     aria-label="Remove location filter: {{ selectedLocation }}">
-    {{ selectedLocation }}
-  </a>
-{% endif %}
-
-    
-
-      {# Subject tag #}
-      {% if selectedSubject %}
-      {% set queryString = "" %}
-      {# Keep all qualification filters #}
-      {% for q in selectedQualifications %}
-        {% if q != "_unchecked" %}
-          {% set queryString = queryString + "&filter=" + q %}
-        {% endif %}
-      {% endfor %}
-    
-      {# Keep all qualification levels #}
-      {% for level in selectedLevels %}
-        {% if level %}
-          {% set queryString = queryString + "&qualification-level=" + level %}
-        {% endif %}
-      {% endfor %}
-    
-      {# Keep location, but exclude subject #}
-      {% if selectedLocation %}
-        {% set queryString = queryString + "&option-select-filter-location=" + selectedLocation %}
-      {% endif %}
-    
-      <a href="?page=1{{ queryString | safe }}"
-         class="govuk-tag govuk-tag--purple govuk-!-margin-right-1 govuk-!-margin-bottom-1"
-         aria-label="Remove keyword filter: {{ selectedSubject }}">
-        {{ selectedSubject }}
-      </a>
-    {% endif %}
-    
-
-
-      {# Qualification level tags #}
-      {% for level in selectedLevels %}
-  {% if level %}
-    {# Rebuild query string without this level #}
-    {% set remainingLevels = [] %}
-    {% for l in selectedLevels %}
-      {% if l != level and l != "_unchecked" %}
-        {% set remainingLevels = remainingLevels.append(l) %}
-      {% endif %}
-    {% endfor %}
-
-    {# Map remaining levels back to qualification types #}
-    {% set mappedQuals = [] %}
-    {% for rl in remainingLevels %}
-      {% if rl == "level-1-2" %}
-        {% set mappedQuals = mappedQuals.append("btec") %}
-        {% set mappedQuals = mappedQuals.append("apprenticeship") %}
-      {% elseif rl == "level-3" %}
-        {% set mappedQuals = mappedQuals.append("a level") %}
-        {% set mappedQuals = mappedQuals.append("t level") %}
-        {% set mappedQuals = mappedQuals.append("apprenticeship") %}
-      {% elseif rl == "level-4-7" %}
-        {% set mappedQuals = mappedQuals.append("degree") %}
-        {% set mappedQuals = mappedQuals.append("apprenticeship") %}
-      {% endif %}
-    {% endfor %}
-
-    {# Add query string with new levels and mapped quals #}
-    {% set query = "" %}
-    {% for q in mappedQuals %}
-      {% set query = query + "&filter=" + q %}
-    {% endfor %}
-    {% for rl in remainingLevels %}
-      {% set query = query + "&qualification-level=" + rl %}
-    {% endfor %}
-    {% set query = query + "&option-select-filter-location=" + selectedLocation + "&subject-filter=" + selectedSubject %}
-
-    <a href="?page=1{{ query | safe }}"
-       class="govuk-tag govuk-tag--yellow govuk-!-margin-right-1 govuk-!-margin-bottom-1"
-       aria-label="Remove level filter: {{ level }}">
-      {% if level == "level-1-2" %}Level 1 or 2{% endif %}
-      {% if level == "level-3" %}Level 3{% endif %}
-      {% if level == "level-4-7" %}Level 4 to 7{% endif %}
-    </a>
-  {% endif %}
-{% endfor %}
-
-    
-
-    </div>
-
-  
-  </div>
-{% endif %}
-
-
-
 <p>{{ totalResults }} courses found.</p>
+
+<p class="govuk-body govuk-!-margin-bottom-6">
+  <span class="govuk-!-font-weight-bold">Sort courses by:</span> 
+<span class="govuk-!-margin-left-1 govuk-!-margin-right-1">
+  
+<span class="">Distance</span>
+</span>    
+ | 
+<span class="govuk-!-margin-left-2 govuk-!-margin-right-1">
+    <a href="/records?sortOrder=lastName" class="govuk-link govuk-link--no-visited-state">Relevance</a>
+</span>
+</p>
+
+
 
 {% for course in courses %}
 <div class="govuk-summary-card">
@@ -293,7 +243,7 @@
     </h2>
     <ul class="govuk-summary-card__actions">
       <li class="govuk-summary-card__action">
-        <a class="govuk-link" href="/06/course/{{ course.slug }}">
+        <a class="govuk-link" href="/08/course/{{ course.slug }}">
           View more details<span class="govuk-visually-hidden"> about {{ course.name }}</span>
         </a>
       </li>
@@ -361,7 +311,7 @@
     <div class="govuk-pagination__prev">
       <a class="govuk-link govuk-pagination__link" href="?page={{ currentPage - 1 }}{{ filterQuery }}" rel="prev">
         <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
-          <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
+          <path d="m6.5938-0.0088125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
         </svg>
         <span class="govuk-pagination__link-title">
           Previous<span class="govuk-visually-hidden"> page</span>
@@ -420,7 +370,7 @@
           Next<span class="govuk-visually-hidden"> page</span>
         </span>
         <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
-          <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+          <path d="m8.108-0.0088125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
         </svg>
       </a>
     </div>
@@ -504,6 +454,24 @@
   ]
 }) }}
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleButton = document.getElementById('toggle-filters');
+    const filterPanel = document.getElementById('filter-panel');
+
+    toggleButton.addEventListener('click', function () {
+      const isActive = filterPanel.classList.contains('active');
+
+      if (isActive) {
+        filterPanel.classList.remove('active');
+        toggleButton.textContent = 'Show filters';
+      } else {
+        filterPanel.classList.add('active');
+        toggleButton.textContent = 'Hide filters';
+      }
+    });
+  });
+</script>
 
 {% endblock %}
 
