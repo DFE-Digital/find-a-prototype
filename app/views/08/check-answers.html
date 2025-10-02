@@ -83,14 +83,19 @@
       Level you're looking for
     </dt>
     <dd class="govuk-summary-list__value">
-      {% if data['qualification-level'] == 'none' %}
-      Get skills and experience (without a qualification)
-    {% elseif data['qualification-level'] == 'level-1-2' %}
-    Level 1 or 2 (like GCSEs)
-    {% elseif data['qualification-level'] == 'level-3' %}
-    Level 3 (like BTECs and A levels)
-    {% elseif data['qualification-level'] == 'level-4-7' %}
-    Level 4 to 7 (like diplomas and degrees)
+      {% if data['qualification-level'] %}
+      {% for level in data['qualification-level'] %}
+        {% if level == 'none' %}
+          Get skills and experience (without a qualification)
+        {% elseif level == 'level-1-2' %}
+          Level 1 or 2 (like GCSEs)
+        {% elseif level == 'level-3' %}
+          Level 3 (like BTECs and A levels)
+        {% elseif level == 'level-4-7' %}
+          Level 4 to 7 (like diplomas and degrees)
+        {% endif %}
+        {%- if not loop.last %}, {% endif -%}
+      {% endfor %}
     {% else %}
       Not provided
     {% endif %}
