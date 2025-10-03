@@ -12,18 +12,47 @@
 
   <div class="govuk-grid-column-full">
     <h1 class="govuk-heading-l">Your search results</h1>
-    <p class="govuk-body-l">Showing {{ totalResults }} courses {% if data['location'] %} near <strong>{{ data['location'] }}</strong>{% endif %} {% if data['interest-1'] %} for <strong> {{ data['interest-1'] }}  </strong> {% endif %} {% if data['interest-2'] %}, <strong> {{ data['interest-2'] }}  </strong> {% endif %} {% if data['interest-3'] %}, <strong> {{ data['interest-3'] }}  </strong> {% endif %}  
-      {% if data['qualification-level'] %} at <strong> 
-    {% for level in data['qualification-level'] %}
-      {% if level == 'level-1-2' %}
-         Level 1 or 2,
-      {% elseif level == 'level-3' %}
-         Level 3
-      {% elseif level == 'level-4-7' %}
-         Level 4 to 7,
+    
+    <p class="govuk-body-l">
+      Showing {{ totalResults }} courses
+      {% if data['location'] %} near <strong>{{ data['location'] }}</strong>{% endif %}
+    
+      {% if data['interest-1'] %} for <strong>{{ data['interest-1'] }}</strong>{% endif %}
+      {% if data['interest-2'] %}, <strong>{{ data['interest-2'] }}</strong>{% endif %}
+      {% if data['interest-3'] %}, <strong>{{ data['interest-3'] }}</strong>{% endif %}
+    
+      {% if data['qualification-level'] %}
+        {% set levelLabels = {
+          "level-1-2": "Level 1 or 2",
+          "level-3": "Level 3",
+          "level-4-7": "Level 4 to 7"
+        } %}
+    
+        {% set sel = data['qualification-level'] %}
+        {% if sel is string %}
+          {% set sel = [sel] %}
+        {% endif %}
+    
+        at
+        {% for code in sel %}
+          {% set label = levelLabels[code] or code %}
+    
+          {% if loop.first %}
+            <strong>{{ label }}</strong>
+          {% elseif loop.last %}
+            and <strong>{{ label }}</strong>
+          {% else %}
+            , <strong>{{ label }}</strong>
+          {% endif %}
+        {% endfor %}
       {% endif %}
-    {% endfor %}
-  {% endif %}</strong></p>
+    </p>
+    
+    
+    
+    
+    
+    
 
       <p><a href="clear-session-and-go">Search again</a> </p>
   
@@ -264,13 +293,13 @@ Show filters
   <span class="govuk-!-margin-left-2">
     {% if sort == "distance" %}
       <span aria-current="true">Distance</span>
-      · <a class="govuk-link govuk-link--no-visited-state" href="{{ relevanceUrl }}">Relevance</a>
+      | <a class="govuk-link govuk-link--no-visited-state" href="{{ relevanceUrl }}">Relevance</a>
     {% elseif sort == "relevance" %}
       <a class="govuk-link govuk-link--no-visited-state" href="{{ distanceUrl }}">Distance</a>
-      · <span aria-current="true">Relevance</span>
+      | <span aria-current="true">Relevance</span>
     {% else %}
       <a class="govuk-link govuk-link--no-visited-state" href="{{ distanceUrl }}">Distance</a>
-      · <a class="govuk-link govuk-link--no-visited-state" href="{{ relevanceUrl }}">Relevance</a>
+      | <a class="govuk-link govuk-link--no-visited-state" href="{{ relevanceUrl }}">Relevance</a>
     {% endif %}
   </span>
 </p>
