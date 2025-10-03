@@ -1,0 +1,331 @@
+{% extends "./layouts/_QUESTION.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Where would you like to study?" %}
+{% set withoutDescription = "true" %}
+
+
+{% block service %}
+<form action="interests" method="post" novalidate>
+
+  <h1 class="govuk-heading-l">
+    Where do you want to study?
+  </h1>
+
+  <p>You can search anywhere in England.</p>
+
+  <p>However, some courses are only available to people living in the local area. This is more common for short courses or those aiming to help you find employment. And can apply even if it is online training. Check with the provider if you are unsure. </p>
+
+  <div class="govuk-form-group">
+    <h1 class="govuk-label-wrapper">
+      <label class="govuk-label govuk-label--m" for="country">
+        Enter a town, city or postcode (optional)
+      </label>
+    </h1>
+    <select class="govuk-select" id="location" name="location"
+      data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+      <option value="" selected disabled>Select an option</option>
+      <option value="Abingdon">Abingdon</option>
+<option value="Alnwick">Alnwick</option>
+<option value="Altrincham">Altrincham</option>
+<option value="Amersham">Amersham</option>
+<option value="Andover">Andover</option>
+<option value="Ashford">Ashford</option>
+<option value="Ashby-de-la-Zouch">Ashby-de-la-Zouch</option>
+<option value="Aylesbury">Aylesbury</option>
+<option value="Banbury">Banbury</option>
+<option value="Barnsley">Barnsley</option>
+<option value="Barrow-in-Furness">Barrow-in-Furness</option>
+<option value="Basildon">Basildon</option>
+<option value="Basingstoke">Basingstoke</option>
+<option value="Bath">Bath</option>
+<option value="Bedford">Bedford</option>
+<option value="Beverley">Beverley</option>
+<option value="Bicester">Bicester</option>
+<option value="Bideford">Bideford</option>
+<option value="Birmingham">Birmingham</option>
+<option value="Blackburn">Blackburn</option>
+<option value="Blackpool">Blackpool</option>
+<option value="Bognor Regis">Bognor Regis</option>
+<option value="Bolton">Bolton</option>
+<option value="Bootle">Bootle</option>
+<option value="Bournemouth">Bournemouth</option>
+<option value="Bracknell">Bracknell</option>
+<option value="Bradford">Bradford</option>
+<option value="Braintree">Braintree</option>
+<option value="Brecon">Brecon</option>
+<option value="Brentwood">Brentwood</option>
+<option value="Bridgwater">Bridgwater</option>
+<option value="Bridlington">Bridlington</option>
+<option value="Bridport">Bridport</option>
+<option value="Brighton and Hove">Brighton and Hove</option>
+<option value="Bristol">Bristol</option>
+<option value="Bromley">Bromley</option>
+<option value="Burnley">Burnley</option>
+<option value="Burton upon Trent">Burton upon Trent</option>
+<option value="Bury">Bury</option>
+<option value="Bury St Edmunds">Bury St Edmunds</option>
+<option value="Cambridge">Cambridge</option>
+<option value="Canterbury">Canterbury</option>
+<option value="Carlisle">Carlisle</option>
+<option value="Castleford">Castleford</option>
+<option value="Chatham">Chatham</option>
+<option value="Chelmsford">Chelmsford</option>
+<option value="Cheltenham">Cheltenham</option>
+<option value="Chester">Chester</option>
+<option value="Chesterfield">Chesterfield</option>
+<option value="Chichester">Chichester</option>
+<option value="Chorley">Chorley</option>
+<option value="Clacton-on-Sea">Clacton-on-Sea</option>
+<option value="Colchester">Colchester</option>
+<option value="Corby">Corby</option>
+<option value="Coventry">Coventry</option>
+<option value="Crewe">Crewe</option>
+<option value="Darlington">Darlington</option>
+<option value="Dartford">Dartford</option>
+<option value="Deal">Deal</option>
+<option value="Derby">Derby</option>
+<option value="Doncaster">Doncaster</option>
+<option value="Dorchester">Dorchester</option>
+<option value="Dover">Dover</option>
+<option value="Dudley">Dudley</option>
+<option value="Durham">Durham</option>
+<option value="Eastbourne">Eastbourne</option>
+<option value="Eastleigh">Eastleigh</option>
+<option value="Ebbw Vale">Ebbw Vale</option>
+<option value="Egham">Egham</option>
+<option value="Ellesmere Port">Ellesmere Port</option>
+<option value="Ely">Ely</option>
+<option value="Enfield">Enfield</option>
+<option value="Epsom">Epsom</option>
+<option value="Exeter">Exeter</option>
+<option value="Exmouth">Exmouth</option>
+<option value="Falmouth">Falmouth</option>
+<option value="Fareham">Fareham</option>
+<option value="Farnborough">Farnborough</option>
+<option value="Farnham">Farnham</option>
+<option value="Felixstowe">Felixstowe</option>
+<option value="Fleet">Fleet</option>
+<option value="Folkestone">Folkestone</option>
+<option value="Gateshead">Gateshead</option>
+<option value="Gillingham">Gillingham</option>
+<option value="Gloucester">Gloucester</option>
+<option value="Grantham">Grantham</option>
+<option value="Gravesend">Gravesend</option>
+<option value="Grays">Grays</option>
+<option value="Great Malvern">Great Malvern</option>
+<option value="Great Yarmouth">Great Yarmouth</option>
+<option value="Grimsby">Grimsby</option>
+<option value="Guildford">Guildford</option>
+<option value="Harlow">Harlow</option>
+<option value="Harrogate">Harrogate</option>
+<option value="Hartlepool">Hartlepool</option>
+<option value="Hastings">Hastings</option>
+<option value="Hatfield">Hatfield</option>
+<option value="Havant">Havant</option>
+<option value="Hemel Hempstead">Hemel Hempstead</option>
+<option value="Hereford">Hereford</option>
+<option value="Hertford">Hertford</option>
+<option value="High Wycombe">High Wycombe</option>
+<option value="Hinckley">Hinckley</option>
+<option value="Huddersfield">Huddersfield</option>
+<option value="Hull">Hull</option>
+<option value="Huntingdon">Huntingdon</option>
+<option value="Ilford">Ilford</option>
+<option value="Ipswich">Ipswich</option>
+<option value="Isleworth">Isleworth</option>
+<option value="Keighley">Keighley</option>
+<option value="Kendal">Kendal</option>
+<option value="Kidderminster">Kidderminster</option>
+<option value="King's Lynn">King's Lynn</option>
+<option value="Kingston upon Thames">Kingston upon Thames</option>
+<option value="Knaresborough">Knaresborough</option>
+<option value="Lancaster">Lancaster</option>
+<option value="Leamington Spa">Leamington Spa</option>
+<option value="Leatherhead">Leatherhead</option>
+<option value="Leeds">Leeds</option>
+<option value="Leicester">Leicester</option>
+<option value="Lewes">Lewes</option>
+<option value="Lichfield">Lichfield</option>
+<option value="Lincoln">Lincoln</option>
+<option value="Littlehampton">Littlehampton</option>
+<option value="Liverpool">Liverpool</option>
+<option value="London">London</option>
+<option value="Loughborough">Loughborough</option>
+<option value="Louth">Louth</option>
+<option value="Luton">Luton</option>
+<option value="Macclesfield">Macclesfield</option>
+<option value="Maidstone">Maidstone</option>
+<option value="Maldon">Maldon</option>
+<option value="Malton">Malton</option>
+<option value="Manchester">Manchester</option>
+<option value="Mansfield">Mansfield</option>
+<option value="Margate">Margate</option>
+<option value="Matlock">Matlock</option>
+<option value="Middlesbrough">Middlesbrough</option>
+<option value="Milton Keynes">Milton Keynes</option>
+<option value="Morecambe">Morecambe</option>
+<option value="Newark-on-Trent">Newark-on-Trent</option>
+<option value="Newcastle upon Tyne">Newcastle upon Tyne</option>
+<option value="Newcastle-under-Lyme">Newcastle-under-Lyme</option>
+<option value="Newport (Isle of Wight)">Newport (Isle of Wight)</option>
+<option value="Northallerton">Northallerton</option>
+<option value="Northampton">Northampton</option>
+<option value="Northwich">Northwich</option>
+<option value="Norwich">Norwich</option>
+<option value="Nottingham">Nottingham</option>
+<option value="Nuneaton">Nuneaton</option>
+<option value="Oldham">Oldham</option>
+<option value="Ormskirk">Ormskirk</option>
+<option value="Oxford">Oxford</option>
+<option value="Paignton">Paignton</option>
+<option value="Penzance">Penzance</option>
+<option value="Peterborough">Peterborough</option>
+<option value="Plymouth">Plymouth</option>
+<option value="Poole">Poole</option>
+<option value="Portsmouth">Portsmouth</option>
+<option value="Preston">Preston</option>
+<option value="Reading">Reading</option>
+<option value="Redcar">Redcar</option>
+<option value="Redditch">Redditch</option>
+<option value="Reigate">Reigate</option>
+<option value="Richmond">Richmond</option>
+<option value="Ripon">Ripon</option>
+<option value="Rochdale">Rochdale</option>
+<option value="Rochester">Rochester</option>
+<option value="Rotherham">Rotherham</option>
+<option value="Rugby">Rugby</option>
+<option value="Runcorn">Runcorn</option>
+<option value="St Albans">St Albans</option>
+<option value="St Helens">St Helens</option>
+<option value="Salford">Salford</option>
+<option value="Salisbury">Salisbury</option>
+<option value="Scarborough">Scarborough</option>
+<option value="Scunthorpe">Scunthorpe</option>
+<option value="Sevenoaks">Sevenoaks</option>
+<option value="Sheffield">Sheffield</option>
+<option value="Shrewsbury">Shrewsbury</option>
+<option value="Solihull">Solihull</option>
+<option value="South Shields">South Shields</option>
+<option value="Southampton">Southampton</option>
+<option value="Southend-on-Sea">Southend-on-Sea</option>
+<option value="Southport">Southport</option>
+<option value="Southsea">Southsea</option>
+<option value="Staines-upon-Thames">Staines-upon-Thames</option>
+<option value="Stafford">Stafford</option>
+<option value="Staines">Staines</option>
+<option value="Stevenage">Stevenage</option>
+<option value="Stockport">Stockport</option>
+<option value="Stockton-on-Tees">Stockton-on-Tees</option>
+<option value="Stoke-on-Trent">Stoke-on-Trent</option>
+<option value="Stratford-upon-Avon">Stratford-upon-Avon</option>
+<option value="Sunderland">Sunderland</option>
+<option value="Surbiton">Surbiton</option>
+<option value="Sutton Coldfield">Sutton Coldfield</option>
+<option value="Sutton-in-Ashfield">Sutton-in-Ashfield</option>
+<option value="Swansea">Swansea</option>
+<option value="Swindon">Swindon</option>
+<option value="Taunton">Taunton</option>
+<option value="Telford">Telford</option>
+<option value="Thamesmead">Thamesmead</option>
+<option value="Thurrock">Thurrock</option>
+<option value="Tiverton">Tiverton</option>
+<option value="Torquay">Torquay</option>
+<option value="Truro">Truro</option>
+<option value="Tunbridge Wells">Tunbridge Wells</option>
+<option value="Uckfield">Uckfield</option>
+<option value="Wakefield">Wakefield</option>
+<option value="Walsall">Walsall</option>
+<option value="Warrington">Warrington</option>
+<option value="Warwick">Warwick</option>
+<option value="Watford">Watford</option>
+<option value="Wellingborough">Wellingborough</option>
+<option value="Wells">Wells</option>
+<option value="Welwyn Garden City">Welwyn Garden City</option>
+<option value="West Bromwich">West Bromwich</option>
+<option value="Weston-super-Mare">Weston-super-Mare</option>
+<option value="Weymouth">Weymouth</option>
+<option value="Whitehaven">Whitehaven</option>
+<option value="Widnes">Widnes</option>
+<option value="Wigan">Wigan</option>
+<option value="Winchester">Winchester</option>
+<option value="Windsor">Windsor</option>
+<option value="Wirral">Wirral</option>
+<option value="Woking">Woking</option>
+<option value="Wokingham">Wokingham</option>
+<option value="Wolverhampton">Wolverhampton</option>
+<option value="Worcester">Worcester</option>
+<option value="Workington">Workington</option>
+<option value="Worthing">Worthing</option>
+<option value="Wrexham">Wrexham</option>
+<option value="Yeovil">Yeovil</option>
+<option value="York">York</option>
+
+    </select>
+  </div>
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+        <h1 class="govuk-fieldset__heading">
+          How far are you able to travel? (optional)
+        </h1>
+      </legend>
+      <div class="govuk-radios" data-module="govuk-radios">
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="travel-location-2" name="travel-location" type="radio" value="2 miles">
+          <label class="govuk-label govuk-radios__label" for="travel-location-2">
+            Up to 2 miles
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="travel-location-3" name="travel-location" type="radio" value="5 miles">
+          <label class="govuk-label govuk-radios__label" for="travel-location-3">
+            Up to 5 miles
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="travel-location-4" name="travel-location" type="radio" value="10 miles">
+          <label class="govuk-label govuk-radios__label" for="travel-location-4">
+            Up to 10 miles
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="travel-location-5" name="travel-location" type="radio" value="15 miles">
+          <label class="govuk-label govuk-radios__label" for="travel-location-5">
+            Up to 15 miles
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="travel-location-6" name="travel-location" type="radio" value="30 miles">
+          <label class="govuk-label govuk-radios__label" for="travel-location-6">
+            Up to 30 miles
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="travel-location-7" name="travel-location" type="radio" value="Over 30 miles">
+          <label class="govuk-label govuk-radios__label" for="travel-location-7">
+            Over 30 miles
+          </label>
+        </div>
+
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="govuk-button-group">
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+    </div>
+
+
+    </div>
+  </form>
+
+  </div>
+</div>
+
+{% endblock %}

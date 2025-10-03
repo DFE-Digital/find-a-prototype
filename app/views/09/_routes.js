@@ -224,7 +224,7 @@ router.get("/load-courses", function (req, res) {
   }));
 
   // 🖥️ Render page
-  res.render("08/courses", {
+  res.render("09/courses", {
     courses: paginatedCourses,
     currentPage: page,
     totalPages,
@@ -252,7 +252,7 @@ router.get("/load-courses", function (req, res) {
 
 
 router.get('/course/:slug', function (req, res) {
-    console.log("✅ Reached /08/course/:slug");
+    console.log("✅ Reached /09/course/:slug");
     const slug = req.params.slug;
   
     let coursesData = [];
@@ -281,7 +281,7 @@ router.get('/course/:slug', function (req, res) {
       return res.status(404).send("Course not found");
     }
   
-    res.render("08/course-detail", { course });
+    res.render("09/course-detail", { course });
   });
   
   

@@ -1,0 +1,200 @@
+{% extends "./layouts/_QUESTION.html" %}
+
+{% set back = "true" %}
+{% set pageHeading = "Where would you like to study?" %}
+{% set withoutDescription = "true" %}
+
+
+{% block service %}
+<form method="post" action="/search">
+  <div class="govuk-form-group" id="multi-add-group">
+    <label class="govuk-label govuk-label--m" for="multi-add-input">
+      Add courses, subjects, jobs or career types
+    </label>
+    <div id="multi-add-hint" class="govuk-hint">
+      Start typing and press Enter to add. You can paste several separated by commas or new lines.
+    </div>
+
+    <!-- Combobox input -->
+    <div class="govuk-input__wrapper">
+      <input
+        class="govuk-input"
+        id="multi-add-input"
+        name="multi-add-input"
+        type="text"
+        aria-describedby="multi-add-hint"
+        role="combobox"
+        aria-autocomplete="list"
+        aria-expanded="false"
+        aria-owns="multi-add-listbox"
+        autocomplete="off">
+      <button class="govuk-button govuk-button--secondary" name="action" value="add" type="submit">
+        Add
+      </button>
+    </div>
+
+    <!-- Suggestions listbox (hidden without JS) -->
+    <div class="govuk-!-margin-top-1" id="multi-add-suggestions" hidden>
+      <ul id="multi-add-listbox" role="listbox" class="govuk-list govuk-list--spaced"></ul>
+    </div>
+
+    <!-- Selected tokens -->
+    <div class="govuk-!-margin-top-3" id="multi-add-tokens" aria-live="polite">
+      <!-- Example server-rendered tokens -->
+      <!--
+      <span class="govuk-tag govuk-tag--grey">
+        Physics
+        <button type="submit" name="remove" value="physics" class="govuk-link govuk-link--no-visited-state govuk-!-margin-left-2">
+          <span class="govuk-visually-hidden">Remove </span>×
+        </button>
+        <input type="hidden" name="selected[]" value="subject:physics">
+      </span>
+      -->
+    </div>
+
+    <div class="govuk-hint govuk-!-margin-top-2" id="multi-add-count">
+      You can add up to 10 items.
+    </div>
+
+    <details class="govuk-details govuk-!-margin-top-2">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">What can I add?</span>
+      </summary>
+      <div class="govuk-details__text">
+        Examples: “English degree”, “Physics”, “Apprenticeship”, “Nurse”, “Software developer”.
+      </div>
+    </details>
+  </div>
+
+  <button class="govuk-button" type="submit" name="action" value="continue">
+    Continue
+  </button>
+</form>
+
+
+<script>
+(function() {
+  const input = document.getElementById('multi-add-input');
+  const tokens = document.getElementById('multi-add-tokens');
+  const listbox = document.getElementById('multi-add-listbox');
+  const suggestionsWrap = document.getElementById('multi-add-suggestions');
+  const MAX = 10;
+  const state = new Map(); // key -> { label, canonical }
+
+  function addToken(item) {
+    const key = (item.canonical || item.label).toLowerCase();
+    if (state.has(key) || state.size >= MAX) return;
+
+    state.set(key, item);
+
+    const tag = document.createElement('span');
+    tag.className = 'govuk-tag govuk-tag--grey govuk-!-margin-right-2 govuk-!-margin-bottom-2';
+    tag.innerHTML = `
+      ${item.label}
+      <button type="button" class="govuk-link govuk-link--no-visited-state govuk-!-margin-left-2" data-remove="${key}">
+        <span class="govuk-visually-hidden">Remove ${item.label}</span>×
+      </button>
+      <input type="hidden" name="selected[]" value="${item.type || 'text'}:${item.canonical || item.label}">
+    `;
+    tokens.appendChild(tag);
+    announce(`${item.label} added`);
+  }
+
+  function removeToken(key) {
+    state.delete(key);
+    [...tokens.querySelectorAll('[data-remove]')].forEach(btn => {
+      if (btn.dataset.remove === key) btn.closest('span').remove();
+    });
+  }
+
+  function showSuggestions(items) {
+    listbox.innerHTML = '';
+    if (!items.length) {
+      suggestionsWrap.hidden = true;
+      input.setAttribute('aria-expanded', 'false');
+      return;
+    }
+    items.forEach((it, idx) => {
+      const li = document.createElement('li');
+      li.role = 'option';
+      li.id = `opt-${idx}`;
+      li.className = 'govuk-!-padding-1 govuk-!-margin-bottom-1 govuk-!-border-bottom-1';
+      li.tabIndex = -1;
+      li.dataset.payload = JSON.stringify(it);
+      li.innerHTML = `<button type="button" class="govuk-link govuk-link--no-visited-state">${it.label}</button>
+        ${it.meta ? `<div class="govuk-hint govuk-!-margin-top-1">${it.meta}</div>` : ''}`;
+      listbox.appendChild(li);
+    });
+    suggestionsWrap.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+
+  function fetchSuggestions(q) {
+    // Replace with your API: return [{label, canonical, type, meta, confidence}]
+    // For prototype: fake a couple of items.
+    if (!q || q.length < 2) return showSuggestions([]);
+    const mock = [
+      { label: `BSc ${q}`, canonical: `degree:${q}`, type: 'course', meta: 'Course • high confidence' },
+      { label: q.charAt(0).toUpperCase() + q.slice(1), canonical: `subject:${q}`, type: 'subject', meta: 'Subject • medium confidence' },
+      { label: `${q} apprenticeship`, canonical: `apprenticeship:${q}`, type: 'course', meta: 'Apprenticeship • suggestion' }
+    ];
+    showSuggestions(mock);
+  }
+
+  // Announce helper
+  const live = document.createElement('div');
+  live.className = 'govuk-visually-hidden';
+  live.setAttribute('aria-live','polite');
+  tokens.parentNode.appendChild(live);
+  function announce(msg){ live.textContent = msg; }
+
+  // Input handlers
+  input.addEventListener('input', e => fetchSuggestions(e.target.value));
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      const value = input.value.trim();
+      if (value) addToken({ label: value });
+      input.value = '';
+      showSuggestions([]);
+    } else if (e.key === 'Escape') {
+      showSuggestions([]);
+    }
+  });
+
+  // Paste multiple
+  input.addEventListener('paste', e => {
+    const text = (e.clipboardData || window.clipboardData).getData('text');
+    if (!text) return;
+    e.preventDefault();
+    text.split(/[\n,]+/).map(s => s.trim()).filter(Boolean).slice(0, MAX - state.size)
+      .forEach(v => addToken({ label: v }));
+    input.value = '';
+    showSuggestions([]);
+  });
+
+  // Click suggestion
+  listbox.addEventListener('click', e => {
+    const li = e.target.closest('li');
+    if (!li) return;
+    const item = JSON.parse(li.dataset.payload);
+    addToken(item);
+    input.value = '';
+    showSuggestions([]);
+  });
+
+  // Remove token
+  tokens.addEventListener('click', e => {
+    const btn = e.target.closest('[data-remove]');
+    if (!btn) return;
+    removeToken(btn.dataset.remove);
+    announce('Item removed');
+  });
+})();
+</script>
+
+  </div>
+</div>
+
+{% endblock %}

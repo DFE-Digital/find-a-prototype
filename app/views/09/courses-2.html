@@ -10,29 +10,6 @@
 
 <div class="govuk-grid-row">
 
-  <div class="govuk-grid-column-full">
-    <h1 class="govuk-heading-l">Your search results</h1>
-    <p class="govuk-body-l">Showing {{ totalResults }} courses {% if data['location'] %} near <strong>{{ data['location'] }}</strong>{% endif %} {% if data['interest-1'] %} for <strong> {{ data['interest-1'] }}  </strong> {% endif %} {% if data['interest-2'] %}, <strong> {{ data['interest-2'] }}  </strong> {% endif %} {% if data['interest-3'] %}, <strong> {{ data['interest-3'] }}  </strong> {% endif %}  
-      {% if data['qualification-level'] %} at <strong> 
-    {% for level in data['qualification-level'] %}
-      {% if level == 'level-1-2' %}
-         Level 1 or 2,
-      {% elseif level == 'level-3' %}
-         Level 3
-      {% elseif level == 'level-4-7' %}
-         Level 4 to 7,
-      {% endif %}
-    {% endfor %}
-  {% endif %}</strong></p>
-
-      <p><a href="clear-session-and-go">Search again</a> </p>
-  
-      <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
-
-    </div>
-
-
-  
   <div class="govuk-grid-column-one-third">
 
     <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-3 govuk-!-display-none-print" 
@@ -81,6 +58,17 @@ Show filters
     {% endif %}
     
 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="option-select-filter-location">
+          Enter a postcode, town or city
+        </label>
+        <input class="govuk-input"
+               type="text"
+               id="option-select-filter-location"
+               name="option-select-filter-location"
+               value="{{ selectedLocation }}">
+      </div>
 
       {{ govukSelect({
         id: "travel-location",
@@ -214,7 +202,7 @@ Show filters
       <button class="govuk-button" type="submit">Apply filters</button>
 
       <p class="govuk-body">
-        <a href="/08/load-courses" class="govuk-link" id="clear-all-link">Clear all filters</a>
+        <a href="/06/load-courses" class="govuk-link" id="clear-all-link">Clear all filters</a>
       </p>
       
     </form>
@@ -227,10 +215,13 @@ Show filters
 
   <div class="govuk-grid-column-two-thirds">
 
-<h2 class="govuk-heading-m">Available courses</h2>
+<h1 class="govuk-heading-l">Available courses</h1>
 
+<p><a href="clear-session-and-go">Search again</a> </p>
 
-<!-- <p class="govuk-body govuk-!-margin-bottom-6">
+<p>{{ totalResults }} courses found.</p>
+
+<p class="govuk-body govuk-!-margin-bottom-6">
   <span class="govuk-!-font-weight-bold">Sort courses by:</span> 
 <span class="govuk-!-margin-left-1 govuk-!-margin-right-1">
   
@@ -240,39 +231,6 @@ Show filters
 <span class="govuk-!-margin-left-2 govuk-!-margin-right-1">
     <a href="/records?sortOrder=lastName" class="govuk-link govuk-link--no-visited-state">Relevance</a>
 </span>
-</p>
--->
-
-{# Build a base QS that preserves filters + travel distance + location/subject #}
-{% set filterQuery = "" %}
-{% for qual in selectedQualifications %}
-  {% if qual != "_unchecked" and qual %}
-    {% set filterQuery = filterQuery + "&filter=" + qual %}
-  {% endif %}
-{% endfor %}
-{% set filterQuery = filterQuery
-  + "&option-select-filter-location=" + (selectedLocation or '')
-  + "&subject-filter=" + (selectedSubject or '')
-  + "&travel-location=" + (travelDistance or '')
-%}
-
-{% set distanceUrl  = "?page=1" + filterQuery + "&sort=distance" %}
-{% set relevanceUrl = "?page=1" + filterQuery + "&sort=relevance" %}
-
-<p class="govuk-body govuk-!-margin-bottom-6">
-  <span class="govuk-!-font-weight-bold">Sort courses by:</span>
-  <span class="govuk-!-margin-left-2">
-    {% if sort == "distance" %}
-      <span aria-current="true">Distance</span>
-      · <a class="govuk-link govuk-link--no-visited-state" href="{{ relevanceUrl }}">Relevance</a>
-    {% elseif sort == "relevance" %}
-      <a class="govuk-link govuk-link--no-visited-state" href="{{ distanceUrl }}">Distance</a>
-      · <span aria-current="true">Relevance</span>
-    {% else %}
-      <a class="govuk-link govuk-link--no-visited-state" href="{{ distanceUrl }}">Distance</a>
-      · <a class="govuk-link govuk-link--no-visited-state" href="{{ relevanceUrl }}">Relevance</a>
-    {% endif %}
-  </span>
 </p>
 
 
@@ -306,7 +264,7 @@ Show filters
           Location
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ course.location }}{% if course.distance %}, {{ course.distance }}{% endif %}
+          {{ course.location }}
         </dd>
       </div>
       <div class="govuk-summary-list__row">
@@ -345,19 +303,7 @@ Show filters
     {% set filterQuery = filterQuery + "&filter=" + qual %}
   {% endif %}
 {% endfor %}
-
-{# Always preserve location/subject #}
-{% set filterQuery = filterQuery
-  + "&option-select-filter-location=" + (selectedLocation or '')
-  + "&subject-filter=" + (selectedSubject or '')
-%}
-
-{# Preserve travel distance and sort choice #}
-{% set filterQuery = filterQuery
-  + "&travel-location=" + (travelDistance or '')
-  + "&sort=" + (query.sort or '')
-%}
-
+{% set filterQuery = filterQuery + "&option-select-filter-location=" + selectedLocation + "&subject-filter=" + selectedSubject %}
 
 <nav class="govuk-pagination" aria-label="Pagination">
 
@@ -525,8 +471,6 @@ Show filters
       }
     });
   });
-
-  
 </script>
 
 {% endblock %}

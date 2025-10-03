@@ -1,0 +1,727 @@
+{% extends "./layouts/_RESULTS.html" %}
+
+
+
+{% set withoutDescription = "true" %}
+{% set pageHeading = "Search results" %}
+{% set pageDescription = "Use the filters to explore these nearby courses." %}
+
+{% block content %}
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+
+    <h1 class="govuk-heading-l">Available Courses</h1>
+
+    <ul class="govuk-list govuk-list--bullet">
+      {% for course in courses %}
+        <li>
+          <strong>{{ course["Course name"] }}</strong><br>
+          {{ course["Provider"] }}, {{ course["Location"] }}<br>
+          {{ course["Qualification type"] }}, {{ course["Full or part time"] }}<br>
+          Entry requirements: {{ course["Entry requirements"] }}<br>
+          {{ course["Overview of the course"] }}
+        </li>
+      {% endfor %}
+    </ul>
+
+    <h1 class="govuk-heading-l">2 results</h1>
+  
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+
+    <hr class="govuk-section-break govuk-section-break--s govuk-section-break">
+
+
+    <div class="filter-container">
+
+      <div class="filter-search-terms">
+
+
+    <form id="filter-form" class="govuk-form-group" style="margin-bottom: 10px;">
+
+      <div class="filter-heading">
+
+      <h2 class="govuk-heading-m" style="margin-bottom: 12px;">Filter</h2>
+
+      </div>
+    
+    </div>
+
+      <div class="filter-buttons">
+
+      <button type="button" class="govuk-button" id="apply-filters">
+        Apply filters
+      </button>
+
+      <p><a href="#" id="clear-filters" class="govuk-link">Clear all filters</a></p>
+
+      </div>
+
+
+
+    <div class="filter-list">
+
+      <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+        <div class="govuk-accordion__section">
+          <div class="govuk-accordion__section-header">
+            <h2 class="govuk-accordion__section-heading">
+              <span class="govuk-accordion__section-button" id="accordion-default-heading-1">
+                Qualification type
+              </span>
+            </h2>
+          </div>
+          <div id="accordion-default-content-1" class="govuk-accordion__section-content">
+            <div class="gem-c-option-select__container js-options-container" style="height: 254.333px;">
+              <div class="gem-c-option-select__container-inner js-auto-height-inner">
+                <span id="option-select-checkboxes-count-" class="gem-c-option-select__count govuk-visually-hidden"
+                  aria-live="polite" data-single="option found" data-multiple="options found" data-selected="selected">
+                </span>
+                <fieldset class="govuk-fieldset" aria-describedby="filters-hint">
+                  <div class="govuk-checkboxes govuk-checkboxes--small">
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="filter-a-level" name="filter" type="checkbox"
+                        value="A Level">
+                      <label class="govuk-label govuk-checkboxes__label" for="filter-a-level">A Level</label>
+                    </div>
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="filter-apprenticeship" name="filter" type="checkbox"
+                        value="Apprenticeship">
+                      <label class="govuk-label govuk-checkboxes__label" for="filter-apprenticeship">Apprenticeship</label>
+                    </div>
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="filter-btec" name="filter" type="checkbox" value="BTEC">
+                      <label class="govuk-label govuk-checkboxes__label" for="filter-btec">BTEC</label>
+                    </div>
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="filter-diploma" name="filter" type="checkbox"
+                        value="Diploma">
+                      <label class="govuk-label govuk-checkboxes__label" for="filter-diploma">Diploma</label>
+                    </div>
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="filter-diploma" name="filter" type="checkbox"
+                        value="Diploma">
+                      <label class="govuk-label govuk-checkboxes__label" for="filter-diploma">Degree</label>
+                    </div>
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="filter-t-level" name="filter" type="checkbox"
+                        value="T Level">
+                      <label class="govuk-label govuk-checkboxes__label" for="filter-t-level">T Level</label>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="govuk-accordion__section">
+          <div class="govuk-accordion__section-header">
+            <h2 class="govuk-accordion__section-heading">
+              <span class="govuk-accordion__section-button" id="accordion-default-heading-2">
+                Location
+              </span>
+            </h2>
+          </div>
+          <div id="accordion-default-content-2" class="govuk-accordion__section-content">
+            <label for="option-select-filter-location" class="govuk-label">
+              Enter a postcode, town or city
+            </label>
+            <input name="option-select-filter-location" id="option-select-filter-location"
+              class="govuk-input" type="text"
+              aria-describedby="option-select-checkboxes-count-" aria-controls="option-select-checkboxes-">
+            <p></p>
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="sort">
+                Within
+              </label>
+              <select class="govuk-select" id="sort" name="sort">
+                <option value="published">1 mile</option>
+                <option value="updated" selected>2 miles</option>
+                <option value="views">5 miles</option>
+                <option value="comments">10 miles</option>
+                <option value="comments">Over 20 miles</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="govuk-accordion__section">
+          <div class="govuk-accordion__section-header">
+            <h2 class="govuk-accordion__section-heading">
+              <span class="govuk-accordion__section-button" id="accordion-default-heading-4">
+                Subject or career keywords
+              </span>
+            </h2>
+          </div>
+          <div id="accordion-default-content-4" class="govuk-accordion__section-content">
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="subject-filter">
+                Subject or career keywords
+              </label>
+              <input class="govuk-input" id="subject-filter" name="subject-filter" type="text">
+            </div>
+          </div>
+        </div>
+        <div class="govuk-accordion__section">
+          <div class="govuk-accordion__section-header">
+            <h2 class="govuk-accordion__section-heading">
+              <span class="govuk-accordion__section-button" id="accordion-default-heading-3">
+                Level
+              </span>
+            </h2>
+          </div>
+          <div id="accordion-default-content-3" class="govuk-accordion__section-content">
+                <fieldset class="govuk-fieldset" aria-describedby="filters-hint">
+                  <div class="govuk-checkboxes govuk-checkboxes--small">
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="filter-level-1" name="filter" type="checkbox"
+                        value="Level 1 or 2 (like GCSEs)">
+                      <label class="govuk-label govuk-checkboxes__label" for="filter-level-1">Level 1 or 2 (like GCSEs)</label>
+                    </div>
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="filter-level-3" name="filter" type="checkbox"
+                        value="Level 3 (like BTECs and A Levels)">
+                      <label class="govuk-label govuk-checkboxes__label" for="filter-level-3">Level 3 (like BTECs and A Levels)</label>
+                    </div>
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="filter-level-4" name="filter" type="checkbox" value="Level 4 to 7 (like diplomas and degrees)">
+                      <label class="govuk-label govuk-checkboxes__label" for="filter-level-4">Level 4 to 7 (like diplomas and degrees)</label>
+                    </div>
+                  </div>
+                </fieldset>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="govuk-button" id="apply-filters">
+        Apply filters
+      </button>
+    </div>
+</div>
+</div>
+
+
+
+     <!-- 
+
+      <div class="gem-c-option-select js-collapsible" data-module="option-select">
+        <h3 class="gem-c-option-select__heading js-container-heading">
+          <div class="gem-c-option-select__toggle js-container-toggle">
+            <button class="js-container-button gem-c-option-select__title gem-c-option-select__button" type="button"
+              aria-expanded="true" id="" aria-controls="null">Qualification type</button>
+            <svg version="1.1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="0" height="0"
+              class="gem-c-option-select__icon gem-c-option-select__icon--up" aria-hidden="true" focusable="false">
+              <path
+                d="m798.16 609.84l-256-256c-16.683-16.683-43.691-16.683-60.331 0l-256 256c-16.683 16.683-16.683 43.691 0 60.331s43.691
+                  16.683 60.331 0l225.84-225.84 225.84 225.84c16.683 16.683 43.691 16.683 60.331 0s16.683-43.691 0-60.331z">
+              </path>
+            </svg>
+            <svg version="1.1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="0" height="0"
+              class="gem-c-option-select__icon gem-c-option-select__icon--down" aria-hidden="true" focusable="false">
+              <path d="m225.84 414.16l256 256c16.683 16.683 43.691 16.683 60.331 0l256-256c16.683-16.683 16.683-43.691
+                  0-60.331s-43.691-16.683-60.331 0l-225.84 225.84-225.84-225.84c-16.683-16.683-43.691-16.683-60.331 0s-16.683 43.691 0
+                  60.331z"></path>
+            </svg>
+          </div>
+        </h3>
+
+        <div class="gem-c-option-select__container js-options-container" style="height: 254.333px;">
+          <div class="gem-c-option-select__container-inner js-auto-height-inner">
+            <span id="option-select-checkboxes-count-" class="gem-c-option-select__count govuk-visually-hidden"
+              aria-live="polite" data-single="option found" data-multiple="options found" data-selected="selected">
+            </span>
+            <fieldset class="govuk-fieldset" aria-describedby="filters-hint">
+              <div class="govuk-checkboxes govuk-checkboxes--small">
+                <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="filter-a-level" name="filter" type="checkbox"
+                    value="A Level">
+                  <label class="govuk-label govuk-checkboxes__label" for="filter-a-level">A Level</label>
+                </div>
+                <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="filter-apprenticeship" name="filter" type="checkbox"
+                    value="Apprenticeship">
+                  <label class="govuk-label govuk-checkboxes__label" for="filter-apprenticeship">Apprenticeship</label>
+                </div>
+                <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="filter-btec" name="filter" type="checkbox" value="BTEC">
+                  <label class="govuk-label govuk-checkboxes__label" for="filter-btec">BTEC</label>
+                </div>
+                <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="filter-diploma" name="filter" type="checkbox"
+                    value="Diploma">
+                  <label class="govuk-label govuk-checkboxes__label" for="filter-diploma">Diploma</label>
+                </div>
+                <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="filter-diploma" name="filter" type="checkbox"
+                    value="Diploma">
+                  <label class="govuk-label govuk-checkboxes__label" for="filter-diploma">Degree</label>
+                </div>
+                <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="filter-t-level" name="filter" type="checkbox"
+                    value="T Level">
+                  <label class="govuk-label govuk-checkboxes__label" for="filter-t-level">T Level</label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+    </form>
+  </div>
+  <div class="gem-c-option-select js-collapsible" data-module="option-select">
+    <h3 class="gem-c-option-select__heading js-container-heading">
+      <div class="gem-c-option-select__toggle js-container-toggle">
+        <button class="js-container-button gem-c-option-select__title gem-c-option-select__button" type="button"
+          aria-expanded="true" id="" aria-controls="null">Location</button>
+        <svg version="1.1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="0" height="0"
+          class="gem-c-option-select__icon gem-c-option-select__icon--up" aria-hidden="true" focusable="false">
+          <path
+            d="m798.16 609.84l-256-256c-16.683-16.683-43.691-16.683-60.331 0l-256 256c-16.683 16.683-16.683 43.691 0 60.331s43.691
+                    16.683 60.331 0l225.84-225.84 225.84 225.84c16.683 16.683 43.691 16.683 60.331 0s16.683-43.691 0-60.331z">
+          </path>
+        </svg>
+        <svg version="1.1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="0" height="0"
+          class="gem-c-option-select__icon gem-c-option-select__icon--down" aria-hidden="true" focusable="false">
+          <path d="m225.84 414.16l256 256c16.683 16.683 43.691 16.683 60.331 0l256-256c16.683-16.683 16.683-43.691
+                    0-60.331s-43.691-16.683-60.331 0l-225.84 225.84-225.84-225.84c-16.683-16.683-43.691-16.683-60.331 0s-16.683 43.691 0
+                    60.331z"></path>
+        </svg>
+      </div>
+    </h3>
+
+
+
+    <div class="gem-c-option-select__filter">
+      <label for="option-select-filter-location" class="govuk-label govuk-visually-hidden">
+        Enter a postcode, town or city
+      </label>
+      <input name="option-select-filter-location" id="option-select-filter-location"
+        class="gem-c-option-select__filter-input govuk-input" type="text"
+        aria-describedby="option-select-checkboxes-count-" aria-controls="option-select-checkboxes-">
+      <p></p>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="sort">
+          Within
+        </label>
+        <select class="govuk-select" id="sort" name="sort">
+          <option value="published">1 mile</option>
+          <option value="updated" selected>2 miles</option>
+          <option value="views">5 miles</option>
+          <option value="comments">10 miles</option>
+          <option value="comments">Over 20 miles</option>
+        </select>
+      </div>
+    </div>
+    </form>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+
+    <div class="gem-c-option-select js-collapsible" data-module="option-select">
+      <h3 class="gem-c-option-select__heading js-container-heading">
+        <div class="gem-c-option-select__toggle js-container-toggle">
+          <button class="js-container-button gem-c-option-select__title gem-c-option-select__button" type="button"
+            aria-expanded="true" id="" aria-controls="null">Requirements</button>
+          <svg version="1.1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="0" height="0"
+            class="gem-c-option-select__icon gem-c-option-select__icon--up" aria-hidden="true" focusable="false">
+            <path
+              d="m798.16 609.84l-256-256c-16.683-16.683-43.691-16.683-60.331 0l-256 256c-16.683 16.683-16.683 43.691 0 60.331s43.691
+                16.683 60.331 0l225.84-225.84 225.84 225.84c16.683 16.683 43.691 16.683 60.331 0s16.683-43.691 0-60.331z">
+            </path>
+          </svg>
+          <svg version="1.1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="0" height="0"
+            class="gem-c-option-select__icon gem-c-option-select__icon--down" aria-hidden="true" focusable="false">
+            <path d="m225.84 414.16l256 256c16.683 16.683 43.691 16.683 60.331 0l256-256c16.683-16.683 16.683-43.691
+                0-60.331s-43.691-16.683-60.331 0l-225.84 225.84-225.84-225.84c-16.683-16.683-43.691-16.683-60.331 0s-16.683 43.691 0
+                60.331z"></path>
+          </svg>
+        </div>
+      </h3>
+
+      <div class="gem-c-option-select__container js-options-container" style="height: 254.333px;">
+        <div class="gem-c-option-select__container-inner js-auto-height-inner">
+          <span id="option-select-checkboxes-count-" class="gem-c-option-select__count govuk-visually-hidden"
+            aria-live="polite" data-single="option found" data-multiple="options found" data-selected="selected">
+          </span>
+          <fieldset class="govuk-fieldset" aria-describedby="filters-hint">
+            <div class="govuk-checkboxes govuk-checkboxes--small">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="filter-a-level" name="filter" type="checkbox"
+                  value="A Level">
+                <label class="govuk-label govuk-checkboxes__label" for="filter-a-level">A Level</label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="filter-apprenticeship" name="filter" type="checkbox"
+                  value="Apprenticeship">
+                <label class="govuk-label govuk-checkboxes__label" for="filter-apprenticeship">Apprenticeship</label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="filter-btec" name="filter" type="checkbox" value="BTEC">
+                <label class="govuk-label govuk-checkboxes__label" for="filter-btec">BTEC</label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="filter-diploma" name="filter" type="checkbox"
+                  value="Diploma">
+                <label class="govuk-label govuk-checkboxes__label" for="filter-diploma">Diploma</label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="filter-diploma" name="filter" type="checkbox"
+                  value="Diploma">
+                <label class="govuk-label govuk-checkboxes__label" for="filter-diploma">Degree</label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="filter-t-level" name="filter" type="checkbox"
+                  value="T Level">
+                <label class="govuk-label govuk-checkboxes__label" for="filter-t-level">T Level</label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+  </form>
+</div>
+  </div>
+</div>
+
+ -->
+
+
+
+<div class="govuk-grid-column-two-thirds">
+  <div id="active-filters">
+    <h2 id="active-filters-heading" class="govuk-heading-m" style="display: none;">You've searched for:</h2>
+    <div id="selected-filters" class="remove-filters"></div>
+  </div>
+
+  <div id="search-results">
+
+    <div class="govuk-summary-card" data-category="A Level">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          A Level Accounting <a class="card-link" href="course-example" style="margin-right: 10px;"></a>
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link" href="accounting-1">View more details<span class="govuk-visually-hidden"> A Level
+                Accounting</span></a>
+          </li>
+        </ul>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Requirements
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Maths and English GCSE grade 4-9
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Distance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <p>0.12 miles (Manchester)</p>
+              <p>Xaverian College</p>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--orange" style="margin-bottom: 10px;">
+                A Level
+              </strong>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    What is an A Level?
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  <p>A levels are subject-based qualifications usually assessed by exams. You usually choose 3
+                    subjects to study but you can take more or fewer.</p>
+                  <p>You typically study them full time over 2 years, after you've finished GCSEs.</p>
+                </div>
+              </details>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+              1 September 2025
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Duration
+            </dt>
+            <dd class="govuk-summary-list__value">
+              2 years
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="govuk-summary-card" data-category="BTEC">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          BTEC Applied Science <a class="card-link" href="course-example" style="margin-right: 10px;"></a>
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link" href="biology-1">View more details<span class="govuk-visually-hidden"> A Level
+                Accounting</span></a>
+          </li>
+        </ul>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Requirements
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Six passes at GCSE including two at grade 6 or above
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Distance
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <p>0.12 miles (Manchester)</p>
+              <p>Xaverian College</p>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--turquoise" style="margin-bottom: 10px;">
+                BTEC
+              </strong>
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    What is a BTEC?
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  <p>A BTEC, or Business and Technology Education Council qualification, is a work-related
+                    qualification that combines practical learning with theory.</p>
+                  <p>BTECs are an alternative to A-levels.</p>
+                </div>
+              </details>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+              1 September 2025
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Duration
+            </dt>
+            <dd class="govuk-summary-list__value">
+              2 years
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!--
+
+  <div class="govuk-panel govuk-panel--confirmation" data-category="A Level">
+    <h2 class="govuk-panel__title">A Level – English Literature</h2>
+  </div>
+  <div class="govuk-panel govuk-panel--confirmation" data-category="Apprenticeship">
+    <h2 class="govuk-panel__title">Apprenticeship – Digital Marketing</h2>
+  </div>
+  <div class="govuk-panel govuk-panel--confirmation" data-category="BTEC">
+    <h2 class="govuk-panel__title">BTEC – Business Studies</h2>
+  </div>
+  <div class="govuk-panel govuk-panel--confirmation" data-category="Diploma">
+    <h2 class="govuk-panel__title">Diploma – Health and Social Care</h2>
+  </div>
+  <div class="govuk-panel govuk-panel--confirmation" data-category="T Level">
+    <h2 class="govuk-panel__title">T Level – Software Development</h2>
+  </div>
+</div>
+-->
+
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const checkboxes = document.querySelectorAll('input[name="filter"]');
+  const levelCheckboxes = document.querySelectorAll('input[name="level-filter"]');
+  const results = document.querySelectorAll('#search-results > div, #search-results > li');
+  const filterContainer = document.getElementById('selected-filters');
+  const activeFiltersHeading = document.getElementById('active-filters-heading');
+  const keywordInput = document.getElementById('option-select-filter-location');
+  const subjectInput = document.getElementById('subject-filter'); // ✅ New subject input
+  const distanceSelect = document.getElementById('sort');
+  const applyButton = document.getElementById('apply-filters');
+  const clearFiltersLink = document.getElementById('clear-filters');
+
+  let submittedKeyword = '';
+  let submittedSubject = ''; // ✅ New subject state
+  let submittedDistance = '2';
+  let submittedCategories = [];
+  let submittedLevels = [];
+
+  function updateFilters() {
+    const keyword = submittedKeyword;
+    const subject = submittedSubject;
+    const distance = submittedDistance;
+    const categories = submittedCategories;
+    const levels = submittedLevels;
+
+    results.forEach(result => {
+      const category = result.getAttribute('data-category');
+      const level = result.getAttribute('data-level');
+      const text = result.textContent;
+
+      const matchesCategory = categories.length === 0 || categories.includes(category);
+      const matchesLevel = levels.length === 0 || levels.includes(level);
+      const matchesKeyword = keyword === '' || text.toLowerCase().includes(keyword.toLowerCase());
+      const matchesSubject = subject === '' || text.toLowerCase().includes(subject.toLowerCase());
+
+      result.style.display = matchesCategory && matchesLevel && matchesKeyword && matchesSubject ? '' : 'none';
+    });
+
+    filterContainer.innerHTML = '';
+
+    categories.forEach(value => {
+      const link = document.createElement('a');
+      link.href = '#';
+      link.textContent = value;
+      link.setAttribute('data-filter', value);
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const checkbox = Array.from(checkboxes).find(cb => cb.value === value);
+        if (checkbox) checkbox.checked = false;
+        submittedCategories = submittedCategories.filter(c => c !== value);
+        updateFilters();
+      });
+      filterContainer.appendChild(link);
+    });
+
+    levels.forEach(value => {
+      const link = document.createElement('a');
+      link.href = '#';
+      link.textContent = value;
+      link.setAttribute('data-filter', value);
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const checkbox = Array.from(levelCheckboxes).find(cb => cb.value === value);
+        if (checkbox) checkbox.checked = false;
+        submittedLevels = submittedLevels.filter(l => l !== value);
+        updateFilters();
+      });
+      filterContainer.appendChild(link);
+    });
+
+    if (keyword !== '') {
+      const keywordTag = document.createElement('a');
+      keywordTag.href = '#';
+      keywordTag.textContent = keyword;
+      keywordTag.setAttribute('data-filter', 'keyword');
+      keywordTag.addEventListener('click', (e) => {
+        e.preventDefault();
+        submittedKeyword = '';
+        keywordInput.value = '';
+        updateFilters();
+      });
+      filterContainer.appendChild(keywordTag);
+    }
+
+    if (subject !== '') {
+      const subjectTag = document.createElement('a');
+      subjectTag.href = '#';
+      subjectTag.textContent = subject;
+      subjectTag.setAttribute('data-filter', 'subject');
+      subjectTag.addEventListener('click', (e) => {
+        e.preventDefault();
+        submittedSubject = '';
+        subjectInput.value = '';
+        updateFilters();
+      });
+      filterContainer.appendChild(subjectTag);
+    }
+
+    if (distance !== '2') {
+      const distanceLabel = distanceSelect.options[distanceSelect.selectedIndex].text;
+      const distanceTag = document.createElement('a');
+      distanceTag.href = '#';
+      distanceTag.textContent = `Within ${distanceLabel}`;
+      distanceTag.setAttribute('data-filter', 'distance');
+      distanceTag.addEventListener('click', (e) => {
+        e.preventDefault();
+        submittedDistance = '2';
+        distanceSelect.value = '2';
+        updateFilters();
+      });
+      filterContainer.appendChild(distanceTag);
+    }
+
+    const anyFiltersActive =
+      categories.length > 0 ||
+      levels.length > 0 ||
+      keyword !== '' ||
+      subject !== '' ||
+      distance !== '2';
+
+    activeFiltersHeading.style.display = anyFiltersActive ? 'block' : 'none';
+  }
+
+  clearFiltersLink.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    checkboxes.forEach(cb => cb.checked = false);
+    levelCheckboxes.forEach(cb => cb.checked = false);
+    keywordInput.value = '';
+    subjectInput.value = '';
+    submittedKeyword = '';
+    submittedSubject = '';
+    distanceSelect.value = '2';
+    submittedDistance = '2';
+    submittedCategories = [];
+    submittedLevels = [];
+
+    updateFilters();
+  });
+
+  applyButton.addEventListener('click', function () {
+    submittedKeyword = keywordInput.value.trim();
+    submittedSubject = subjectInput.value.trim(); // ✅ Capture subject input
+    submittedDistance = distanceSelect.value;
+    submittedCategories = Array.from(checkboxes)
+      .filter(cb => cb.checked)
+      .map(cb => cb.value);
+    submittedLevels = Array.from(levelCheckboxes)
+      .filter(cb => cb.checked)
+      .map(cb => cb.value);
+
+    updateFilters();
+  });
+
+  updateFilters(); // Initial run
+});
+
+
+</script>
+
+{% endblock %}
