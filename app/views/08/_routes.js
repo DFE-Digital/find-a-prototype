@@ -82,7 +82,7 @@ router.get("/load-courses", function (req, res) {
     (req.query["travel-location"] || req.session.data["travel-location"] || "").trim();
 
   // Accepts "distance" | "relevance" | "" (no sort)
-  const sort = (req.query.sort || "").toLowerCase();
+  const sort = (req.query.sort || "distance").toLowerCase();
 
   // Helpers
   const milesValue = (val) => {
