@@ -54,19 +54,28 @@ router.get("/load-courses", function (req, res) {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
   };
+  
+// ✂️ Split overview into short + remaining (sentence-safe around 450 chars)
+const splitOverview = (str = "", limit = 450) => {
+  const s = String(str || "").trim();
+  if (s.length <= limit) return { short: s, remaining: "" };
 
-  // ✂️ Split overview into short + remaining (word-safe around 450 chars)
-  const splitOverview = (str = "", limit = 450) => {
-    const s = String(str || "").trim();
-    if (s.length <= limit) return { short: s, remaining: "" };
+  // Find the last full stop before the limit
+  let cut = s.lastIndexOf(".", limit);
 
-    // Find last space before limit to avoid mid-word cut
-    let cut = s.lastIndexOf(" ", limit);
-    if (cut < Math.floor(limit * 0.7)) cut = limit; // fallback: hard cut if no decent space found
-    const short = s.slice(0, cut).trim();
-    const remaining = s.slice(cut).trim();
-    return { short, remaining };
-  };
+  // If there isn't a full stop before limit, fall back to last space
+  if (cut === -1 || cut < limit * 0.6) {
+    cut = s.lastIndexOf(" ", limit);
+  }
+
+  // If still not found, just hard cut
+  if (cut < 0) cut = limit;
+
+  const short = s.slice(0, cut + 1).trim(); // include the full stop
+  const remaining = s.slice(cut + 1).trim();
+
+  return { short, remaining };
+};
 
   // 🧠 Load inputs
   const age = req.session.data["age"] || req.query["age"];
