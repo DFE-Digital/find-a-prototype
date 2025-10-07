@@ -192,7 +192,7 @@ Show filters
   </legend>
 
   <div class="govuk-checkboxes govuk-checkboxes--small">
-    {% for method in ["Online", "Classroom based", "Work based", "Blended learning"] %}
+    {% for method in ["Online", "Classroom based", "Work based", "Hybrid (online and classroom based)"] %}
       <div class="govuk-checkboxes__item">
         <input class="govuk-checkboxes__input" id="learning-method-{{ loop.index }}" name="learning-method" type="checkbox" value="{{ method }}">
         <label class="govuk-label govuk-checkboxes__label" for="learning-method-{{ loop.index }}">
@@ -230,7 +230,7 @@ Show filters
   </legend>
 
   <div class="govuk-checkboxes govuk-checkboxes--small">
-    {% for times in ["Daytime", "Evening", "Weekend", "Day or block release"] %}
+    {% for times in ["Daytime", "Evening", "Weekend"] %}
       <div class="govuk-checkboxes__item">
         <input class="govuk-checkboxes__input" id="course-times-{{ loop.index }}" name="course-times" type="checkbox" value="{{ times }}">
         <label class="govuk-label govuk-checkboxes__label" for="course-times-{{ loop.index }}">
