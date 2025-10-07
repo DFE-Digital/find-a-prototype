@@ -55,6 +55,19 @@ router.get("/load-courses", function (req, res) {
       .replace(/(^-|-$)/g, "");
   };
 
+  // ✂️ Split overview into short + remaining (word-safe around 450 chars)
+  const splitOverview = (str = "", limit = 450) => {
+    const s = String(str || "").trim();
+    if (s.length <= limit) return { short: s, remaining: "" };
+
+    // Find last space before limit to avoid mid-word cut
+    let cut = s.lastIndexOf(" ", limit);
+    if (cut < Math.floor(limit * 0.7)) cut = limit; // fallback: hard cut if no decent space found
+    const short = s.slice(0, cut).trim();
+    const remaining = s.slice(cut).trim();
+    return { short, remaining };
+  };
+
   // 🧠 Load inputs
   const age = req.session.data["age"] || req.query["age"];
   const nextStep = req.session.data["next-step"] || req.query["next-step"];
@@ -63,7 +76,7 @@ router.get("/load-courses", function (req, res) {
   // ✅ Get selected levels
   const getArray = (input) =>
     Array.isArray(input) ? input : input ? [input] : [];
-  
+
   let selectedLevels = getArray(
     req.query["qualification-level"] || req.session.data["qualification-level"]
   );
@@ -218,10 +231,16 @@ router.get("/load-courses", function (req, res) {
   const start = (page - 1) * perPage;
   const end = start + perPage;
 
-  const paginatedCourses = filteredCourses.slice(start, end).map(course => ({
-    ...course,
-    slug: generateSlug(course),
-  }));
+  // 🔧 Add slug + overview split to each course on the current page
+  const paginatedCourses = filteredCourses.slice(start, end).map(course => {
+    const { short, remaining } = splitOverview(course.overview, 450);
+    return {
+      ...course,
+      slug: generateSlug(course),
+      shortOverview: short,
+      remainingOverview: remaining
+    };
+  });
 
   // 🖥️ Render page
   res.render("08/courses", {
@@ -245,6 +264,7 @@ router.get("/load-courses", function (req, res) {
   console.log("🔍 Slugs from paginatedCourses:");
   paginatedCourses.forEach(c => console.log(c.slug));
 });
+
 
 
 

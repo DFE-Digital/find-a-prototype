@@ -355,11 +355,24 @@ Show filters
         </dd>
       </div>
       <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Overview
-        </dt>
+        <dt class="govuk-summary-list__key">Overview</dt>
         <dd class="govuk-summary-list__value">
-          {{ course.overview }}
+      
+          {{ course.shortOverview }}
+      
+          {% if course.remainingOverview %}
+            <details class="govuk-details govuk-!-margin-top-2" data-module="govuk-details">
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                  Read more about the course overview
+                </span>
+              </summary>
+              <div class="govuk-details__text">
+                {{ course.remainingOverview }}
+              </div>
+            </details>
+          {% endif %}
+      
         </dd>
       </div>
     </dl>
