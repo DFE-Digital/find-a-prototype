@@ -1,5 +1,6 @@
 {% extends "./layouts/_RESULTS.html" %}
 {% from "./macros/clear-filter-link.njk" import clearFilterLink %}
+
 <!--Find the person in the data-->
 
 {% set withoutDescription = "true" %}
@@ -185,16 +186,20 @@ Show filters
 {% endif %}
 
 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-      <!-- Learning method -->
 <fieldset class="govuk-fieldset">
-  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-    Learning method
-  </legend>
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Learning method</legend>
 
   <div class="govuk-checkboxes govuk-checkboxes--small">
-    {% for method in ["Online", "Classroom based", "Work based", "Hybrid (online and classroom based)"] %}
+    {% set methods = ["Online", "Classroom based", "Work based", "Hybrid"] %}
+    {% for method in methods %}
+      {% set valueLower = method | lower %}
       <div class="govuk-checkboxes__item">
-        <input class="govuk-checkboxes__input" id="learning-method-{{ loop.index }}" name="learning-method" type="checkbox" value="{{ method }}">
+        <input class="govuk-checkboxes__input"
+               id="learning-method-{{ loop.index }}"
+               name="learning-method"
+               type="checkbox"
+               value="{{ method }}"
+               {% if selectedLearningMethods and (valueLower in selectedLearningMethods) %}checked{% endif %}>
         <label class="govuk-label govuk-checkboxes__label" for="learning-method-{{ loop.index }}">
           {{ method }}
         </label>
@@ -202,18 +207,25 @@ Show filters
     {% endfor %}
   </div>
 </fieldset>
+{% if selectedLearningMethods and selectedLearningMethods.length > 0 %}
+  {{ clearFilterLink("learning-method", query) }}
+{% endif %}
+
 
 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-<!-- Course hours -->
 <fieldset class="govuk-fieldset">
-  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-    Course hours
-  </legend>
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Course hours</legend>
 
   <div class="govuk-checkboxes govuk-checkboxes--small">
     {% for hours in ["Full time", "Part time", "Flexible"] %}
+      {% set valueLower = hours | lower %}
       <div class="govuk-checkboxes__item">
-        <input class="govuk-checkboxes__input" id="course-hours-{{ loop.index }}" name="course-hours" type="checkbox" value="{{ hours }}">
+        <input class="govuk-checkboxes__input"
+               id="course-hours-{{ loop.index }}"
+               name="course-hours"
+               type="checkbox"
+               value="{{ hours }}"
+               {% if selectedCourseHours and (valueLower in selectedCourseHours) %}checked{% endif %}>
         <label class="govuk-label govuk-checkboxes__label" for="course-hours-{{ loop.index }}">
           {{ hours }}
         </label>
@@ -221,18 +233,25 @@ Show filters
     {% endfor %}
   </div>
 </fieldset>
+{% if selectedCourseHours and selectedCourseHours.length > 0 %}
+  {{ clearFilterLink("course-hours", query) }}
+{% endif %}
+
 
 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-<!-- Course hours -->
 <fieldset class="govuk-fieldset">
-  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-    Course study time
-  </legend>
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Course study time</legend>
 
   <div class="govuk-checkboxes govuk-checkboxes--small">
     {% for times in ["Daytime", "Evening", "Weekend"] %}
+      {% set valueLower = times | lower %}
       <div class="govuk-checkboxes__item">
-        <input class="govuk-checkboxes__input" id="course-times-{{ loop.index }}" name="course-times" type="checkbox" value="{{ times }}">
+        <input class="govuk-checkboxes__input"
+               id="course-times-{{ loop.index }}"
+               name="course-times"
+               type="checkbox"
+               value="{{ times }}"
+               {% if selectedCourseTimes and (valueLower in selectedCourseTimes) %}checked{% endif %}>
         <label class="govuk-label govuk-checkboxes__label" for="course-times-{{ loop.index }}">
           {{ times }}
         </label>
@@ -240,6 +259,10 @@ Show filters
     {% endfor %}
   </div>
 </fieldset>
+{% if selectedCourseTimes and selectedCourseTimes.length > 0 %}
+  {{ clearFilterLink("course-times", query) }}
+{% endif %}
+
 
       
     <br>
@@ -402,6 +425,18 @@ Show filters
   + "&travel-location=" + (travelDistance or '')
   + "&sort=" + (query.sort or '')
 %}
+
+{# Preserve new checkbox filters #}
+{% for m in selectedLearningMethods or [] %}
+  {% set filterQuery = filterQuery + "&learning-method=" + m %}
+{% endfor %}
+{% for h in selectedCourseHours or [] %}
+  {% set filterQuery = filterQuery + "&course-hours=" + h %}
+{% endfor %}
+{% for t in selectedCourseTimes or [] %}
+  {% set filterQuery = filterQuery + "&course-times=" + t %}
+{% endfor %}
+
 
 
 <nav class="govuk-pagination" aria-label="Pagination">

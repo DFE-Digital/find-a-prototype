@@ -1,0 +1,41 @@
+{% from "./clear-filter-link.njk" import clearFilterLink %}
+
+{#
+  checkboxFilter
+  - name: string (query param name)
+  - legend: string
+  - items: array of strings OR objects { value, label }
+  - selected: array of lowercase strings (e.g. ["online","part time"])
+  - idPrefix: optional string for input ids (defaults to name)
+  - showClearKey: optional string; if provided, renders clearFilterLink(showClearKey, query)
+  - query: pass the page's `query` object if you want the clear link to preserve other params
+#}
+{% macro checkboxFilter(name, legend, items=[], selected=[], idPrefix="", showClearKey=null, query=null) %}
+  {% set _id = idPrefix or name %}
+  <fieldset class="govuk-fieldset">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">{{ legend }}</legend>
+
+    <div class="govuk-checkboxes govuk-checkboxes--small">
+      {% for item in items %}
+        {% set value = (item.value if item is mapping else item) %}
+        {% set label = (item.label if item is mapping else item) %}
+        {% set valueLower = value | lower %}
+        <div class="govuk-checkboxes__item">
+          <input class="govuk-checkboxes__input"
+                 id="{{ _id }}-{{ loop.index }}"
+                 name="{{ name }}"
+                 type="checkbox"
+                 value="{{ value }}"
+                 {% if selected and (valueLower in selected) %}checked{% endif %}>
+          <label class="govuk-label govuk-checkboxes__label" for="{{ _id }}-{{ loop.index }}">
+            {{ label }}
+          </label>
+        </div>
+      {% endfor %}
+    </div>
+  </fieldset>
+
+  {% if showClearKey and selected and selected.length > 0 %}
+    {{ clearFilterLink(showClearKey, query) }}
+  {% endif %}
+{% endmacro %}
