@@ -311,15 +311,6 @@ router.get("/load-courses", function (req, res) {
 
 
 
-
-
-
-
-
-
-
-
-
 router.get('/course/:slug', function (req, res) {
     console.log("✅ Reached /08/course/:slug");
     const slug = req.params.slug;
@@ -539,7 +530,6 @@ router.post('/next-steps', (req, res) => {
   
     return res.redirect('level-adult');
   });
-  
 
 
 
