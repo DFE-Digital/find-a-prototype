@@ -39,6 +39,7 @@ router.get("/load-courses", function (req, res) {
     evening: "evening",
     weekend: "weekend",
   };
+
   const mapWith = (aliases, s) => (s == null ? "" : aliases[norm(s)] || norm(s));
   const getArray = (v) => (Array.isArray(v) ? v : v ? [v] : []);
   const cleanArray = (arr) =>
@@ -49,50 +50,33 @@ router.get("/load-courses", function (req, res) {
     const m = String(val).match(/[\d.]+/);
     return m ? parseFloat(m[0]) : Number.POSITIVE_INFINITY;
   };
-  const after = (label, list) => {
-    console.log(`➡️ after ${label}: ${list.length}`);
-    return list;
-  };
   const intersects = (arr, set) => arr.some((v) => set.has(v));
 
-  // ---------- load data (prefer the file you shared)
-  let dataFile =
-    fs.existsSync(path.join(__dirname, "../../data/courses.json"))
-      ? path.join(__dirname, "../../data/courses.json")
-      : path.join(__dirname, "../../data/courses.json");
-
+  // ---------- load data
+  const dataFile = path.join(__dirname, "../../data/courses.json");
   let coursesData = [];
   try {
     coursesData = JSON.parse(fs.readFileSync(dataFile, "utf8"));
-    console.log("📄 Loaded:", path.basename(dataFile), "records:", coursesData.length);
   } catch (e) {
     console.error("❌ Error loading course data:", e.message);
     return res.status(500).send("Error loading course data.");
   }
 
-  // ---------- build dataset distincts (normalised)
+  // ---------- dataset distincts (normalised)
   const typesSet  = new Set(coursesData.map((c) => norm(c.type)).filter(Boolean));
   const hoursSet  = new Set(coursesData.map((c) => mapWith(HOURS_ALIASES, c.courseHours)).filter(Boolean));
   const methodSet = new Set(coursesData.map((c) => mapWith(METHOD_ALIASES, c.deliveryMethod)).filter(Boolean));
   const timeSet   = new Set(coursesData.map((c) => mapWith(TIME_ALIASES, c.studyTime)).filter(Boolean));
 
-  console.log("🧾 dataset types:", [...typesSet]);
-  console.log("🧾 dataset hours:", [...hoursSet]);
-  console.log("🧾 dataset methods:", [...methodSet]);
-  console.log("🧾 dataset times:", [...timeSet]);
-
-  // ---------- parse inputs (prefer query over session)
-  const q = req.query || {};
+  // ---------- parse inputs
+  const q  = req.query || {};
   const sd = req.session?.data || {};
-  console.log("RAW query:", q);
 
-  // qualification type checkboxes
+  // Types
   let qualificationFilters = cleanArray(q["filter"]);
-  if (qualificationFilters.length === 0) {
-    qualificationFilters = cleanArray(sd["filter"]);
-  }
+  if (qualificationFilters.length === 0) qualificationFilters = cleanArray(sd["filter"]);
 
-  // levels (expand legacy)
+  // Levels → expand legacy groups
   let selectedLevels = cleanArray(q["qualification-level"]);
   if (selectedLevels.length === 0) selectedLevels = cleanArray(sd["qualification-level"]);
   selectedLevels = selectedLevels.flatMap((lvl) =>
@@ -101,7 +85,7 @@ router.get("/load-courses", function (req, res) {
     [lvl]
   );
 
-  // map levels to types
+  // Level → type mapping
   const qualificationMap = {
     entry: ["Functional Skills"],
     "level-1": ["BTEC", "Apprenticeship"],
@@ -114,7 +98,7 @@ router.get("/load-courses", function (req, res) {
   };
   const levelMappedQualifications = selectedLevels.flatMap((lvl) => qualificationMap[lvl] || []);
 
-  // new filters (normalised)
+  // New facets (normalised)
   const selectedLearningMethods = (cleanArray(q["learning-method"]).length
       ? cleanArray(q["learning-method"])
       : cleanArray(sd["learning-method"])).map((v) => mapWith(METHOD_ALIASES, v));
@@ -127,6 +111,7 @@ router.get("/load-courses", function (req, res) {
       ? cleanArray(q["course-times"])
       : cleanArray(sd["course-times"])).map((v) => mapWith(TIME_ALIASES, v));
 
+  // Base search inputs
   const locationFilter = (q["option-select-filter-location"] || sd["location"] || "").toString().trim();
   const subjectFilter  = (q["subject-filter"] || sd["interest-1"] || sd["job-1"] || "").toString().trim();
   const travelDistance = (q["travel-location"] || sd["travel-location"] || "").toString().trim();
@@ -135,108 +120,74 @@ router.get("/load-courses", function (req, res) {
   const locationFilterLower = norm(locationFilter);
   const subjectFilterLower  = norm(subjectFilter);
 
-  // explicit filter detector (controls redirect and fallbacks)
-  const hasAnyExplicitFilter =
+  // Is this a base search? Are there facet filters?
+  const hasBaseSearch   = !!locationFilterLower || !!subjectFilterLower;
+  const hasFacetFilters =
     qualificationFilters.length > 0 ||
     selectedLevels.length > 0 ||
-    !!locationFilterLower ||
-    !!subjectFilterLower ||
     selectedLearningMethods.length > 0 ||
     selectedCourseHours.length > 0 ||
     selectedCourseTimes.length > 0 ||
     !!travelDistance;
 
-  // ---------- start filtering with step-by-step logs
-  let filtered = after("start", coursesData.slice());
+  // ---------- 1) Base search (subject/location only)
+  let baseFiltered = coursesData.slice();
 
-  // 1) TYPE filter — but only if it intersects dataset types
-  const normalisedTypeFilters = [...qualificationFilters, ...levelMappedQualifications]
-    .map((f) => norm(f))
-    .filter(Boolean);
-
-  if (normalisedTypeFilters.length > 0) {
-    if (intersects(normalisedTypeFilters, typesSet)) {
-      filtered = after(
-        "type",
-        filtered.filter((c) => normalisedTypeFilters.includes(norm(c.type)))
-      );
-    } else {
-      console.warn("⚠️ Skipping TYPE filter; no overlap with dataset types. Wanted:", normalisedTypeFilters, "Dataset:", [...typesSet]);
-    }
-  }
-
-  // 2) LOCATION
   if (locationFilterLower) {
-    filtered = after(
-      "location",
-      filtered.filter((c) => norm(c.location).includes(locationFilterLower))
-    );
+    baseFiltered = baseFiltered.filter((c) => norm(c.location).includes(locationFilterLower));
   }
-
-  // 3) SUBJECT
   if (subjectFilterLower) {
-    filtered = after(
-      "subject",
-      filtered.filter((c) => norm(c.name).includes(subjectFilterLower) || norm(c.overview).includes(subjectFilterLower))
+    baseFiltered = baseFiltered.filter(
+      (c) => norm(c.name).includes(subjectFilterLower) || norm(c.overview).includes(subjectFilterLower)
     );
   }
 
-  // 4) LEARNING METHOD — only if intersects dataset
-  if (selectedLearningMethods.length > 0) {
-    if (intersects(selectedLearningMethods, methodSet)) {
-      filtered = after(
-        "learning method",
-        filtered.filter((c) => selectedLearningMethods.includes(mapWith(METHOD_ALIASES, c.deliveryMethod)))
-      );
-    } else {
-      console.warn("⚠️ Skipping LEARNING METHOD; no overlap. Wanted:", selectedLearningMethods, "Dataset:", [...methodSet]);
-    }
-  }
-
-  // 5) COURSE HOURS — only if intersects dataset
-  if (selectedCourseHours.length > 0) {
-    if (intersects(selectedCourseHours, hoursSet)) {
-      filtered = after(
-        "course hours",
-        filtered.filter((c) => selectedCourseHours.includes(mapWith(HOURS_ALIASES, c.courseHours)))
-      );
-    } else {
-      console.warn("⚠️ Skipping COURSE HOURS; no overlap. Wanted:", selectedCourseHours, "Dataset:", [...hoursSet]);
-    }
-  }
-
-  // 6) STUDY TIME — only if intersects dataset
-  if (selectedCourseTimes.length > 0) {
-    if (intersects(selectedCourseTimes, timeSet)) {
-      filtered = after(
-        "study time",
-        filtered.filter((c) => selectedCourseTimes.includes(mapWith(TIME_ALIASES, c.studyTime)))
-      );
-    } else {
-      console.warn("⚠️ Skipping STUDY TIME; no overlap. Wanted:", selectedCourseTimes, "Dataset:", [...timeSet]);
-    }
-  }
-
-  // 7) MAX DISTANCE
-  if (travelDistance) {
-    const maxMiles = milesValue(travelDistance);
-    filtered = after("distance", filtered.filter((c) => milesValue(c.distance) <= maxMiles));
-  }
-
-  // ---------- if zero, log everything we considered
-  if (filtered.length === 0 && hasAnyExplicitFilter) {
-    console.warn("❗ ZERO RESULTS with filters:", {
-      normalisedTypeFilters,
-      locationFilterLower,
-      subjectFilterLower,
-      selectedLearningMethods,
-      selectedCourseHours,
-      selectedCourseTimes,
-      travelDistance,
-    });
+  // If user provided search terms and base search is empty → redirect
+  if (hasBaseSearch && baseFiltered.length === 0) {
     const qs = req.url.includes("?") ? req.url.split("?")[1] : "";
     return res.redirect(`search-results-no-results${qs ? `?${qs}` : ""}`);
   }
+
+  // ---------- 2) Apply facets to the base results
+  let filtered = baseFiltered;
+
+  // Type (only if overlaps)
+  const normalisedTypeFilters = [...qualificationFilters, ...levelMappedQualifications]
+    .map((f) => norm(f))
+    .filter(Boolean);
+  if (normalisedTypeFilters.length > 0 && intersects(normalisedTypeFilters, typesSet)) {
+    filtered = filtered.filter((c) => normalisedTypeFilters.includes(norm(c.type)));
+  }
+
+  // Learning method (only if overlaps)
+  if (selectedLearningMethods.length > 0 && intersects(selectedLearningMethods, methodSet)) {
+    filtered = filtered.filter((c) =>
+      selectedLearningMethods.includes(mapWith(METHOD_ALIASES, c.deliveryMethod))
+    );
+  }
+
+  // Course hours — strict equality
+  if (selectedCourseHours.length > 0) {
+    const selectedHoursSet = new Set(selectedCourseHours);
+    filtered = filtered.filter((c) => selectedHoursSet.has(mapWith(HOURS_ALIASES, c.courseHours)));
+  }
+
+  // Study time (only if overlaps)
+  if (selectedCourseTimes.length > 0 && intersects(selectedCourseTimes, timeSet)) {
+    filtered = filtered.filter((c) =>
+      selectedCourseTimes.includes(mapWith(TIME_ALIASES, c.studyTime))
+    );
+  }
+
+  // Distance
+  if (travelDistance) {
+    const maxMiles = milesValue(travelDistance);
+    filtered = filtered.filter((c) => milesValue(c.distance) <= maxMiles);
+  }
+
+  // ---------- Inline no-results only when:
+  // base search returned something AND filtering wiped it out.
+  const noResults = baseFiltered.length > 0 && filtered.length === 0;
 
   // ---------- sorting
   const relValue = (v) => (Number.isFinite(Number(v)) ? Number(v) : -1);
@@ -296,7 +247,8 @@ router.get("/load-courses", function (req, res) {
     currentPage: page,
     totalPages,
     totalResults,
-    // keep your existing sticky props as before; omitted here for brevity if you already had them
+
+    // sticky values
     selectedQualifications: [...new Set([...qualificationFilters, ...levelMappedQualifications])],
     selectedLevels,
     selectedLocation: locationFilter,
@@ -306,8 +258,15 @@ router.get("/load-courses", function (req, res) {
     selectedLearningMethods,
     selectedCourseHours,
     selectedCourseTimes,
+
+    // inline no-results flag
+    noResults
   });
 });
+
+
+
+
 
 
 
