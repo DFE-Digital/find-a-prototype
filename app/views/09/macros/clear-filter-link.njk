@@ -1,0 +1,18 @@
+{% macro clearFilterLink(removeParam, currentParams) %}
+  {% set newQuery = [] %}
+  {% for key, val in currentParams %}
+    {% if key != removeParam %}
+      {% if val is iterable and not string %}
+        {% for v in val %}
+          {% set newQuery = newQuery.push(key + '=' + v) %}
+        {% endfor %}
+      {% else %}
+        {% set newQuery = newQuery.push(key + '=' + val) %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  {% set queryString = newQuery | join('&') %}
+  <p style="margin-top: 10px;">
+    <a href="?{{ queryString }}">Clear filter</a>
+  </p>
+{% endmacro %}
