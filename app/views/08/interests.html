@@ -7,7 +7,7 @@
 
 {% block service %}
 
-    <form action="level" method="post" novalidate>
+    <form action="interests" method="post" novalidate>
 
       <h1 class="govuk-heading-l">What courses, subjects, jobs or careers are you interested in?</h1>
 
@@ -29,9 +29,10 @@
           },
           classes: "govuk-input--width-20",
           id: "interest-1",
-          name: "interest-1"
+          name: "interest-1",
+          value: data['interest-1'] | default('')
         }) }}
-
+        
         {{ govukInput({
           label: {
             text: "Interest 2 (optional)",
@@ -39,9 +40,10 @@
           },
           classes: "govuk-input--width-20",
           id: "interest-2",
-          name: "interest-2"
+          name: "interest-2",
+          value: data['interest-2'] | default('')
         }) }}
-
+        
         {{ govukInput({
           label: {
             text: "Interest 3 (optional)",
@@ -49,8 +51,10 @@
           },
           classes: "govuk-input--width-20",
           id: "interest-3",
-          name: "interest-3"
+          name: "interest-3",
+          value: data['interest-3'] | default('')
         }) }}
+        
 
 
     

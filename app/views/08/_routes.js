@@ -309,19 +309,110 @@ router.get('/course/:slug', function (req, res) {
     res.redirect('location') // Replace with your desired page
   })
 
-  router.post("/levels", (req, res) => {
-    // Pull the submitted values (can be string or array depending on selection count)
-    const raw = req.session.data["qualification-level"] || [];
-    const selected = Array.isArray(raw) ? raw : [raw];
+
+
+
+// GET location
+router.get('/location', function (req, res) {
+  if (req.query.from === 'check-answers') {
+    req.session.data.returnToCheckAnswers = true;
+  }
+
+  res.render('08/location');
+});
+
+// POST location
+router.post('/location', function (req, res) {
+  if (req.session.data.returnToCheckAnswers) {
+    delete req.session.data.returnToCheckAnswers;
+    return res.redirect('check-answers');
+  }
+
+  // Normal linear journey
+  return res.redirect('interests');
+});
+
+// GET interests
+router.get('/interests', function (req, res) {
+  if (req.query.from === 'check-answers') {
+    req.session.data.returnToCheckAnswers = true;
+  }
+
+  res.render('08/interests');
+});
+
+// POST interests
+router.post('/interests', function (req, res) {
+  if (req.session.data.returnToCheckAnswers) {
+    delete req.session.data.returnToCheckAnswers;
+    return res.redirect('check-answers');
+  }
+
+  // Normal linear journey
+  return res.redirect('level');
+});
+
+
+// GET level
+router.get('/level', function (req, res) {
+  if (req.query.from === 'check-answers') {
+    req.session.data.returnToCheckAnswers = true;
+  }
+
+  res.render('08/level');
+});
+
+// POST levels
+router.post('/levels', function (req, res) {
+  const raw = req.session.data['qualification-level'] || [];
+  const selected = Array.isArray(raw) ? raw : [raw].filter(Boolean);
+  const fromCheckAnswers = !!req.session.data.returnToCheckAnswers;
+
+  const needsAge = selected.includes('none') || selected.includes('level-1-2');
+
+  if (needsAge) {
+    // Keep the flag so /age can send the user back to check-answers
+    return res.redirect('age');
+  }
+
+  // No age page needed
+  if (fromCheckAnswers) {
+    delete req.session.data.returnToCheckAnswers;
+    return res.redirect('check-answers');
+  }
+
+  // Normal linear journey also ends at check-answers
+  return res.redirect('check-answers');
+});
+
+
+// GET age
+router.get('/age', function (req, res) {
+  if (req.query.from === 'check-answers') {
+    req.session.data.returnToCheckAnswers = true;
+  }
+
+  res.render('08/age');
+});
+
+// POST age
+router.post('/age', function (req, res) {
+  if (req.session.data.returnToCheckAnswers) {
+    delete req.session.data.returnToCheckAnswers;
+    return res.redirect('check-answers');
+  }
+
+  // For this journey, age always goes to check-answers
+  return res.redirect('check-answers');
+});
+
+
   
-    // If 'none' OR 'level-1-2' selected => go to 'age'
-    if (selected.includes("none") || selected.includes("level-1-2")) {
-      return res.redirect("age");
-    }
-  
-    // Otherwise => go to 'check-answers'
-    return res.redirect("check-answers");
-  });
+
+
+
+
+
   
 
 router.post('/age-results', function(request, response) {
