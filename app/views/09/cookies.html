@@ -215,6 +215,8 @@
       <h2 class="govuk-heading-m">Change your cookie settings</h2>
       <form id="cookie-form" method="post" action="/09/cookies">
      
+
+<div class="remember-radio" data-key="analytics-cookies">
         {{ govukRadios({
           idPrefix: "analytics-cookies",
           name: "analytics-cookies",
@@ -238,7 +240,10 @@
             }
           ]
         }) }}
+        </div>
         
+
+<div class="remember-radio" data-key="marketing-cookies">
         {{ govukRadios({
           idPrefix: "marketing-cookies",
           name: "marketing-cookies",
@@ -262,12 +267,13 @@
             }
           ]
         }) }}
-        
+      </div>
 
           {{ govukButton({
             text: "Save cookie settings",
             attributes: { id: "save-cookie-btn" }
           }) }}
+
         </form>
         
 
@@ -276,7 +282,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // Stop the browser trying to restore scroll position on reload
+      // Make the browser not try to restore scroll position
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
@@ -284,23 +290,64 @@
       var banner = document.getElementById('cookie-banner');
       var form   = document.getElementById('cookie-form');
     
-      // After reload: if the flag is set, show the banner and jump to top
-      if (localStorage.getItem('showCookieBanner') === 'true') {
-        if (banner) {
-          banner.hidden = false;
+      // -------------------------------------------
+      // 1. Restore radio selections from localStorage
+      // -------------------------------------------
+      document.querySelectorAll('.remember-radio').forEach(function (group) {
+        var key    = group.dataset.key;
+        var inputs = group.querySelectorAll('input[type="radio"]');
+    
+        var saved = localStorage.getItem('radio-' + key);
+        if (saved) {
+          inputs.forEach(function (input) {
+            if (input.value === saved) {
+              input.checked = true;
+            }
+          });
         }
+      });
+    
+      // -------------------------------------------
+      // 2. Show banner after reload if flag is set
+      // -------------------------------------------
+      if (localStorage.getItem('showCookieBanner') === 'true') {
+        if (banner) banner.hidden = false;
+    
         localStorage.removeItem('showCookieBanner');
     
-        // Use a tiny timeout so this runs after the browser's own scroll logic
+        // Ensure we jump to top after reload
         setTimeout(function () {
           window.scrollTo(0, 0);
         }, 0);
       }
     
-      // On submit: set the flag and reload the page
+      // -------------------------------------------
+      // 3. On submit: save radios, set flag, reload
+      // -------------------------------------------
       if (form) {
         form.addEventListener('submit', function (e) {
           e.preventDefault();
+    
+          // Save current radio selections for each group
+          document.querySelectorAll('.remember-radio').forEach(function (group) {
+            var key    = group.dataset.key;
+            var inputs = group.querySelectorAll('input[type="radio"]');
+            var selected = '';
+    
+            inputs.forEach(function (input) {
+              if (input.checked) {
+                selected = input.value;
+              }
+            });
+    
+            if (selected) {
+              localStorage.setItem('radio-' + key, selected);
+            } else {
+              localStorage.removeItem('radio-' + key);
+            }
+          });
+    
+          // Set banner flag and reload
           localStorage.setItem('showCookieBanner', 'true');
     
           if ('scrollRestoration' in history) {
@@ -312,8 +359,6 @@
       }
     });
     </script>
-    
-    
     
     
 

@@ -215,6 +215,8 @@
       <h2 class="govuk-heading-m">Change your cookie settings</h2>
       <form id="cookie-form" method="post" action="/09/cookies">
      
+
+<div class="remember-radio" data-key="analytics-cookies">
         {{ govukRadios({
           idPrefix: "analytics-cookies",
           name: "analytics-cookies",
@@ -238,7 +240,10 @@
             }
           ]
         }) }}
+        </div>
         
+
+<div class="remember-radio" data-key="marketing-cookies">
         {{ govukRadios({
           idPrefix: "marketing-cookies",
           name: "marketing-cookies",
@@ -262,57 +267,90 @@
             }
           ]
         }) }}
-        
+      </div>
 
           {{ govukButton({
             text: "Save cookie settings",
             attributes: { id: "save-cookie-btn" }
           }) }}
+
         </form>
         
 
     </div>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Stop the browser trying to restore scroll position on reload
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // -------------------------------------------
+  // 🔵 Force page to the top after reload
+  // -------------------------------------------
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  // Elements
+  var banner = document.getElementById('cookie-banner');
+  var form   = document.getElementById('cookie-form');
+
+  // -------------------------------------------
+  // 🔵 Show banner after reload if flag is set
+  // -------------------------------------------
+  if (localStorage.getItem('showCookieBanner') === 'true') {
+    if (banner) banner.hidden = false;
+
+    // Remove flag so it's only shown once
+    localStorage.removeItem('showCookieBanner');
+
+    // Scroll to top AFTER the browser tries to restore position
+    setTimeout(function () {
+      window.scrollTo(0, 0);
+    }, 0);
+  }
+
+  // -------------------------------------------
+  // 🔵 Intercept form submit: save flag + reload
+  // -------------------------------------------
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      localStorage.setItem('showCookieBanner', 'true');
+
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
-    
-      var banner = document.getElementById('cookie-banner');
-      var form   = document.getElementById('cookie-form');
-    
-      // After reload: if the flag is set, show the banner and jump to top
-      if (localStorage.getItem('showCookieBanner') === 'true') {
-        if (banner) {
-          banner.hidden = false;
-        }
-        localStorage.removeItem('showCookieBanner');
-    
-        // Use a tiny timeout so this runs after the browser's own scroll logic
-        setTimeout(function () {
-          window.scrollTo(0, 0);
-        }, 0);
-      }
-    
-      // On submit: set the flag and reload the page
-      if (form) {
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          localStorage.setItem('showCookieBanner', 'true');
-    
-          if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual';
-          }
-    
-          location.reload();
-        });
-      }
+
+      location.reload();
     });
-    </script>
-    
+  }
+
+  // -------------------------------------------
+  // 🔵 Remember radio choices on reload
+  // -------------------------------------------
+  document.querySelectorAll('.remember-radio').forEach(function (group) {
+    var key = group.dataset.key;
+    var inputs = group.querySelectorAll('input[type="radio"]');
+
+    // Load saved value
+    var saved = localStorage.getItem('radio-' + key);
+    if (saved) {
+      inputs.forEach(function (input) {
+        if (input.value === saved) {
+          input.checked = true;
+        }
+      });
+    }
+
+    // Save on change
+    inputs.forEach(function (input) {
+      input.addEventListener('change', function () {
+        localStorage.setItem('radio-' + key, input.value);
+      });
+    });
+  });
+
+});
+</script>    
     
     
     
