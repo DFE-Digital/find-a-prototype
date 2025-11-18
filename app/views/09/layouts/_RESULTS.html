@@ -24,6 +24,13 @@
 
 {% block beforeContent %}
 
+{{ govukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service. Help us improve it and <a class="govuk-link" href="#">give your feedback (opens in new tab)</a>.'
+}) }}
+
 {% if back %}
 <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 {% endif %}
@@ -54,25 +61,21 @@ Text goes here, override this by overriding the block
       width: "two-thirds",
       columns: 2,
       items: [
+      {
+        href: "accessibility-statement",
+        text: "Accessibility"
+      },
+      {
+        href: "privacy",
+        text: "Privacy"
+      },
+      {
+        href: "cookies",
+        text: "Cookies"
+      },
         {
-          href: "#",
-          text: "About us"
-        },
-        {
-          href: "#",
-          text: "Help"
-        },
-        {
-          href: "#",
-          text: "Privacy and cookies"
-        },
-        {
-          href: "#",
-          text: "Accessibility statement"
-        },
-        {
-          href: "#",
-          text: "Terms and conditions"
+          href: "https://www.skillsforcareers.education.gov.uk/pages/help/contact-information",
+          text: "Contact information"
         }
       ]
     },
@@ -81,15 +84,15 @@ Text goes here, override this by overriding the block
       width: "one-third",
       items: [
         {
-          href: "#",
+          href: "https://www.myworldofwork.co.uk/",
           text: "Scotland"
         },
         {
-          href: "#",
+          href: "https://careerswales.gov.wales/",
           text: "Wales"
         },
         {
-          href: "#",
+          href: "https://www.nidirect.gov.uk/campaigns/careers",
           text: "Northern Ireland"
         }
       ]
