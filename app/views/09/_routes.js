@@ -242,7 +242,7 @@ router.get("/load-courses", function (req, res) {
     return { ...c, slug: generateSlug(c), shortOverview: short, remainingOverview: remaining };
   });
 
-  res.render("08/courses", {
+  res.render("09/courses", {
     courses: pageItems,
     currentPage: page,
     totalPages,
@@ -271,7 +271,7 @@ router.get("/load-courses", function (req, res) {
 
 
 router.get('/course/:slug', function (req, res) {
-    console.log("✅ Reached /08/course/:slug");
+    console.log("✅ Reached /09/course/:slug");
     const slug = req.params.slug;
   
     let coursesData = [];
@@ -300,7 +300,7 @@ router.get('/course/:slug', function (req, res) {
       return res.status(404).send("Course not found");
     }
   
-    res.render("08/course-detail", { course });
+    res.render("09/course-detail", { course });
   });
   
   
@@ -318,7 +318,7 @@ router.get('/location', function (req, res) {
     req.session.data.returnToCheckAnswers = true;
   }
 
-  res.render('08/location');
+  res.render('09/location');
 });
 
 // POST location
@@ -338,7 +338,7 @@ router.get('/interests', function (req, res) {
     req.session.data.returnToCheckAnswers = true;
   }
 
-  res.render('08/interests');
+  res.render('09/interests');
 });
 
 // POST interests
@@ -359,7 +359,7 @@ router.get('/level', function (req, res) {
     req.session.data.returnToCheckAnswers = true;
   }
 
-  res.render('08/level');
+  res.render('09/level');
 });
 
 // POST levels
@@ -392,7 +392,7 @@ router.get('/age', function (req, res) {
     req.session.data.returnToCheckAnswers = true;
   }
 
-  res.render('08/age');
+  res.render('09/age');
 });
 
 // POST age
