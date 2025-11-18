@@ -1,12 +1,21 @@
 {% extends "./layouts/_HOME.html" %}
 {% set back = true %}
 
-
 {% block content %}
 
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+
+      <div id="cookie-banner" class="govuk-notification-banner govuk-notification-banner--success" 
+            data-module="govuk-notification-banner" hidden>
+        <div class="govuk-notification-banner__header">
+          <h2 class="govuk-notification-banner__title">Success</h2>
+        </div>
+        <div class="govuk-notification-banner__content">
+          <p class="govuk-notification-banner__heading">You’ve saved your cookie settings.</p>
+        </div>
+      </div>
 
       <h1 class="govuk-heading-l">Cookies on the Skills for Careers website</h1>
 
@@ -204,8 +213,8 @@
       </p>
 
       <h2 class="govuk-heading-m">Change your cookie settings</h2>
-
-      <form method="post" action="/cookies">
+      <form id="cookie-form" method="post" action="/09/cookies">
+     
         {{ govukRadios({
           idPrefix: "analytics-cookies",
           name: "analytics-cookies",
@@ -254,15 +263,58 @@
           ]
         }) }}
         
-        {{ govukButton({
-          text: "Save cookie settings"
-        }) }}
+
+          {{ govukButton({
+            text: "Save cookie settings",
+            attributes: { id: "save-cookie-btn" }
+          }) }}
+        </form>
         
-      </form>
 
     </div>
   </div>
 
-
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Stop the browser trying to restore scroll position on reload
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+    
+      var banner = document.getElementById('cookie-banner');
+      var form   = document.getElementById('cookie-form');
+    
+      // After reload: if the flag is set, show the banner and jump to top
+      if (localStorage.getItem('showCookieBanner') === 'true') {
+        if (banner) {
+          banner.hidden = false;
+        }
+        localStorage.removeItem('showCookieBanner');
+    
+        // Use a tiny timeout so this runs after the browser's own scroll logic
+        setTimeout(function () {
+          window.scrollTo(0, 0);
+        }, 0);
+      }
+    
+      // On submit: set the flag and reload the page
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          localStorage.setItem('showCookieBanner', 'true');
+    
+          if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+          }
+    
+          location.reload();
+        });
+      }
+    });
+    </script>
+    
+    
+    
+    
 
 {% endblock %}
