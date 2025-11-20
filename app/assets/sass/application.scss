@@ -5,6 +5,12 @@
 
 // Add extra styles here
 
+@media (max-width: 40.0625em) {
+  .govuk-pagination__list .govuk-pagination__item {
+    display: inline-block;
+  }
+}
+
 .govuk-summary-list__row--full-width .govuk-summary-list__value {
   grid-column: 1 / -1;
   width: 100%;
