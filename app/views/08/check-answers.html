@@ -11,23 +11,18 @@
 
 <dl class="govuk-summary-list">
 
-  {% if (data['location']) %}
 
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
       Location
     </dt>
     <dd class="govuk-summary-list__value">
-     {{ data['location'] }}
+     {% if data['location'] %} {{ data['location'] }} {% else %} No location added {% endif %}
     </dd>
     <dd class="govuk-summary-list__actions">
       <a class="govuk-link" href="location?from=check-answers">Change<span class="govuk-visually-hidden"> date of birth</span></a>
     </dd>
   </div>
-
-  {% endif %}
-
-  {% if (data['travel-location']) %}
 
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
@@ -47,7 +42,7 @@
     {% elseif data['travel-location'] == 'Over 30 miles' %}
     Over 30 miles
     {% else %}
-      Not provided
+      No travel distance added
     {% endif %}
     </dd>
 
@@ -55,8 +50,6 @@
       <a class="govuk-link" href="location?from=check-answers">Change<span class="govuk-visually-hidden"> address</span></a>
     </dd>
   </div>
-
-  {% endif %}
 
 
   <div class="govuk-summary-list__row">
