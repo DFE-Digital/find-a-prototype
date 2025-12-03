@@ -59,21 +59,22 @@
   {% endif %}
 
 
-  {% if (data['interest-1']) %}
-
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
       Interests
     </dt>
     <dd class="govuk-summary-list__value">
-      {{ data['interest-1'] }} {% if (data['interest-2']) %}, {{ data['interest-2'] }}{% endif %}{% if (data['interest-3']) %}, {{ data['interest-3'] }}{% endif %}
+      {% if data['interest-1'] or data['interest-2'] or data['interest-3'] %}
+        {{ data['interest-1'] }}{% if data['interest-2'] %}, {{ data['interest-2'] }}{% endif %}{% if data['interest-3'] %}, {{ data['interest-3'] }}{% endif %}
+      {% else %}
+        No interests added
+      {% endif %}
     </dd>
     <dd class="govuk-summary-list__actions">
       <a class="govuk-link" href="interests?from=check-answers">Change<span class="govuk-visually-hidden"> name</span></a>
     </dd>
   </div>
-
-  {% endif %}
+  
 
 
   {% if (data['qualification-level']) %}
@@ -106,33 +107,37 @@
   </div>
 {% endif %}
 
-{% if (data['age']) %}
+{% if data['qualification-level'] == 'none' or data['qualification-level'] == 'level-1-2' %}
 
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
     Age
   </dt>
+
   <dd class="govuk-summary-list__value">
     {% if data['age'] == '16-17' %}
-    Under 18
-  {% elseif data['age'] == '18' %}
-    18
+      Under 18
+    {% elseif data['age'] == '18' %}
+      18
     {% elseif data['age'] == '19' %}
-    19
-  {% elseif data['age'] == '20-24' %}
-    20-24
-  {% elseif data['age'] == 'over-25' %}
-    25 or older
-  {% else %}
-    Not provided
-  {% endif %}
+      19
+    {% elseif data['age'] == '20-24' %}
+      20-24
+    {% elseif data['age'] == 'over-25' %}
+      25 or older
+    {% else %}
+      No age added
+    {% endif %}
   </dd>
+
   <dd class="govuk-summary-list__actions">
-    <a class="govuk-link" href="age?from=check-answers">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+    <a class="govuk-link" href="age?from=check-answers">Change<span class="govuk-visually-hidden"> age</span></a>
   </dd>
 </div>
 
 {% endif %}
+
+
 
 
 </dl>
