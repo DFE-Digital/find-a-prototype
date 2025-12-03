@@ -81,7 +81,7 @@ router.get("/load-courses", function (req, res) {
   if (selectedLevels.length === 0) selectedLevels = cleanArray(sd["qualification-level"]);
   selectedLevels = selectedLevels.flatMap((lvl) =>
     lvl === "level-1-2" ? ["level-1", "level-2"] :
-    lvl === "level-4-7" ? ["level-4", "level-5", "level-6", "level-7"] :
+    lvl === "level-4-7" ? ["level-4", "level-5", "level-6", "level-7", "level-8"] :
     [lvl]
   );
 
@@ -95,6 +95,7 @@ router.get("/load-courses", function (req, res) {
     "level-5": ["Diploma"],
     "level-6": ["Degree"],
     "level-7": ["Degree"],
+    "level-8": ["Degree"],
   };
   const levelMappedQualifications = selectedLevels.flatMap((lvl) => qualificationMap[lvl] || []);
 
