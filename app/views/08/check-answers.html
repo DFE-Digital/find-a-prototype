@@ -100,13 +100,16 @@
   </div>
 {% endif %}
 
-{% if data['qualification-level'] == 'none' or data['qualification-level'] == 'level-1-2' %}
+{% set quals = data['qualification-level'] or [] %}
 
+{% set has_low = ('none' in quals) or ('level-1-2' in quals) %}
+{% set has_high = ('level-3' in quals) or ('level-4-7' in quals) %}
+
+{% if has_low and has_high %}
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
     Age
   </dt>
-
   <dd class="govuk-summary-list__value">
     {% if data['age'] == '16-17' %}
       Under 18
@@ -122,12 +125,10 @@
       No age added
     {% endif %}
   </dd>
-
   <dd class="govuk-summary-list__actions">
     <a class="govuk-link" href="age?from=check-answers">Change<span class="govuk-visually-hidden"> age</span></a>
   </dd>
 </div>
-
 {% endif %}
 
 
