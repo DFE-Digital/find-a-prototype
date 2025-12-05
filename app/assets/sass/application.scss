@@ -5,6 +5,7 @@
 
 // Add extra styles here
 
+
 @media (max-width: 40.0625em) {
   .govuk-pagination__list .govuk-pagination__item {
     display: inline-block;
@@ -28,6 +29,7 @@
 }
 
 @import 'node_modules/dfe-frontend/packages/dfefrontend';
+@import "custom";
 
 // Patterns not in Frontend
 
